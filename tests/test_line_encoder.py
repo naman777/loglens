@@ -6,7 +6,7 @@ from loglens.model.line_encoder import LineEncoder, LineEncoderConfig, count_par
 def test_default_param_count_in_budget():
     n = count_params(LineEncoder(LineEncoderConfig()))
     print("line encoder params:", n)
-    assert 25e6 < n < 32e6
+    assert 25e6 < n < 40e6  # 16k vocab: ~33.6M
 
 
 def test_embedding_shape_and_padding_invariance():

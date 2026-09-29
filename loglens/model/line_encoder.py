@@ -10,7 +10,7 @@ from torch.nn import functional as F
 
 @dataclass
 class LineEncoderConfig:
-    vocab_size: int = 8000
+    vocab_size: int = 16000
     d_model: int = 512
     n_layers: int = 8
     n_heads: int = 8

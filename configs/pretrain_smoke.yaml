@@ -1,0 +1,15 @@
+seed: 1337
+out_dir: artifacts/pretrain_smoke
+n_layers: 2
+d_model: 128
+n_heads: 4
+d_ff: 512
+embed_dim: 256
+batch_size: 128
+max_steps: 400
+warmup_steps: 50
+lr: 0.001
+log_every: 50
+eval_every: 200
+ckpt_every_min: 999
+run_name: pretrain_smoke

@@ -29,12 +29,12 @@ class PretrainConfig:
     seed: int = 1337
     tok_dir: str = "data/tok"
     out_dir: str = "artifacts/pretrain"
-    tokenizer: str = "artifacts/tokenizer/loglens-bpe-8k.json"
+    tokenizer: str = "artifacts/tokenizer/loglens-bpe-16k.json"
     unseen: str = "Thunderbird"
     exclude: list[str] = field(default_factory=list)
     max_system_share: float = 0.30
     # model
-    vocab_size: int = 8000
+    vocab_size: int = 16000
     d_model: int = 512
     n_layers: int = 8
     n_heads: int = 8
@@ -49,6 +49,7 @@ class PretrainConfig:
     warmup_steps: int = 2000
     min_lr_frac: float = 0.1
     batch_size: int = 256
+    max_batch_tokens: int = 16384  # rows * padded width cap (keeps a 6 GB GPU out of shared memory)
     max_steps: int = 50_000
     grad_clip: float = 1.0
     mask_prob: float = 0.15
@@ -133,11 +134,19 @@ class Corpus:
             out[r, :ln] = self.ids[s: s + ln]
         return out
 
-    def train_batches(self, rng: np.random.Generator, bs: int, pool_batches: int = 32):
+    def train_batches(self, rng: np.random.Generator, bs: int, max_tokens: int, pool_batches: int = 32):
         while True:
             pool = rng.choice(self.train_idx, size=bs * pool_batches, p=self.weights)
             pool = pool[np.argsort(self.lens[pool], kind="stable")]
-            chunks = [pool[i: i + bs] for i in range(0, len(pool), bs)]
+            chunks, cur = [], []
+            for i in pool:
+                width = min(int(self.lens[i]), self.max_len)
+                if cur and (len(cur) >= bs or (len(cur) + 1) * width > max_tokens):
+                    chunks.append(np.array(cur))
+                    cur = []
+                cur.append(i)
+            if cur:
+                chunks.append(np.array(cur))
             rng.shuffle(chunks)
             yield from (self.batch(rng, c) for c in chunks)
 
@@ -230,7 +239,7 @@ def main(cfg: PretrainConfig) -> None:
         print(f"resumed from {ck[-1]} @ step {step}", flush=True)
     tracker = Tracker("loglens", cfg.run_name, cfg, use_wandb=cfg.wandb)
     rng = np.random.default_rng(cfg.seed + step)
-    batches = corpus.train_batches(rng, cfg.batch_size)
+    batches = corpus.train_batches(rng, cfg.batch_size, cfg.max_batch_tokens)
     model.train()
     t0 = t_ck = time.time()
     tok_seen, ema = 0, None

@@ -101,10 +101,14 @@ def main(cfg: TokEvalConfig) -> str:
         star = " (unseen)" if s == cfg.unseen else ""
         md.append(f"| {s}{star} | {g_raw['mean']:.1f} / {g_raw['p95']:.0f} | {g_mask['mean']:.1f} | "
                   + " | ".join(cells) + f" | {content['mean']:.1f} | {ratio:.2f}x |")
+    m8, m16 = np.mean(agg[f"{cfg.vocab_sizes[0]}_mean"]), np.mean(agg[f"{cfg.vocab_sizes[1]}_mean"])
+    pick = cfg.vocab_sizes[0] if m8 <= 1.05 * m16 else cfg.vocab_sizes[1]
     unseen_ratio = dict(rows).get(cfg.unseen, float("nan"))
     md += ["", f"Mean ratio across systems: {np.mean([r for _, r in rows]):.2f}x; unseen system "
            f"({cfg.unseen}): {unseen_ratio:.2f}x fewer content tokens than raw GPT-2 "
-           "(gate: >= 2x on the unseen system, < 2% of lines over 128 tokens).", ""]
+           "(gate: >= 2x on the unseen system, < 2% of lines over 128 tokens).", "",
+           f"Vocabulary choice: mean tokens/line {m8:.1f} (8k) vs {m16:.1f} (16k) -> rule "
+           f"'8k if within 5% of 16k' selects **{pick // 1000}k**.", ""]
     text = "\n".join(md)
     Path(cfg.out_md).parent.mkdir(parents=True, exist_ok=True)
     Path(cfg.out_md).write_text(text, encoding="utf-8")
