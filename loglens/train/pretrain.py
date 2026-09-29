@@ -54,6 +54,7 @@ class PretrainConfig:
     grad_clip: float = 1.0
     mask_prob: float = 0.15
     simcse_weight: float = 0.0
+    simcse_rows: int = 64  # contrastive loss on the first N rows only (memory)
     bf16: bool = True
     # bookkeeping
     log_every: int = 50
@@ -253,10 +254,11 @@ def main(cfg: PretrainConfig) -> None:
             loss, _ = mlm_loss(model, x, y, cfg)
             total = loss
             if cfg.simcse_weight > 0:
-                z1, z2 = model.embed(ids), model.embed(ids)
+                sub = ids[: cfg.simcse_rows]
+                z1, z2 = model.embed(sub), model.embed(sub)
                 sim = F.normalize(z1.float(), dim=-1) @ F.normalize(z2.float(), dim=-1).T / 0.05
                 total = loss + cfg.simcse_weight * F.cross_entropy(
-                    sim, torch.arange(len(ids), device=dev))
+                    sim, torch.arange(len(sub), device=dev))
         opt.zero_grad(set_to_none=True)
         total.backward()
         gn = torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.grad_clip)

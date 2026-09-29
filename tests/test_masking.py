@@ -174,3 +174,16 @@ def test_ipv4_mapped_and_relative_paths():
 ])
 def test_identifier_suffix_numbers(raw, expected):
     assert mask(raw) == expected
+
+
+def test_fast_mask_equals_reference():
+    from loglens.tokenizer.masking import mask_reference
+
+    samples = [
+        "Receiving block blk_-1608999687919862906 src: /10.250.19.102:54106 dest: /10.250.19.102:50010",
+        "took 5 ms", "no digits here at all", "path /a/b/c.txt and http://x.y/z?q=1", "R02-M1-N0-C:J12-U11 core.123",
+        "0xdeadbeef and 9f86d081884c7d65 x86_64 utf8 sda1 ::1 fe80::1", "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        "status 503 code=137 v2.3.1 1.2.3.4:80 step_5", "", "   ", "a::b std::string x-y-z",
+    ]
+    for m in samples:
+        assert mask(m) == mask_reference(m), m

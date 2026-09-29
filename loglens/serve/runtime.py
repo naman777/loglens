@@ -64,6 +64,10 @@ def _iso_ms(m: re.Match) -> int:
     return int(dt.timestamp() * 1000) + (int(frac[:3].ljust(3, "0")) if frac else 0)
 
 
+def _mask_chunk(msgs: list[str]) -> list[str]:
+    return [mask(m) for m in msgs]
+
+
 @dataclass
 class RuntimeConfig:
     model_dir: str = "artifacts/onnx"
@@ -77,6 +81,7 @@ class RuntimeConfig:
     max_len: int = 128
     services: list[str] = field(default_factory=lambda: list(DEFAULT_SERVICES))
     use_cache: bool = True
+    mask_workers: int = 0  # >0: mask uncached messages in a process pool
 
 
 @dataclass
@@ -108,6 +113,29 @@ class LogLensRuntime:
         self.svc_ix = {s: i for i, s in enumerate(cfg.services)}
         self.svc_known = set(cfg.services)
         self.stats = {"lines": 0, "encoder_lines": 0, "secs": 0.0}
+        self._pool = None
+
+    def _prefill_masks(self, msgs: list[str]) -> None:
+        """Mask all not-yet-cached messages, in parallel when a worker pool is configured."""
+        todo = list({m for m in msgs if m not in self.mask_cache})
+        if not todo:
+            return
+        if self.cfg.mask_workers > 0 and len(todo) >= 2000:
+            if self._pool is None:
+                from concurrent.futures import ProcessPoolExecutor
+
+                self._pool = ProcessPoolExecutor(self.cfg.mask_workers)
+            k = self.cfg.mask_workers * 2
+            chunks = [todo[i::k] for i in range(k)]
+            out = list(self._pool.map(_mask_chunk, chunks))
+            for ch, res in zip(chunks, out, strict=True):
+                for m, r in zip(ch, res, strict=True):
+                    self.mask_cache[m] = r
+        else:
+            for m in todo:
+                self.mask_cache[m] = mask(m)
+        if len(self.mask_cache) > 500_000:
+            self.mask_cache.clear()
 
     # ---------------------------------------------------------------- embeddings
     def _text(self, p: Parsed) -> str:
@@ -115,8 +143,6 @@ class LogLensRuntime:
         m = self.mask_cache.get(key)
         if m is None:
             m = mask(p.message)
-            if len(self.mask_cache) < 500_000:
-                self.mask_cache[key] = m
         return f"{level_token(p.level)} {service_token(p.service, self.svc_known)} {m}"
 
     def embed(self, texts: list[str]) -> np.ndarray:
@@ -155,6 +181,7 @@ class LogLensRuntime:
     def score(self, raw_lines: list[str], top_k: int = 15) -> Scored:
         t0 = time.perf_counter()
         parsed = [parse_line(x) for x in raw_lines]
+        self._prefill_masks([p.message for p in parsed])
         emb = self.embed([self._text(p) for p in parsed])
         n = len(parsed)
         ts = [p.ts for p in parsed]

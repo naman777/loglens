@@ -126,7 +126,8 @@ def _num(m: re.Match) -> str:
     return "<NUM>"
 
 
-def mask(message: str) -> str:
+def mask_reference(message: str) -> str:
+    """Unguarded reference implementation (all rules, always); tests assert mask() == this."""
     s = message
     s = _UUID.sub("<UUID>", s)
     s = _BLK.sub("<BLK>", s)
@@ -147,6 +148,49 @@ def mask(message: str) -> str:
     s = _DOT_NUM.sub(".<NUM>", s)
     s = _US_NUM.sub("_<NUM>", s)
     s = _STEM_NUM.sub(lambda m: m.group(0) if m.group(1).lower() in _KEEP_STEM else m.group(1) + "<NUM>", s)
+    return _MULTISPACE.sub(" ", s).strip()
+
+
+_HASDIGIT = re.compile(r"\d")
+
+
+def mask(message: str) -> str:
+    """Same result as ``mask_reference`` but skips rules whose trigger characters are absent."""
+    s = message
+    hd = _HASDIGIT.search(s) is not None
+    if "-" in s:
+        s = _UUID.sub("<UUID>", s)
+    if "blk_" in s:
+        s = _BLK.sub("<BLK>", s)
+    if "://" in s:
+        s = _URL.sub("<URL>", s)
+    if hd:
+        s = _TS.sub("<TS>", s)
+        if "::" in s:
+            s = _IP4MAPPED.sub(_ip4, s)
+        if "." in s:
+            s = _IP4.sub(_ip4, s)
+    if ":" in s:
+        s = _IP6.sub("<IP>", s)
+    if hd and "R" in s:
+        s = _LOC.sub("<LOC>", s)
+    if "/" in s:
+        s = _PATH.sub(_path, s)
+        s = _RELPATH.sub("<PATH>", s)
+    if hd:
+        if "." in s:
+            s = _VER.sub("<VER>", s)
+        if "0x" in s or "0X" in s:
+            s = _HEX0X.sub("<HEX>", s)
+        s = _HEXRUN.sub("<HEX>", s)
+        s = _ID.sub("<ID>", s)
+        s = _DUR.sub(_dur_token, s)
+        s = _NUM.sub(_num, s)
+        if "." in s:
+            s = _DOT_NUM.sub(".<NUM>", s)
+        if "_" in s:
+            s = _US_NUM.sub("_<NUM>", s)
+        s = _STEM_NUM.sub(lambda m: m.group(0) if m.group(1).lower() in _KEEP_STEM else m.group(1) + "<NUM>", s)
     return _MULTISPACE.sub(" ", s).strip()
 
 

@@ -13,9 +13,10 @@ from loglens.serve.runtime import LogLensRuntime, RuntimeConfig, parse_line
 app = typer.Typer(add_completion=False, help="LogLens: flag incidents and rank the lines that explain them.")
 
 
-def _rt(model_dir: str, tokenizer: str, int8: bool, threads: int, cache: bool = True) -> LogLensRuntime:
+def _rt(model_dir: str, tokenizer: str, int8: bool, threads: int, cache: bool = True,
+        mask_workers: int = 0) -> LogLensRuntime:
     return LogLensRuntime(RuntimeConfig(model_dir=model_dir, tokenizer=tokenizer, int8=int8,
-                                        threads=threads, use_cache=cache))
+                                        threads=threads, use_cache=cache, mask_workers=mask_workers))
 
 
 MODEL = typer.Option("artifacts/onnx", help="Directory with encoder/window ONNX files")
@@ -85,12 +86,13 @@ def watch(paths: list[Path], interval: float = 5.0, window: int = 256, top_k: in
 
 @app.command()
 def bench(file: Path, max_lines: int = 1_000_000, batch: int = 20_000, model_dir: str = MODEL,
-          tokenizer: str = TOK, int8: bool = True, threads: int = 4, cache: bool = True) -> None:
+          tokenizer: str = TOK, int8: bool = True, threads: int = 4, cache: bool = True,
+          mask_workers: int = 0) -> None:
     """Throughput, latency, cache hit rate and peak RAM on FILE."""
     from loglens.serve import resource_usage
 
     lines = _read(file, None, None)[:max_lines]
-    rt = _rt(model_dir, tokenizer, int8, threads, cache)
+    rt = _rt(model_dir, tokenizer, int8, threads, cache, mask_workers)
     lat = []
     t0 = time.perf_counter()
     for i in range(0, len(lines), batch):
@@ -101,7 +103,7 @@ def bench(file: Path, max_lines: int = 1_000_000, batch: int = 20_000, model_dir
     import numpy as np
 
     out = {"lines": len(lines), "lines_per_s": len(lines) / dt, "batch": batch, "threads": threads,
-           "int8": int8, "cache": cache, "cache_hit_rate": rt.cache.hit_rate,
+           "int8": int8, "cache": cache, "mask_workers": mask_workers, "cache_hit_rate": rt.cache.hit_rate,
            "p50_batch_ms": float(np.percentile(lat, 50) * 1000),
            "p99_batch_ms": float(np.percentile(lat, 99) * 1000),
            "peak_rss_mb": resource_usage.peak_rss_mb()}
