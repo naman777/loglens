@@ -72,8 +72,8 @@ class Provider:
 
             tok = AutoTokenizer.from_pretrained(self.cfg.model)
             model = AutoModelForCausalLM.from_pretrained(
-                self.cfg.model, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-                device_map="auto" if torch.cuda.is_available() else None)
+                self.cfg.model, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
+            model.to("cuda" if torch.cuda.is_available() else "cpu").eval()
             self._impl = (tok, model)
         elif self.cfg.provider == "anthropic":
             if not os.environ.get("ANTHROPIC_API_KEY"):
