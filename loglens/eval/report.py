@@ -21,6 +21,7 @@ from loglens.config import load_config, parse_args
 from loglens.eval.baselines.classic import (
     DeepLogBaseline,
     TemplateCountIForest,
+    TemplateCountLogReg,
     drain_clusters,
     random_rank,
     severity_rank,
@@ -142,8 +143,6 @@ def unseen_few_label(cfg: EvalConfig, fc_sup: FinetuneConfig, sup_path: str) -> 
 def rca_table(cfg: EvalConfig, sup, fc_sup, extra_methods: dict | None = None) -> dict:
     sd = SystemData("Lab", cfg.win_dir, cfg.emb_dir)
     clusters = drain_clusters("Lab", cfg.masked_dir)
-    lr = TemplateCountLogReg(sd, clusters, seed=cfg.seed).fit()
-    res["Drain3+LogReg (supervised)"] = evaluate_scores(yv, lr.score_windows(wv), yt, lr.score_windows(wt))
     dl = DeepLogBaseline(sd, clusters, seed=cfg.seed, dev=cfg.dev).fit()
     levels = LEVELS
     methods = {
