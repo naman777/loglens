@@ -1,0 +1,4 @@
+seed: 1337
+steps: 200
+lr: 0.01
+wandb: false

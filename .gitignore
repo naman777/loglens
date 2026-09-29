@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+data/
+artifacts/
+results/
+lab/out/
+wandb/
+*.pt
+*.onnx
+*.npy
+.DS_Store
