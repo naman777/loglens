@@ -1,0 +1,32 @@
+# Real (Docker) version of the lab. NOTE: the committed results were produced with the
+# deterministic simulator in lab/sim (Docker was not available on the dev machine); this file
+# is the reusable Compose setup and has NOT been run by the author.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: { POSTGRES_PASSWORD: lab, POSTGRES_DB: lab }
+  redis:
+    image: redis:7-alpine
+  orders:
+    build: { context: ./services, args: { SERVICE: orders } }
+    environment: { DATABASE_URL: "postgresql://postgres:lab@postgres/lab", POOL_SIZE: "10" }
+    depends_on: [postgres, redis]
+  payments:
+    build: { context: ./services, args: { SERVICE: payments } }
+    environment: { DATABASE_URL: "postgresql://postgres:lab@postgres/lab", BANK_LATENCY_MS: "180", POOL_SIZE: "10" }
+    depends_on: [postgres]
+  inventory:
+    build: { context: ./services, args: { SERVICE: inventory } }
+    environment: { REDIS_HOST: redis, DATABASE_URL: "postgresql://postgres:lab@postgres/lab" }
+    depends_on: [redis, postgres]
+  worker:
+    build: { context: ./services, args: { SERVICE: worker } }
+    environment: { REDIS_HOST: redis, SPOOL_DIR: /var/spool/outbox }
+    volumes: ["spool:/var/spool/outbox"]
+    depends_on: [redis]
+  gateway:
+    build: { context: ./services, args: { SERVICE: gateway } }
+    ports: ["8000:8000"]
+    depends_on: [orders, payments, inventory]
+volumes:
+  spool: {}

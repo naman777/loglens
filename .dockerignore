@@ -1,0 +1,9 @@
+data/
+results/
+lab/out/
+wandb/
+.git/
+artifacts/pretrain*/
+artifacts/window*/
+artifacts/onnx_smoke/
+artifacts/gpt2_tokenizer.json
