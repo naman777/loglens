@@ -7,3 +7,5 @@ max_chars: 1024
 train_frac: 0.7
 val_frac: 0.1
 unseen: Thunderbird
+max_lines:
+  Spark: 6000000   # full Spark is ~33M lines; capped to fit 16 GB RAM (first apps by name)

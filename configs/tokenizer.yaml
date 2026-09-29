@@ -1,0 +1,7 @@
+seed: 1337
+masked_dir: data/masked
+out_dir: artifacts/tokenizer
+vocab_sizes: [8000, 16000]
+sample_lines: 5000000
+max_system_share: 0.30
+unseen: Thunderbird

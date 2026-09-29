@@ -15,7 +15,7 @@ lab-down:
 	docker compose -f lab/docker-compose.yml down -v
 
 lab-campaign:
-	$(PY) lab/run_campaign.py
+	$(PY) lab/run_campaign.py && $(PY) -m loglens.data.lab
 
 tokenizer:
 	$(PY) -m loglens.tokenizer.train_bpe --config configs/tokenizer.yaml
