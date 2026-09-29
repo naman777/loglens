@@ -11,7 +11,7 @@ from loglens.tokenizer.masking import DURATION_BUCKETS, LEVEL_TOKENS, MASK_TOKEN
 SPECIALS = ["[PAD]", "[CLS]", "[SEP]", "[MASK]", "[UNK]"]
 DEFAULT_SERVICES = [
     "BGL", "HDFS", "Thunderbird", "OpenStack", "Hadoop", "Spark", "Zookeeper", "Linux", "Apache",
-    "HPC", "SSH", "gateway", "orders", "payments", "inventory", "worker", "postgres", "redis",
+    "HPC", "SSH", "Mac", "HealthApp", "Proxifier", "Android", "Lab", "gateway", "orders", "payments", "inventory", "worker", "postgres", "redis",
     "other",
 ]
 

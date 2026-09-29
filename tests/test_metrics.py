@@ -1,7 +1,11 @@
 import numpy as np
 
 from loglens.eval.metrics import (
-    best_threshold, evaluate_scores, prf, rank_of_first_causal, rca_metrics,
+    best_threshold,
+    evaluate_scores,
+    prf,
+    rank_of_first_causal,
+    rca_metrics,
 )
 
 

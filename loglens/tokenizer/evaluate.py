@@ -50,11 +50,15 @@ def test_lines(cfg: TokEvalConfig, system: str, rng: random.Random) -> tuple[lis
     return raw, masked
 
 
-def stats(tk: Tokenizer, texts: list[str], max_len: int) -> dict:
+def stats(tk: Tokenizer, texts: list[str], max_len: int, content_only: bool = False) -> dict:
     tk.no_padding()
     tk.no_truncation()
     enc = tk.encode_batch(texts)
-    lens = np.array([len(e.ids) for e in enc])
+    if content_only:  # drop [CLS]/[SEP] and the <LVL>/<SVC> prefix: metadata raw GPT-2 never sees
+        lens = np.array([sum(not (t in ("[CLS]", "[SEP]") or t.startswith(("<LVL:", "<SVC:")))
+                             for t in e.tokens) for e in enc])
+    else:
+        lens = np.array([len(e.ids) for e in enc])
     unk = tk.token_to_id("[UNK]")
     unk_rate = 0.0
     if unk is not None:
@@ -77,7 +81,8 @@ def main(cfg: TokEvalConfig) -> str:
           f"`{cfg.unseen}` is the unseen system: excluded from BPE training.", "",
           "| system | GPT-2 raw (mean / p95) | GPT-2 masked (mean) | " + " | ".join(
               f"LogLens {v // 1000}k (mean / p95 / UNK% / >128%)" for v in cfg.vocab_sizes)
-          + " | ratio raw-GPT2 / LogLens-8k |", "|" + " --- |" * (4 + len(cfg.vocab_sizes))]
+          + " | LogLens 8k content-only mean | ratio raw-GPT2 / LogLens-8k content |",
+          "|" + " --- |" * (5 + len(cfg.vocab_sizes))]
     agg: dict[str, list[float]] = {}
     for s in systems:
         raw, masked = test_lines(cfg, s, rng)
@@ -90,13 +95,16 @@ def main(cfg: TokEvalConfig) -> str:
             cells.append(f"{st['mean']:.1f} / {st['p95']:.0f} / {st['unk'] * 100:.2f} / "
                          f"{st['over'] * 100:.2f}")
             agg.setdefault(f"{v}_mean", []).append(st["mean"])
-        ratio = g_raw["mean"] / first["mean"]
+        content = stats(lens_tk[cfg.vocab_sizes[0]], masked, cfg.max_len, content_only=True)
+        ratio = g_raw["mean"] / content["mean"]
         rows.append((s, ratio))
         star = " (unseen)" if s == cfg.unseen else ""
         md.append(f"| {s}{star} | {g_raw['mean']:.1f} / {g_raw['p95']:.0f} | {g_mask['mean']:.1f} | "
-                  + " | ".join(cells) + f" | {ratio:.2f}x |")
-    md += ["", f"Mean ratio across systems: {np.mean([r for _, r in rows]):.2f}x fewer tokens "
-           "(raw GPT-2 / LogLens 8k).", ""]
+                  + " | ".join(cells) + f" | {content['mean']:.1f} | {ratio:.2f}x |")
+    unseen_ratio = dict(rows).get(cfg.unseen, float("nan"))
+    md += ["", f"Mean ratio across systems: {np.mean([r for _, r in rows]):.2f}x; unseen system "
+           f"({cfg.unseen}): {unseen_ratio:.2f}x fewer content tokens than raw GPT-2 "
+           "(gate: >= 2x on the unseen system, < 2% of lines over 128 tokens).", ""]
     text = "\n".join(md)
     Path(cfg.out_md).parent.mkdir(parents=True, exist_ok=True)
     Path(cfg.out_md).write_text(text, encoding="utf-8")

@@ -3,5 +3,5 @@ masked_dir: data/masked
 out_dir: artifacts/tokenizer
 vocab_sizes: [8000, 16000]
 sample_lines: 5000000
-max_system_share: 0.30
+max_system_share: 0.50  # 0.30 in the plan; only ~90k distinct masked lines exist, 30% would discard 80% of BGL
 unseen: Thunderbird

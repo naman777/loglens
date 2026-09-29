@@ -45,6 +45,8 @@ _TS = re.compile(
     r"|(?<![\w.:])\d{2}:\d{2}:\d{2}(?:[.,]\d+)?(?![\w:])"
 )
 _IP4 = re.compile(r"(?<![\w.])(?:\d{1,3}\.){3}\d{1,3}(?::(\d{1,5}))?(?![\w.]\d)")
+_IP4MAPPED = re.compile(r"(?<![\w:])::ffff:(?:\d{1,3}\.){3}\d{1,3}(?::(\d{1,5}))?", re.I)
+_RELPATH = re.compile(r"(?<![\w<>:/.\-])[\w.\-@%+=~$*]*[\w][\w.\-@%+=~$*]*(?:/[\w.\-@%+=~$*]+){2,}/?")
 _IP6 = re.compile(
     r"(?<![\w:])(?=[0-9a-fA-F:]*::|(?:[0-9a-fA-F]{1,4}:){7})(?=:*[0-9a-fA-F])[0-9a-fA-F:]{2,39}(?![\w:])"
 )
@@ -125,11 +127,13 @@ def mask(message: str) -> str:
     s = _BLK.sub("<BLK>", s)
     s = _URL.sub("<URL>", s)
     s = _TS.sub("<TS>", s)
+    s = _IP4MAPPED.sub(_ip4, s)
     s = _IP4.sub(_ip4, s)
     s = _IP6.sub("<IP>", s)
     s = _LOC.sub("<LOC>", s)
-    s = _VER.sub("<VER>", s)
     s = _PATH.sub(_path, s)
+    s = _RELPATH.sub("<PATH>", s)
+    s = _VER.sub("<VER>", s)
     s = _HEX0X.sub("<HEX>", s)
     s = _HEXRUN.sub("<HEX>", s)
     s = _ID.sub("<ID>", s)

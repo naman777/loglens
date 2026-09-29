@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import polars as pl
-from tokenizers import Tokenizer, decoders, models, pre_tokenizers, processors, trainers
+from tokenizers import AddedToken, Tokenizer, decoders, models, pre_tokenizers, processors, trainers
 
 from loglens.config import load_config, parse_args
 from loglens.seed import set_seed
@@ -49,27 +49,19 @@ def sample_training_texts(cfg: TokenizerConfig) -> list[str]:
     import random
 
     rng = random.Random(cfg.seed)
-    # water-fill: give every system an equal share, capped at max_system_share of the total
-    cap = int(cfg.sample_lines * cfg.max_system_share)
-    budget = {s: 0 for s in systems}
-    remaining = cfg.sample_lines
-    active = [s for s in systems if len(pools[s]) > 0]
-    while remaining > 0 and active:
-        share = max(remaining // len(active), 1)
-        nxt = []
-        for s in active:
-            take = min(share, len(pools[s]) - budget[s], cap - budget[s], remaining)
-            budget[s] += take
-            remaining -= take
-            if budget[s] < min(len(pools[s]), cap):
-                nxt.append(s)
-        if not nxt or sum(budget.values()) >= sum(min(len(p), cap) for p in pools.values()):
+    # cap each system's share of the sample: iterate size = min(size, share * total) to a fixed point
+    size = {s: len(p) for s, p in pools.items()}
+    for _ in range(50):
+        total = min(sum(size.values()), cfg.sample_lines)
+        cap = int(cfg.max_system_share * total)
+        new = {s: min(n, cap) for s, n in size.items()}
+        if new == size:
             break
-        active = nxt
+        size = new
     out: list[str] = []
     for s in systems:
         pool = pools[s]
-        out.extend(rng.sample(pool, budget[s]) if budget[s] < len(pool) else pool)
+        out.extend(rng.sample(pool, size[s]) if size[s] < len(pool) else pool)
     rng.shuffle(out)
     return out
 
@@ -78,7 +70,8 @@ def train_one(texts: list[str], vocab_size: int, services: list[str], path: Path
     tk = Tokenizer(models.BPE(unk_token="[UNK]"))
     tk.pre_tokenizer = pre_tokenizers.ByteLevel(add_prefix_space=False)
     tk.decoder = decoders.ByteLevel()
-    special = SPECIALS + structural_tokens(services)
+    # lstrip absorbs the space before a mask/prefix token instead of spending a token on it
+    special = [AddedToken(t, special=True, lstrip=True) for t in SPECIALS + structural_tokens(services)]
     trainer = trainers.BpeTrainer(
         vocab_size=vocab_size, special_tokens=special, min_frequency=2, show_progress=False,
         initial_alphabet=pre_tokenizers.ByteLevel.alphabet(),

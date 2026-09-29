@@ -155,3 +155,9 @@ def test_structural_prefix_tokens():
     assert out == "<LVL:WARN> <SVC:worker> disk full"
     out = encode_line("x", level=None, service="mystery", known_services={"worker"})
     assert out.startswith("<LVL:UNK> <SVC:other>")
+
+
+def test_ipv4_mapped_and_relative_paths():
+    assert mask("from ::ffff:10.1.2.3 port 22") == "from <IP> port <NUM>"
+    assert mask("cd mnt_projects/sysapps/src/ib file") == "cd <PATH> file"
+    assert mask("[/mnt/a/b-3.2.0/x.c:88]") == "[<PATH>/x.c:<NUM>]"
