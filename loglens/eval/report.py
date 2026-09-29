@@ -85,6 +85,8 @@ def anomaly_table(cfg: EvalConfig, system: str, sup, unsup, fc_sup, fc_unsup, ex
     t0 = time.time()
     iso = TemplateCountIForest(sd, clusters, seed=cfg.seed).fit()
     res["Drain3+IsolationForest"] = evaluate_scores(yv, iso.score_windows(wv), yt, iso.score_windows(wt))
+    lr = TemplateCountLogReg(sd, clusters, seed=cfg.seed).fit()
+    res["Drain3+LogReg (supervised)"] = evaluate_scores(yv, lr.score_windows(wv), yt, lr.score_windows(wt))
     dl = DeepLogBaseline(sd, clusters, seed=cfg.seed, dev=cfg.dev).fit()
     res["Drain3+DeepLog"] = evaluate_scores(yv, dl.score_windows(wv), yt, dl.score_windows(wt))
     res["_baseline_secs"] = time.time() - t0
@@ -140,6 +142,8 @@ def unseen_few_label(cfg: EvalConfig, fc_sup: FinetuneConfig, sup_path: str) -> 
 def rca_table(cfg: EvalConfig, sup, fc_sup, extra_methods: dict | None = None) -> dict:
     sd = SystemData("Lab", cfg.win_dir, cfg.emb_dir)
     clusters = drain_clusters("Lab", cfg.masked_dir)
+    lr = TemplateCountLogReg(sd, clusters, seed=cfg.seed).fit()
+    res["Drain3+LogReg (supervised)"] = evaluate_scores(yv, lr.score_windows(wv), yt, lr.score_windows(wt))
     dl = DeepLogBaseline(sd, clusters, seed=cfg.seed, dev=cfg.dev).fit()
     levels = LEVELS
     methods = {

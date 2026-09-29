@@ -15,8 +15,8 @@ class SystemData:
         self.system = system
         z = np.load(Path(win_dir) / f"{system}.npz", allow_pickle=False)
         self.z = {k: z[k] for k in z.files}
-        self.emb = np.load(Path(emb_dir) / f"{system}.npy", mmap_mode="r")
-        self.emb = np.asarray(self.emb)
+        f = Path(emb_dir) / f"{system}.npy"
+        self.emb = np.asarray(np.load(f)) if f.exists() else None  # baselines need no embeddings
         self.n_windows = len(self.z["starts"])
         self.incidents = None
         if "inc_meta" in self.z:
@@ -38,7 +38,7 @@ class SystemData:
     def slice_batch(self, spans: list[tuple[int, int]]) -> dict[str, np.ndarray]:
         L = max(b - a for a, b in spans)
         B = len(spans)
-        d = self.emb.shape[1]
+        d = self.emb.shape[1] if self.emb is not None else 256
         emb = np.zeros((B, L, d), dtype=np.float16)
         gap = np.zeros((B, L), dtype=np.int64)
         svc = np.zeros((B, L), dtype=np.int64)

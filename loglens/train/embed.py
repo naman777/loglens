@@ -25,6 +25,9 @@ class EmbedConfig:
 
 
 def load_encoder(path: str, dev: str = "cpu") -> LineEncoder:
+    if path == "random":  # ablation: untrained encoder with the same architecture
+        torch.manual_seed(1337)
+        return LineEncoder(LineEncoderConfig()).to(dev).eval()
     ck = torch.load(path, map_location=dev, weights_only=False)
     cfg = LineEncoderConfig(**ck["cfg"])
     m = LineEncoder(cfg)

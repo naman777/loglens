@@ -167,6 +167,26 @@ class TemplateCountIForest:
         return -self.model.score_samples(self._feat(widx))
 
 
+class TemplateCountLogReg(TemplateCountIForest):
+    """Supervised baseline: logistic regression on the same log-count vectors, trained on the
+    system's labelled train windows (the fair comparison for LogLens-sup)."""
+
+    name = "Drain3+LogReg (supervised)"
+
+    def fit(self):
+        from sklearn.linear_model import LogisticRegression
+
+        w = self.sd.windows("train")
+        if len(w) > 60000:
+            w = np.random.default_rng(self.seed).choice(w, 60000, replace=False)
+        y = self.sd.z["wlabel"][w]
+        self.model = LogisticRegression(max_iter=300, class_weight="balanced", C=1.0).fit(self._feat(w), y)
+        return self
+
+    def score_windows(self, widx: np.ndarray) -> np.ndarray:
+        return self.model.decision_function(self._feat(widx))
+
+
 _SEV = {"FATAL": 5, "CRITICAL": 5, "ERROR": 4, "WARN": 3, "NOTICE": 2, "INFO": 1, "DEBUG": 0,
         "TRACE": 0, "UNK": 1}
 
