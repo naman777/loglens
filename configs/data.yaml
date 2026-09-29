@@ -1,0 +1,9 @@
+seed: 1337
+raw_dir: data/raw
+out_dir: data/parquet
+split_dir: data/splits
+shard_rows: 1000000
+max_chars: 1024
+train_frac: 0.7
+val_frac: 0.1
+unseen: Thunderbird
