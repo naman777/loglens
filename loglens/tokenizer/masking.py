@@ -69,6 +69,11 @@ _KEEP_CODE = re.compile(
     r"(?i)\b(?:status|code|error|err|errno|exit|rc|returned|response|http|signal)\b[\s:=(]*$"
 )
 _NUM = re.compile(r"(?<![\w.<])-?\d+(?:\.\d+)?(?![\w>])")
+_DOT_NUM = re.compile(r"(?<=[A-Za-z_])\.\d+(?![\w])")  # core.21370 -> core.<NUM>
+_US_NUM = re.compile(r"(?<=[A-Za-z])_\d+(?![\w])")  # step_12 -> step_<NUM>
+_STEM_NUM = re.compile(r"(?<![\w.<])([A-Za-z]{2,})\d{1,4}(?![\w.])")  # bglio12, storage3, sda1
+_KEEP_STEM = frozenset({"ssh", "sha", "md", "utf", "ipv", "http", "tls", "sslv", "tlsv", "ec", "ed",
+                        "aes", "rsa", "sv", "py", "gb", "mb", "kb", "tb"})
 _HTTP_CTX = re.compile(r'(?:<URL>|")\s*$')
 _MULTISPACE = re.compile(r"\s+")
 
@@ -139,6 +144,9 @@ def mask(message: str) -> str:
     s = _ID.sub("<ID>", s)
     s = _DUR.sub(_dur_token, s)
     s = _NUM.sub(_num, s)
+    s = _DOT_NUM.sub(".<NUM>", s)
+    s = _US_NUM.sub("_<NUM>", s)
+    s = _STEM_NUM.sub(lambda m: m.group(0) if m.group(1).lower() in _KEEP_STEM else m.group(1) + "<NUM>", s)
     return _MULTISPACE.sub(" ", s).strip()
 
 

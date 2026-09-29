@@ -161,3 +161,16 @@ def test_ipv4_mapped_and_relative_paths():
     assert mask("from ::ffff:10.1.2.3 port 22") == "from <IP> port <NUM>"
     assert mask("cd mnt_projects/sysapps/src/ib file") == "cd <PATH> file"
     assert mask("[/mnt/a/b-3.2.0/x.c:88]") == "[<PATH>/x.c:<NUM>]"
+
+
+@pytest.mark.parametrize("raw,expected", [
+    ("generating core.21370", "generating core.<NUM>"),
+    ("cache step_12 done", "cache step_<NUM> done"),
+    ("Lustre mount FAILED : bglio1023 : point", "Lustre mount FAILED : bglio<NUM> : point"),
+    ("device sda1 mounted", "device sda<NUM> mounted"),
+    ("Setting hostname an7: ok", "Setting hostname an<NUM>: ok"),
+    ("using ssh2 and sha256 with utf8", "using ssh2 and sha256 with utf8"),
+    ("arch x86_64 ipv4 md5", "arch x86_64 ipv4 md5"),
+])
+def test_identifier_suffix_numbers(raw, expected):
+    assert mask(raw) == expected
