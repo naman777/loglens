@@ -30,8 +30,8 @@ class TokenizerConfig:
     services: list[str] = field(default_factory=lambda: list(DEFAULT_SERVICES))
 
 
-def prefixed(level: str, system: str, masked: str) -> str:
-    return f"{level_token(level)} {service_token(system, None)} {masked}"
+def prefixed(level: str, svc: str, masked: str) -> str:
+    return f"{level_token(level)} {service_token(svc, None)} {masked}"
 
 
 def load_split_texts(masked_dir: str, system: str, split: str | None) -> list[str]:
@@ -39,7 +39,7 @@ def load_split_texts(masked_dir: str, system: str, split: str | None) -> list[st
     u = pl.read_parquet(Path(masked_dir) / system / "uniques.parquet")
     if split == "train":
         u = u.filter(pl.col("count_train") > 0)
-    return [prefixed(lv, system, m) for lv, m in zip(u["level"], u["masked"], strict=True)]
+    return [prefixed(lv, sv, m) for lv, sv, m in zip(u["level"], u["svc"], u["masked"], strict=True)]
 
 
 def sample_training_texts(cfg: TokenizerConfig) -> list[str]:

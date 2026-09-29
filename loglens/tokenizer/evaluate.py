@@ -41,8 +41,8 @@ def test_lines(cfg: TokEvalConfig, system: str, rng: random.Random) -> tuple[lis
     n = min(cfg.sample_per_system, len(lines))
     uids = lines["uid"].to_list()
     pick = rng.sample(uids, n) if n < len(uids) else uids
-    ud = dict(zip(u["uid"], zip(u["level"], u["masked"], strict=True), strict=True))
-    masked = [f"{level_token(ud[i][0])} {service_token(system, None)} {ud[i][1]}" for i in pick]
+    ud = dict(zip(u["uid"], zip(u["level"], u["svc"], u["masked"], strict=True), strict=True))
+    masked = [f"{level_token(ud[i][0])} {service_token(ud[i][1], None)} {ud[i][2]}" for i in pick]
     # raw text: best available proxy is the masked text's source message via a second read
     raw_df = pl.read_parquet(Path(cfg.parquet_dir) / system / "part-*.parquet",
                              columns=["message", "split"]).filter(pl.col("split") == "test")
