@@ -6,7 +6,11 @@ pytest.importorskip("onnx")
 from loglens.model.line_encoder import LineEncoder, LineEncoderConfig
 from loglens.model.window_model import WindowModel, WindowModelConfig
 from loglens.serve.export_onnx import (
-    export_encoder, export_window, parity_encoder, parity_window, quantize,
+    export_encoder,
+    export_window,
+    parity_encoder,
+    parity_window,
+    quantize,
 )
 
 

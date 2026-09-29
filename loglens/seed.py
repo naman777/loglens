@@ -20,3 +20,16 @@ def set_seed(seed: int = 1337) -> int:
     except ImportError:
         pass
     return seed
+
+
+def get_device() -> str:
+    """cuda when available, overridable with LOGLENS_DEVICE=cpu (e.g. while the GPU is busy)."""
+    dev = os.environ.get("LOGLENS_DEVICE")
+    if dev:
+        return dev
+    try:
+        import torch
+
+        return "cuda" if torch.cuda.is_available() else "cpu"
+    except ImportError:
+        return "cpu"

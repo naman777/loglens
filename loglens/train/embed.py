@@ -12,6 +12,7 @@ import torch
 
 from loglens.config import load_config, parse_args
 from loglens.model.line_encoder import LineEncoder, LineEncoderConfig
+from loglens.seed import get_device
 
 
 @dataclass
@@ -58,7 +59,7 @@ def embed_ragged(model: LineEncoder, ids: np.ndarray, offsets: np.ndarray, dev: 
 
 
 def main(cfg: EmbedConfig) -> None:
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
+    dev = get_device()
     model = load_encoder(cfg.encoder, dev)
     Path(cfg.emb_dir).mkdir(parents=True, exist_ok=True)
     files = sorted(Path(cfg.tok_dir).glob("*.npz"))

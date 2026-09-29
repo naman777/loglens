@@ -19,7 +19,7 @@ from torch.nn import functional as F
 from loglens.config import load_config, parse_args
 from loglens.eval.metrics import evaluate_scores, pr_auc, rank_of_first_causal, rca_metrics
 from loglens.model.window_model import WindowModel, WindowModelConfig
-from loglens.seed import set_seed
+from loglens.seed import get_device, set_seed
 from loglens.tracking import Tracker
 from loglens.train.losses import anomaly_bce, pairwise_margin, suspicion_bce
 from loglens.train.windata import MixedSampler, SystemData, load_systems, to_torch
@@ -53,6 +53,7 @@ class FinetuneConfig:
     susp_weight: float = 1.0
     use_gap: bool = True
     n_masks_eval: int = 4
+    val_max_windows: int = 4000
     bf16: bool = True
     wandb: bool = False
     run_name: str = "finetune"
@@ -163,7 +164,7 @@ def rca_eval(model, sd: SystemData, split: str, cfg: FinetuneConfig, dev: str) -
 
 def train(cfg: FinetuneConfig) -> dict:
     set_seed(cfg.seed)
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
+    dev = get_device()
     sysnames = sorted(set(cfg.train_systems if cfg.mode == "sup" else cfg.unsup_systems)
                       | set(cfg.eval_systems))
     systems = load_systems(sysnames, cfg.win_dir, cfg.emb_dir)
@@ -235,6 +236,8 @@ def validate(model, systems, cfg: FinetuneConfig, dev: str) -> tuple[float, dict
     for n in cfg.eval_systems:
         sd = systems[n]
         w = sd.windows("val")
+        if len(w) > cfg.val_max_windows:
+            w = w[np.linspace(0, len(w) - 1, cfg.val_max_windows).astype(int)]
         y = sd.z["wlabel"][w]
         if y.sum() == 0:
             continue

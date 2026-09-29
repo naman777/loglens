@@ -27,7 +27,7 @@ from loglens.eval.baselines.classic import (
 )
 from loglens.eval.metrics import evaluate_scores, prf, rank_of_first_causal, rca_metrics
 from loglens.model.window_model import WindowModel, WindowModelConfig
-from loglens.seed import set_seed
+from loglens.seed import get_device, set_seed
 from loglens.tokenizer.masking import LEVELS
 from loglens.train.finetune import (
     FinetuneConfig,
@@ -54,7 +54,7 @@ class EvalConfig:
     few_label_frac: float = 0.01
     few_label_steps: int = 300
     unseen_frac_seeds: int = 3
-    dev: str = "cuda" if torch.cuda.is_available() else "cpu"
+    dev: str = field(default_factory=get_device)
 
 
 def load_window_model(path: str, dev: str) -> tuple[WindowModel, FinetuneConfig]:
