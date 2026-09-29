@@ -105,8 +105,8 @@ def unsup_scores(model, sd: SystemData, widx: np.ndarray, cfg: FinetuneConfig, d
                 m[rows, pick[rows]] = True
             with torch.autocast(dev, dtype=torch.bfloat16, enabled=cfg.bf16 and dev == "cuda"):
                 lg = model(t["emb"], t["gap"], t["svc"], t["lvl"], t["pad"], m, True)["template_logits"]
-            l = F.cross_entropy(lg.float().transpose(1, 2), t["tid"], reduction="none")
-            nll = nll + (l * m).sum(1) / m.sum(1).clamp(min=1)
+            nl = F.cross_entropy(lg.float().transpose(1, 2), t["tid"], reduction="none")
+            nll = nll + (nl * m).sum(1) / m.sum(1).clamp(min=1)
         out[i: i + bs] = (nll / cfg.n_masks_eval).cpu().numpy()
     return out
 
@@ -195,9 +195,9 @@ def train(cfg: FinetuneConfig) -> dict:
             if cfg.mode == "unsup":
                 m = random_line_mask(t["pad"], cfg.line_mask_prob)
                 o = model(t["emb"], t["gap"], t["svc"], t["lvl"], t["pad"], m, True)
-                l = F.cross_entropy(o["template_logits"].float().transpose(1, 2), t["tid"],
+                nl = F.cross_entropy(o["template_logits"].float().transpose(1, 2), t["tid"],
                                     reduction="none")
-                loss = (l * m).sum() / m.sum().clamp(min=1)
+                loss = (nl * m).sum() / m.sum().clamp(min=1)
             else:
                 o = model(t["emb"], t["gap"], t["svc"], t["lvl"], t["pad"])
                 loss = anomaly_bce(o["anomaly"].float(), t["y"], pos_weight)

@@ -19,14 +19,22 @@ import torch
 
 from loglens.config import load_config, parse_args
 from loglens.eval.baselines.classic import (
-    DeepLogBaseline, TemplateCountIForest, drain_clusters, random_rank, severity_rank,
+    DeepLogBaseline,
+    TemplateCountIForest,
+    drain_clusters,
+    random_rank,
+    severity_rank,
 )
 from loglens.eval.metrics import evaluate_scores, prf, rank_of_first_causal, rca_metrics
 from loglens.model.window_model import WindowModel, WindowModelConfig
 from loglens.seed import set_seed
 from loglens.tokenizer.masking import LEVELS
 from loglens.train.finetune import (
-    FinetuneConfig, rank_incident, sup_scores, train, unsup_scores,
+    FinetuneConfig,
+    rank_incident,
+    sup_scores,
+    train,
+    unsup_scores,
 )
 from loglens.train.windata import SystemData
 

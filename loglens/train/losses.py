@@ -13,9 +13,9 @@ def anomaly_bce(logit: torch.Tensor, y: torch.Tensor, pos_weight: float) -> torc
 def suspicion_bce(logit: torch.Tensor, causal: torch.Tensor, pad: torch.Tensor,
                   pos_weight: float = 10.0) -> torch.Tensor:
     valid = ~pad
-    l = F.binary_cross_entropy_with_logits(
+    bce = F.binary_cross_entropy_with_logits(
         logit, causal, pos_weight=torch.tensor(pos_weight, device=logit.device), reduction="none")
-    return (l * valid).sum() / valid.sum().clamp(min=1)
+    return (bce * valid).sum() / valid.sum().clamp(min=1)
 
 
 def pairwise_margin(logit: torch.Tensor, causal: torch.Tensor, pad: torch.Tensor,
