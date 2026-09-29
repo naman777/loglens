@@ -1,0 +1,6 @@
+seed: 1337
+sup_ckpt: artifacts/window/sup/best.pt
+unsup_ckpt: artifacts/window/unsup/best.pt
+anomaly_systems: [BGL, HDFS]
+unseen: Thunderbird
+max_eval_windows: 40000

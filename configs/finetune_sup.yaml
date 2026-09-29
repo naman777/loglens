@@ -1,0 +1,12 @@
+mode: sup
+out_dir: artifacts/window/sup
+train_systems: [BGL, HDFS, Lab]
+eval_systems: [BGL, HDFS, Lab]
+steps: 5000
+eval_every: 250
+patience: 8
+batch_size: 32
+lr: 0.0003
+sampler_power: 0.3
+rank_weight: 0.5
+run_name: window_sup

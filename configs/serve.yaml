@@ -1,0 +1,3 @@
+encoder: artifacts/pretrain/encoder.pt
+window: artifacts/window/sup/best.pt
+out_dir: artifacts/onnx

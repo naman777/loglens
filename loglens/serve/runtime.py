@@ -17,7 +17,9 @@ from loglens.tokenizer.tok import DEFAULT_SERVICES
 
 _LEVEL_RE = re.compile(r"\b(TRACE|DEBUG|INFO|NOTICE|WARN(?:ING)?|ERROR|ERR|FATAL|CRITICAL|SEVERE)\b")
 _ISO = re.compile(r"(\d{4})-(\d\d)-(\d\d)[T ](\d\d):(\d\d):(\d\d)(?:[.,](\d+))?")
-_SVC = re.compile(r"\[([A-Za-z][\w.\-]{1,30})\]|^\S+ \S+ (\S+?)(?:\[\d+\])?: ")
+_SVC = re.compile(
+    r"\[([A-Za-z][\w.\-]{1,30})\]|^\w{3} +\d+ \d\d:\d\d:\d\d \S+ ([^\s:\[]+)(?:\[\d+\])?:"
+    r"|^\S+ \S+ (\S+?)(?:\[\d+\])?: ")
 
 
 @dataclass
@@ -50,7 +52,7 @@ def parse_line(line: str) -> Parsed:
     lm = _LEVEL_RE.search(s[:120])
     lv = lm.group(1) if lm else "UNK"
     sm = _SVC.search(s[:160])
-    svc = (sm.group(1) or sm.group(2)) if sm else "other"
+    svc = (sm.group(1) or sm.group(2) or sm.group(3)) if sm else "other"
     return Parsed(ts, lv, svc, s)
 
 

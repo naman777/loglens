@@ -1,0 +1,9 @@
+mode: unsup
+out_dir: artifacts/window/unsup
+steps: 4000
+eval_every: 500
+patience: 5
+batch_size: 32
+lr: 0.0003
+sampler_power: 0.5
+run_name: window_unsup
