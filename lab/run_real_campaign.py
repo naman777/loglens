@@ -8,6 +8,7 @@ import sys
 import threading
 import time
 import uuid
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -90,17 +91,22 @@ def collect_traffic(stop, path):
             stop.wait(0.5)
 
 
-def run_incident(fault, duration):
+def run_incident(fault, duration, snapshot=lambda: None):
     before = wait_for(baseline)
+    snapshot()
     start = int(time.time() * 1000)
     with inject(fault):
-        observed = wait_for(lambda: effect(fault), timeout=30)
-        time.sleep(duration)
-        # Confirm the effect persisted, rather than recording a transient startup failure.
-        sustained = effect(fault)
-        if not sustained:
-            raise RuntimeError(f"{fault}: effect did not persist")
-        end = int(time.time() * 1000)
+        try:
+            observed = wait_for(lambda: effect(fault), timeout=30)
+            time.sleep(duration)
+            # Confirm persistence rather than accepting a transient startup failure.
+            sustained = effect(fault)
+            if not sustained:
+                raise RuntimeError(f"{fault}: effect did not persist")
+            end = int(time.time() * 1000)
+        finally:
+            # Recreating a service removes its old container logs. Capture before recovery.
+            snapshot()
     recovered = wait_for(baseline)
     return {"incident_id": uuid.uuid4().hex[:12], "fault_type": fault,
             "target_service": TARGETS[fault], "t_start": start, "t_end": end,
@@ -112,17 +118,23 @@ def run_incident(fault, duration):
 
 def save_logs(out):
     raw = sh(*COMPOSE, "logs", "--no-color", "--no-log-prefix")
-    (out / "compose.log").write_text(raw, encoding="utf-8")
-    rows = []
+    with (out / "compose.log").open("a", encoding="utf-8") as stream:
+        stream.write("\n--- container log snapshot ---\n" + raw)
+    path = out / "logs.jsonl"
+    existing = Counter(path.read_text(encoding="utf-8").splitlines()) if path.exists() else Counter()
+    current = Counter()
     for line in raw.splitlines():
         try:
             row = json.loads(line)
         except json.JSONDecodeError:
             continue
         if isinstance(row, dict) and {"ts", "service", "level", "message"} <= row.keys():
-            rows.append(row)
-    rows.sort(key=lambda row: row["ts"])
-    (out / "logs.jsonl").write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
+            current[json.dumps(row, sort_keys=True)] += 1
+    # Keep the maximum multiplicity seen in any snapshot: preserve repeated events without
+    # multiplying them every time an unchanged container's logs are collected again.
+    merged = existing | current
+    rows = sorted(merged.elements(), key=lambda line: json.loads(line)["ts"])
+    path.write_text("".join(line + "\n" for line in rows), encoding="utf-8")
 
 
 def main():
@@ -152,7 +164,7 @@ def main():
         thread.start()
         with (out / "incidents.jsonl").open("w", encoding="utf-8") as stream:
             for fault in args.faults:
-                record = run_incident(fault, args.duration)
+                record = run_incident(fault, args.duration, snapshot=lambda: save_logs(out))
                 stream.write(json.dumps(record) + "\n")
                 stream.flush()
                 print(f"Verified {fault}: normal -> observed fault -> recovery", flush=True)

@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 COMPOSE = ["docker", "compose", "-p", "loglens-lab", "-f", str(ROOT / "lab/docker-compose.yml")]
-TARGETS = {"container_kill": "orders", "redis_down": "inventory", "db_pool_exhaustion": "payments",
+TARGETS = {"container_kill": "orders", "redis_down": "redis", "db_pool_exhaustion": "payments",
            "disk_full": "worker", "bad_config": "orders", "slow_downstream": "payments"}
 
 

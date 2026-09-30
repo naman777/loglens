@@ -1,8 +1,9 @@
 # Real Docker lab validation
 
-The saved model benchmarks use the simulator. This implementation has local unit coverage,
-but real-container execution is not yet verified: Docker is absent on the development machine.
-The new `docker-lab` CI job runs the campaign and uploads evidence when these changes are pushed.
+The saved model benchmarks use the simulator. The first real Docker CI campaign passed all six
+fault/recovery checks in run 36725075577. Evidence review found that container recreation discarded
+earlier logs; the runner now captures and merges snapshots before each recreation/recovery.
+The corrected campaign is being validated separately. Docker remains absent on the local machine.
 
 ## Run
 
@@ -63,10 +64,10 @@ unverified Docker helpers were replaced; the real runner refuses unsupported fau
 Each run gets a unique directory under `lab/real-out/`, separate from `lab/out/` and training data:
 
 - `incidents.jsonl`: only incidents with observed effects and successful recovery; stores timestamps,
-  target service and before/fault/after evidence. `causal_labels_reviewed` stays false.
+  target service and before/fault/after evidence (Redis itself is the target for `redis_down`). `causal_labels_reviewed` stays false.
 - `traffic.jsonl`: actual gateway response statuses and request durations throughout the campaign.
-- `compose.log`: complete container stdout, including startup failures.
-- `logs.jsonl`: sorted application JSON logs extracted from stdout.
+- `compose.log`: container stdout snapshots, including startup failures; unchanged logs repeat across snapshots.
+- `logs.jsonl`: merged application JSON logs, preserving events before containers are recreated.
 - `failure.json`: runner error, if any; a failed incident is not appended as a successful label.
 
 Manually review cross-service causal evidence before using these logs for RCA scoring. Successful

@@ -216,3 +216,32 @@ def test_log_capture_filters_noise_and_sorts(monkeypatch, tmp_path):
     actual = [json.loads(line) for line in (tmp_path / "logs.jsonl").read_text().splitlines()]
     assert [r["ts"] for r in actual] == [1, 2]
     assert "startup noise" in (tmp_path / "compose.log").read_text()
+
+
+def test_snapshots_keep_recreated_container_logs_without_duplicate_counts(monkeypatch, tmp_path):
+    early = json.dumps({"ts": 1, "service": "payments", "level": "ERROR", "message": "pool exhausted"})
+    late = json.dumps({"ts": 2, "service": "payments", "level": "WARN", "message": "bank slow"})
+    snapshots = iter([early + "\n" + early, early + "\n" + early, late])
+    monkeypatch.setattr(campaign, "sh", lambda *args: next(snapshots))
+    for _ in range(3):
+        campaign.save_logs(tmp_path)
+    rows = [json.loads(line) for line in (tmp_path / "logs.jsonl").read_text().splitlines()]
+    assert [row["ts"] for row in rows] == [1, 1, 2]
+
+
+def test_snapshot_happens_before_fault_recovery(monkeypatch):
+    events = []
+
+    @contextmanager
+    def inject(fault):
+        events.append("inject")
+        try:
+            yield
+        finally:
+            events.append("recover")
+
+    monkeypatch.setattr(campaign, "inject", inject)
+    monkeypatch.setattr(campaign, "wait_for", lambda *a, **kw: {"ok": True})
+    monkeypatch.setattr(campaign, "effect", lambda *a: {"status": 503})
+    campaign.run_incident("redis_down", 0, snapshot=lambda: events.append("snapshot"))
+    assert events == ["snapshot", "inject", "snapshot", "recover"]
