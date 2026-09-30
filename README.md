@@ -19,7 +19,7 @@ that explain them — on a laptop CPU, with zero LLM API calls.
 | Unseen system (Thunderbird) | zero-shot: **fails** (F1 = always-anomalous baseline). With 1% labels (2.1k windows): F1 **0.985** vs 0.858 for LogReg trained on 100% of labels |
 | Model size | 33.6M + 3.6M params; int8 ONNX **37.5 MB** total (FP32 148 MB) |
 | int8 vs FP32 accuracy | F1 drop <= 0.5 point on BGL / HDFS / lab |
-| CPU throughput, int8, template cache | see [`docs/serving_benchmark.md`](docs/serving_benchmark.md) |
+| CPU throughput, int8, template cache (1M raw BGL lines) | **17.7k lines/s pinned to 4 cores** (target 20k: **missed**), 24.1k on 8 cores, 9.9k on 1 core; HDFS 16.8k / 22.7k / 8.3k — [`docs/serving_benchmark.md`](docs/serving_benchmark.md) |
 | Frontier-LLM comparison | **not run** (no API key in the build environment); a 1.5B open LLM is included |
 
 Full tables: [`results/benchmark.md`](results/benchmark.md) (regenerate with `make eval`),
@@ -33,6 +33,9 @@ make test                                   # 100+ tests
 python -m loglens.serve.cli rank sample.log # needs artifacts/onnx (see "Reproduce")
 docker build -t loglens . && docker run --rm -v "$PWD:/data" loglens rank /data/sample.log   # untested here: no Docker on the dev machine
 ```
+
+Demo (simulated fault, no Docker): `python scripts/demo.py --fault db_pool_exhaustion` — LogLens flags the
+window and ranks the `QueuePool limit reached` lines at the top.
 
 CLI: `loglens rank <file> [--from ISO --to ISO]`, `loglens watch <paths>`, `loglens bench <file>`.
 HTTP: `uvicorn loglens.serve.api:app` -> `POST /score {"lines": [...], "top_k": 15}`, `GET /health`,
@@ -86,7 +89,7 @@ make export        # ONNX + int8 -> artifacts/onnx
   (`docs/data_report.md`), and HDFS is saturated (a template-count logistic regression matches it).
 * **Gates not met**: tokenizer >= 2x fewer tokens than GPT-2 (got 1.5x; 1.3x on the unseen system);
   nearest-neighbour template agreement >= 90% (got 68%); linear probe beating TF-IDF (it did not);
-  throughput on a genuinely 4-core-pinned run (see serving benchmark).
+  throughput on 4 pinned cores (17.7k vs 20k lines/s; the Python parse+mask hot path is the limit).
 * **No frontier-LLM baseline** was run, so the "within 10% of a frontier LLM at 1/100th of the cost"
   goal is untested. No cost-per-1M-lines table is claimed.
 * Thunderbird / Spark are truncated subsets; only English-ish logs were tried; no real customer data.

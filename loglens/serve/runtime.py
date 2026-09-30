@@ -95,12 +95,15 @@ class RuntimeConfig:
     max_len: int = 128
     services: list[str] = field(default_factory=lambda: list(DEFAULT_SERVICES))
     use_cache: bool = True
-    mask_workers: int = 0  # >0: mask uncached messages in a process pool
+    mask_workers: int = 0  # >0: parse+mask in a process pool
+    # anomaly decision threshold on sigmoid(logit). Validation-tuned per system: lab 0.84, BGL 0.89,
+    # HDFS 0.42 (results/results.json); 0.85 is a conservative cross-system default.
+    threshold: float = 0.85
 
 
 @dataclass
 class Scored:
-    anomaly: float
+    anomaly: float  # max over windows of sigmoid(anomaly logit); compare against RuntimeConfig.threshold
     lines: list[dict]  # top-k suspects: rank, index, score, ts, text
     n_lines: int
     window_scores: list[float]

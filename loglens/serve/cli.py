@@ -19,6 +19,7 @@ def _rt(model_dir: str, tokenizer: str, int8: bool, threads: int, cache: bool = 
                                         threads=threads, use_cache=cache, mask_workers=mask_workers))
 
 
+THRESH = 0.85
 MODEL = typer.Option("artifacts/onnx", help="Directory with encoder/window ONNX files")
 TOK = typer.Option("artifacts/tokenizer/loglens-bpe-16k.json", help="Tokenizer json")
 
@@ -53,7 +54,7 @@ def rank(file: Path, top_k: int = 15, frm: str = typer.Option(None, "--from"),
         typer.echo(json.dumps({"anomaly_score": res.anomaly, "n_lines": res.n_lines,
                                "suspects": res.lines}, indent=2))
         return
-    color = typer.colors.RED if res.anomaly > 0.5 else typer.colors.GREEN
+    color = typer.colors.RED if res.anomaly > THRESH else typer.colors.GREEN
     typer.secho(f"{res.n_lines} lines, anomaly score {res.anomaly:.3f}", fg=color, bold=True)
     for s in res.lines:
         typer.echo(f"{s['rank']:>3}  {s['score']:>7.2f}  line {s['index'] + 1:<7} {s['text'][:140]}")
@@ -76,9 +77,9 @@ def watch(paths: list[Path], interval: float = 5.0, window: int = 256, top_k: in
         buf = buf[-window:]
         if buf:
             res = rt.score(buf, top_k)
-            tag = typer.style("ANOMALY" if res.anomaly > 0.5 else "ok", fg=typer.colors.RED if res.anomaly > 0.5 else typer.colors.GREEN, bold=True)
+            tag = typer.style("ANOMALY" if res.anomaly > THRESH else "ok", fg=typer.colors.RED if res.anomaly > THRESH else typer.colors.GREEN, bold=True)
             typer.echo(f"[{time.strftime('%H:%M:%S')}] {tag} score={res.anomaly:.3f} lines={res.n_lines}")
-            if res.anomaly > 0.5:
+            if res.anomaly > THRESH:
                 for s in res.lines:
                     typer.echo(f"    {s['score']:.2f}  {s['text'][:140]}")
         time.sleep(interval)
