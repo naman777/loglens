@@ -102,11 +102,14 @@ class Provider:
 
             tok, model = self._impl
             msgs = [{"role": "user", "content": prompt}]
-            ids = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt").to(model.device)
+            enc = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt",
+                                          return_dict=True)
+            enc = {k: v.to(model.device) for k, v in enc.items()}
             with torch.no_grad():
-                out = model.generate(ids, max_new_tokens=self.cfg.max_new_tokens, do_sample=False)
-            text = tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True)
-            rec = {"text": text, "tokens_in": int(ids.shape[1]), "tokens_out": int(out.shape[1] - ids.shape[1])}
+                out = model.generate(**enc, max_new_tokens=self.cfg.max_new_tokens, do_sample=False)
+            n_in = enc["input_ids"].shape[1]
+            text = tok.decode(out[0, n_in:], skip_special_tokens=True)
+            rec = {"text": text, "tokens_in": int(n_in), "tokens_out": int(out.shape[1] - n_in)}
         else:
             r = self._impl.messages.create(model=self.cfg.model, max_tokens=self.cfg.max_new_tokens,
                                            temperature=0, messages=[{"role": "user", "content": prompt}])
