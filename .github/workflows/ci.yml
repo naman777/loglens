@@ -31,3 +31,27 @@ jobs:
         with:
           name: docker-lab-evidence
           path: lab/real-out/
+
+  serving-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Download matching research weights
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download v0.1.0-rc.1 --repo "$GITHUB_REPOSITORY" --pattern '*.zip' --pattern SHA256SUMS.txt
+      - run: sha256sum --check SHA256SUMS.txt
+      - run: python -m zipfile -e loglens-v0.1.0-rc.1.zip artifacts
+      - run: pip install -e ".[serve]"
+      - run: pip check
+      - run: python scripts/smoke_check.py
+      - run: python scripts/smoke_check.py --fp32
+      - run: python -m loglens.serve.cli rank examples/sample.log
+      - run: docker build -t loglens-serving .
+      - run: docker run --rm -v "$PWD/examples:/data:ro" loglens-serving rank /data/sample.log

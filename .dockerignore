@@ -3,6 +3,9 @@ results/
 lab/out/
 wandb/
 .git/
+.venv/
+release/
+lab/real-out/
 artifacts/pretrain*/
 artifacts/window*/
 artifacts/onnx_smoke/
