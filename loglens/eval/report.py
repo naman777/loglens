@@ -140,6 +140,26 @@ def unseen_few_label(cfg: EvalConfig, fc_sup: FinetuneConfig, sup_path: str) -> 
         "train_windows": max(int(len(sd.windows('train')) * cfg.few_label_frac), 8)}
 
 
+def unseen_unsup_adapt(cfg: EvalConfig, fc_unsup: FinetuneConfig, unsup_path: str) -> dict:
+    """Zero labels: continue the masked-template objective on the unseen system's *unlabelled*
+    train windows (its own template vocabulary), then score with template NLL."""
+    from dataclasses import replace
+
+    fc = replace(fc_unsup, init=unsup_path, unsup_systems=[cfg.unseen], eval_systems=[cfg.unseen],
+                 local_templates=True, reset_template_head=True, filter_normal=False, steps=1500,
+                 eval_every=10**6, patience=99, lr=3e-4, warmup=50, run_name="unsup_adapt",
+                 out_dir="artifacts/window/unsup_adapt", val_max_windows=3000)
+    train(fc)
+    m, fcx = load_window_model("artifacts/window/unsup_adapt/best.pt", cfg.dev)
+    fcx.local_templates = True
+    sd = SystemData(cfg.unseen, cfg.win_dir, cfg.emb_dir)
+    sd.use_local_templates(cfg.masked_dir)
+    wv = subsample(sd.windows("val"), cfg.max_eval_windows, cfg.seed)
+    wt = subsample(sd.windows("test"), cfg.max_eval_windows, cfg.seed + 1)
+    return evaluate_scores(sd.z["wlabel"][wv], unsup_scores(m, sd, wv, fcx, cfg.dev),
+                           sd.z["wlabel"][wt], unsup_scores(m, sd, wt, fcx, cfg.dev))
+
+
 def rca_table(cfg: EvalConfig, sup, fc_sup, extra_methods: dict | None = None) -> dict:
     sd = SystemData("Lab", cfg.win_dir, cfg.emb_dir)
     clusters = drain_clusters("Lab", cfg.masked_dir)
@@ -215,6 +235,10 @@ def main(cfg: EvalConfig) -> dict:
     for s in [*cfg.anomaly_systems, cfg.unseen]:
         print("anomaly", s, flush=True)
         res["anomaly"][s] = anomaly_table(cfg, s, sup, unsup, fc_sup, fc_unsup)
+    if unsup is not None:
+        print("unsup-adapt", flush=True)
+        res["anomaly"][cfg.unseen]["LogLens-unsup adapted (zero labels)"] = unseen_unsup_adapt(
+            cfg, fc_unsup, cfg.unsup_ckpt)
     if sup is not None:
         print("few-label", flush=True)
         res["few_label"] = unseen_few_label(cfg, fc_sup, cfg.sup_ckpt)

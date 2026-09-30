@@ -54,6 +54,9 @@ class FinetuneConfig:
     use_gap: bool = True
     n_masks_eval: int = 4
     val_max_windows: int = 4000
+    local_templates: bool = False  # adapt the template head to the system's own templates
+    reset_template_head: bool = False
+    filter_normal: bool = True  # unsup mode: train only on label-0 windows (False = fully unlabelled)
     bf16: bool = True
     wandb: bool = False
     run_name: str = "finetune"
@@ -167,14 +170,16 @@ def train(cfg: FinetuneConfig) -> dict:
     dev = get_device()
     sysnames = sorted(set(cfg.train_systems if cfg.mode == "sup" else cfg.unsup_systems)
                       | set(cfg.eval_systems))
-    systems = load_systems(sysnames, cfg.win_dir, cfg.emb_dir)
+    systems = load_systems(sysnames, cfg.win_dir, cfg.emb_dir, cfg.local_templates)
     model = make_model(cfg).to(dev)
     if cfg.init:
         st = torch.load(cfg.init, map_location=dev, weights_only=False)
         model.load_state_dict(st["model"], strict=False)
+    if cfg.reset_template_head:
+        model.template_head = type(model.template_head)(cfg.d_model, cfg.n_templates).to(dev)
     rng = np.random.default_rng(cfg.seed)
     tr = cfg.train_systems if cfg.mode == "sup" else cfg.unsup_systems
-    labeled = "any" if cfg.mode == "sup" else "normal"
+    labeled = "any" if cfg.mode == "sup" or not cfg.filter_normal else "normal"
     sampler = MixedSampler({n: systems[n] for n in tr}, "train", labeled, cfg.sampler_power, rng)
     # class balance for the anomaly loss
     ys = np.concatenate([systems[n].z["wlabel"][systems[n].windows("train")] for n in tr])

@@ -22,6 +22,19 @@ class SystemData:
         if "inc_meta" in self.z:
             self.incidents = [tuple(json.loads(s)) for s in self.z["inc_meta"]]  # id, type, tgt, split
 
+    def use_local_templates(self, masked_dir: str = "data/masked", n: int = 2000) -> None:
+        """Replace template ids by this system's own top-``n`` templates (ranked by train count) so
+        the template-prediction objective can be adapted to a system unseen during pretraining
+        without any labels. Everything outside the top-n maps to the 'other' id ``n``."""
+        import polars as pl
+
+        u = pl.read_parquet(Path(masked_dir) / self.system / "uniques.parquet",
+                            columns=["uid", "count_train"]).sort("uid")
+        order = np.argsort(-u["count_train"].to_numpy(), kind="stable")[:n]
+        lut = np.full(len(u), n, dtype=np.int64)
+        lut[order] = np.arange(len(order))
+        self.z["tid"] = lut[self.z["uid"]]
+
     def windows(self, split: str, labeled: str = "any") -> np.ndarray:
         """Window indices of a split. labeled: any | normal | anomalous."""
         m = self.z["wsplit"] == SPLITS[split]
@@ -74,8 +87,13 @@ def to_torch(b: dict[str, np.ndarray], dev: str) -> dict[str, torch.Tensor]:
     return t
 
 
-def load_systems(names: list[str], win_dir: str = "data/win", emb_dir: str = "data/emb"):
-    return {n: SystemData(n, win_dir, emb_dir) for n in names}
+def load_systems(names: list[str], win_dir: str = "data/win", emb_dir: str = "data/emb",
+                 local_templates: bool = False, masked_dir: str = "data/masked"):
+    out = {n: SystemData(n, win_dir, emb_dir) for n in names}
+    if local_templates:
+        for sd in out.values():
+            sd.use_local_templates(masked_dir)
+    return out
 
 
 class MixedSampler:
