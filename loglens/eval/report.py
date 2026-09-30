@@ -254,5 +254,12 @@ def main(cfg: EvalConfig) -> dict:
 
 
 if __name__ == "__main__":
-    args = parse_args("run all evaluations")
-    main(load_config(EvalConfig, args.config))
+    import sys
+
+    if "--render-only" in sys.argv:  # re-render results/benchmark.md from results/results.json
+        r = json.loads(Path("results/results.json").read_text())
+        Path("results/benchmark.md").write_text(render(r), encoding="utf-8")
+        print(render(r))
+    else:
+        args = parse_args("run all evaluations")
+        main(load_config(EvalConfig, args.config))
