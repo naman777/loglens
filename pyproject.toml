@@ -35,6 +35,9 @@ include = ["loglens*"]
 line-length = 100
 target-version = "py310"
 
+[tool.ruff.lint.isort]
+known-first-party = ["loglens", "lab"]
+
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]
 ignore = ["E501"]
