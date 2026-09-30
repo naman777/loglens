@@ -221,6 +221,21 @@ def render(res: dict) -> str:
     for m, v in res["rca"].items():
         md.append(f"| {m} | " + " | ".join(
             fmt(v["by_fault_type"].get(t, {}).get("recall@5")) for t in types) + " |")
+    llm = Path("results/llm.json")
+    if llm.exists():
+        md += ["", "## LLM baselines (zero-shot, same JSON schema)", "",
+               "| model | BGL F1 (balanced 50/50 sample) | BGL PR-AUC | lab R@1 | lab R@5 | MRR | "
+               "incidents truncated | lines of an incident visible | tokens in / out |",
+               "| --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+        for name, v in json.loads(llm.read_text()).items():
+            a, r, c = v["anomaly_BGL"], v["rca_lab"], v["cost"]
+            md.append(f"| {name} | {fmt(a['f1'])} | {fmt(a['pr_auc'])} | {fmt(r['recall@1'])} | "
+                      f"{fmt(r['recall@5'])} | {fmt(r['mrr'])} | {r['truncated_incidents']}/{r['n_incidents']} | "
+                      f"{r['mean_lines_shown_frac'] * 100:.1f}% | {c['tokens_in']:,} / {c['tokens_out']:,} |")
+        md += ["", "The LLM is limited to the head of each window/incident that fits its prompt budget "
+               "(1,500 tokens here, run on a 6 GB GPU), so a 1.5B model sees ~2.5% of an incident's lines; "
+               "LogLens sees every line. This is a weak baseline by construction. The frontier-API row "
+               "is absent: it needs ANTHROPIC_API_KEY, which was not available. Local inference: no API cost."]
     return "\n".join(md) + "\n"
 
 
