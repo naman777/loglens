@@ -64,8 +64,22 @@ def _iso_ms(m: re.Match) -> int:
     return int(dt.timestamp() * 1000) + (int(frac[:3].ljust(3, "0")) if frac else 0)
 
 
-def _mask_chunk(msgs: list[str]) -> list[str]:
-    return [mask(m) for m in msgs]
+_KNOWN = frozenset(DEFAULT_SERVICES)
+
+
+def _prepare_chunk(lines: list[str], known: frozenset[str] = _KNOWN) -> list[tuple]:
+    """parse + mask + prefix for a chunk of raw lines -> (ts, service, level_idx, text)."""
+    out = []
+    memo: dict[str, str] = {}
+    for line in lines:
+        p = parse_line(line)
+        m = memo.get(p.message)
+        if m is None:
+            m = memo[p.message] = mask(p.message)
+        lv = _norm_level(p.level)
+        out.append((p.ts, p.service, LEVELS.index(lv),
+                    f"{level_token(lv)} {service_token(p.service, known)} {m}"))
+    return out
 
 
 @dataclass
@@ -109,42 +123,35 @@ class LogLensRuntime:
         self.tk.no_padding()
         self.tk.no_truncation()
         self.cache = EmbeddingCache(cfg.cache_size)
-        self.mask_cache: dict[str, str] = {}
         self.svc_ix = {s: i for i, s in enumerate(cfg.services)}
         self.svc_known = set(cfg.services)
         self.stats = {"lines": 0, "encoder_lines": 0, "secs": 0.0}
         self._pool = None
 
-    def _prefill_masks(self, msgs: list[str]) -> None:
-        """Mask all not-yet-cached messages, in parallel when a worker pool is configured."""
-        todo = list({m for m in msgs if m not in self.mask_cache})
-        if not todo:
-            return
-        if self.cfg.mask_workers > 0 and len(todo) >= 2000:
+    def _submit(self, raw_lines: list[str]):
+        """Start parse+mask for a batch; returns a handle for ``_gather`` (pool futures, or rows)."""
+        w = self.cfg.mask_workers
+        if w > 0 and len(raw_lines) >= 4000:
             if self._pool is None:
                 from concurrent.futures import ProcessPoolExecutor
 
-                self._pool = ProcessPoolExecutor(self.cfg.mask_workers)
-            k = self.cfg.mask_workers * 2
-            chunks = [todo[i::k] for i in range(k)]
-            out = list(self._pool.map(_mask_chunk, chunks))
-            for ch, res in zip(chunks, out, strict=True):
-                for m, r in zip(ch, res, strict=True):
-                    self.mask_cache[m] = r
-        else:
-            for m in todo:
-                self.mask_cache[m] = mask(m)
-        if len(self.mask_cache) > 500_000:
-            self.mask_cache.clear()
+                self._pool = ProcessPoolExecutor(w)
+            n = len(raw_lines)
+            k = w * 2
+            return [self._pool.submit(_prepare_chunk, raw_lines[n * i // k: n * (i + 1) // k], self.svc_known)
+                    for i in range(k)]
+        return _prepare_chunk(raw_lines, self.svc_known)
+
+    @staticmethod
+    def _gather(handle) -> list[tuple]:
+        if isinstance(handle, list) and handle and hasattr(handle[0], "result"):
+            return [row for f in handle for row in f.result()]
+        return handle
+
+    def _prepare(self, raw_lines: list[str]) -> list[tuple]:
+        return self._gather(self._submit(raw_lines))
 
     # ---------------------------------------------------------------- embeddings
-    def _text(self, p: Parsed) -> str:
-        key = p.message
-        m = self.mask_cache.get(key)
-        if m is None:
-            m = mask(p.message)
-        return f"{level_token(p.level)} {service_token(p.service, self.svc_known)} {m}"
-
     def embed(self, texts: list[str]) -> np.ndarray:
         n = len(texts)
         out = np.zeros((n, 256), dtype=np.float32)
@@ -180,18 +187,32 @@ class LogLensRuntime:
     # ---------------------------------------------------------------- scoring
     def score(self, raw_lines: list[str], top_k: int = 15) -> Scored:
         t0 = time.perf_counter()
-        parsed = [parse_line(x) for x in raw_lines]
-        self._prefill_masks([p.message for p in parsed])
-        emb = self.embed([self._text(p) for p in parsed])
-        n = len(parsed)
-        ts = [p.ts for p in parsed]
-        gap = np.zeros(n, dtype=np.int64)
-        for i in range(1, n):
-            if ts[i] is not None and ts[i - 1] is not None:
-                g = max(ts[i] - ts[i - 1], 0)
-                gap[i] = min(int(np.floor(np.log2(g + 1))), 15)
-        svc = np.array([self.svc_ix.get(p.service, self.svc_ix["other"]) for p in parsed], dtype=np.int64)
-        lvl = np.array([LEVELS.index(_norm_level(p.level)) for p in parsed], dtype=np.int64)
+        return self._score_rows(raw_lines, self._prepare(raw_lines), top_k, t0)
+
+    def score_stream(self, batches, top_k: int = 15):
+        """Yield a Scored per batch, parsing/masking batch i+1 in the pool while scoring batch i."""
+        it = iter(batches)
+        nxt = next(it, None)
+        handle = self._submit(nxt) if nxt is not None else None
+        while nxt is not None:
+            cur, cur_handle = nxt, handle
+            nxt = next(it, None)
+            handle = self._submit(nxt) if nxt is not None else None
+            t0 = time.perf_counter()
+            yield self._score_rows(cur, self._gather(cur_handle), top_k, t0)
+
+    def _score_rows(self, raw_lines: list[str], rows: list[tuple], top_k: int, t0: float) -> Scored:
+        emb = self.embed([r[3] for r in rows])
+        n = len(rows)
+        ts = [r[0] for r in rows]
+        tsa = np.array([t if t is not None else np.nan for t in ts], dtype=np.float64)
+        d = np.zeros(n)
+        if n > 1:
+            d[1:] = np.maximum(np.diff(tsa), 0)
+        gap = np.minimum(np.floor(np.log2(np.nan_to_num(d, nan=0.0) + 1)), 15).astype(np.int64)
+        other = self.svc_ix["other"]
+        svc = np.array([self.svc_ix.get(r[1], other) for r in rows], dtype=np.int64)
+        lvl = np.array([r[2] for r in rows], dtype=np.int64)
         W, S = self.cfg.window, self.cfg.stride
         spans, s = [], 0
         while True:

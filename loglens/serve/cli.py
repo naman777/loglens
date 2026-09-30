@@ -87,23 +87,30 @@ def watch(paths: list[Path], interval: float = 5.0, window: int = 256, top_k: in
 @app.command()
 def bench(file: Path, max_lines: int = 1_000_000, batch: int = 20_000, model_dir: str = MODEL,
           tokenizer: str = TOK, int8: bool = True, threads: int = 4, cache: bool = True,
-          mask_workers: int = 0) -> None:
+          mask_workers: int = 0, cores: int = typer.Option(0, help="pin process tree to N cores (0 = all)")
+          ) -> None:
     """Throughput, latency, cache hit rate and peak RAM on FILE."""
+    if cores:
+        import psutil
+
+        psutil.Process().cpu_affinity(list(range(cores)))
     from loglens.serve import resource_usage
 
     lines = _read(file, None, None)[:max_lines]
     rt = _rt(model_dir, tokenizer, int8, threads, cache, mask_workers)
     lat = []
+    batches = [lines[i: i + batch] for i in range(0, len(lines), batch)]
     t0 = time.perf_counter()
-    for i in range(0, len(lines), batch):
-        s = time.perf_counter()
-        rt.score(lines[i: i + batch], 15)
-        lat.append(time.perf_counter() - s)
+    last = t0
+    for _ in rt.score_stream(batches, 15):
+        now = time.perf_counter()
+        lat.append(now - last)
+        last = now
     dt = time.perf_counter() - t0
     import numpy as np
 
     out = {"lines": len(lines), "lines_per_s": len(lines) / dt, "batch": batch, "threads": threads,
-           "int8": int8, "cache": cache, "mask_workers": mask_workers, "cache_hit_rate": rt.cache.hit_rate,
+           "int8": int8, "cache": cache, "mask_workers": mask_workers, "cores": cores or "all", "cache_hit_rate": rt.cache.hit_rate,
            "p50_batch_ms": float(np.percentile(lat, 50) * 1000),
            "p99_batch_ms": float(np.percentile(lat, 99) * 1000),
            "peak_rss_mb": resource_usage.peak_rss_mb()}
