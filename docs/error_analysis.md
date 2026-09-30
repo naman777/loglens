@@ -51,3 +51,13 @@ Both misses are `container_kill` incidents (the target's first causal line ranks
 - **Tokenizer**: 1.5x average (1.3x on Thunderbird) fewer tokens than raw GPT-2, below the 2x gate.
 - **Masking** originally left 65,536 distinct `core.<N>` lines in BGL; found via digit-collapse
   statistics, fixed, and everything downstream re-run.
+
+## Template-contrastive encoder (v3) and masking ablation
+
+- Adding a supervised-contrastive loss over Drain3 templates raised nearest-neighbour agreement only
+  from 68% to 72% (gate 90%) and the linear probe still loses to TF-IDF. Downstream it gave the best
+  zero-shot Thunderbird PR-AUC so far (0.70 vs 0.56) and RCA Recall@5 1.00, but BGL F1 collapsed to
+  0.47 while BGL PR-AUC stayed 0.96, i.e. the validation-tuned threshold did not transfer across the
+  BGL time shift. Single run, single seed: not adopted as the main model.
+- Collapsing durations to `<NUM>` (random-init encoder) lowered BGL F1 0.939 -> 0.872 and HDFS 0.995 ->
+  0.950: keeping bucketed durations helps.
