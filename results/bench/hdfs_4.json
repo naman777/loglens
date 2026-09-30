@@ -1,0 +1,15 @@
+{
+  "name": "fp32 + cache, 4 cores (2 ORT threads, 3 mask workers)",
+  "lines": 1000000,
+  "lines_per_s": 11986.912324721814,
+  "batch": 20000,
+  "threads": 2,
+  "int8": false,
+  "cache": true,
+  "mask_workers": 3,
+  "cores": 4,
+  "cache_hit_rate": 0.964434,
+  "p50_batch_ms": 1614.1728500006138,
+  "p99_batch_ms": 2701.22037599867,
+  "peak_rss_mb": 513.982464
+}

@@ -1,0 +1,13 @@
+{
+  "lines": 1000000,
+  "lines_per_s": 9815.10859846454,
+  "batch": 20000,
+  "threads": 4,
+  "int8": true,
+  "cache": false,
+  "mask_workers": 3,
+  "cache_hit_rate": 0.0,
+  "p50_batch_ms": 2079.144900002575,
+  "p99_batch_ms": 2598.8561380082674,
+  "peak_rss_mb": 467.968
+}

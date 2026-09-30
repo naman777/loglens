@@ -1,0 +1,33 @@
+{
+  "Qwen/Qwen2.5-1.5B-Instruct": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "provider": "hf_local",
+    "anomaly_BGL": {
+      "precision": 0.8235294117647058,
+      "recall": 0.28,
+      "f1": 0.417910447761194,
+      "pr_auc": 0.6052380952380952,
+      "n": 100,
+      "truncated_windows": 100,
+      "invalid_json": 0,
+      "note": "class-balanced 50/50 sample: F1 not comparable to natural-rate tables"
+    },
+    "rca_lab": {
+      "recall@1": 0.0,
+      "recall@5": 0.0,
+      "mrr": 0.0005874024804765946,
+      "n_incidents": 36,
+      "truncated_incidents": 36,
+      "mean_lines_shown_frac": 0.024871609360359613
+    },
+    "cost": {
+      "calls": 116,
+      "cache_hits": 20,
+      "tokens_in": 158351,
+      "tokens_out": 4176,
+      "usd": 0.0,
+      "price_date": ""
+    },
+    "wall_seconds": 291.9004955291748
+  }
+}

@@ -1,0 +1,8 @@
+# Ablations (test split, supervised window model)
+
+| variant | BGL F1 | BGL PR-AUC | HDFS F1 | HDFS PR-AUC | Lab F1 | Lab PR-AUC | RCA R@1 | RCA R@5 | MRR | Thunderbird zero-shot F1 | Thunderbird zero-shot PR-AUC |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| full | 0.948 | 0.974 | 0.985 | 1.000 | 0.793 | 0.855 | 0.750 | 0.917 | 0.825 | 0.746 | 0.563 |
+| nogap | 0.972 | 0.963 | 0.999 | 0.998 | 0.806 | 0.865 | 0.667 | 0.917 | 0.760 | 0.759 | 0.652 |
+| random_enc | 0.939 | 0.978 | 0.995 | 1.000 | 0.785 | 0.852 | 0.778 | 0.917 | 0.840 | 0.741 | 0.474 |
+| simcse_enc | 0.941 | 0.972 | 0.970 | 0.999 | 0.810 | 0.864 | 0.806 | 1.000 | 0.885 | 0.741 | 0.546 |

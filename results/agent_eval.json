@@ -1,0 +1,374 @@
+{
+  "summary": {
+    "incidents": 36,
+    "mean_raw_lines": 2342.027777777778,
+    "mean_raw_tokens": 39951.305555555555,
+    "mean_returned_tokens": 284.72222222222223,
+    "token_reduction_x": 140.31678048780486,
+    "causal_line_in_top15": 0.9444444444444444,
+    "top1_service_correct": 0.8055555555555556,
+    "top5_majority_service_correct": 0.8333333333333334
+  },
+  "per_incident": [
+    {
+      "incident": "c08-i00",
+      "fault_type": "disk_full",
+      "raw_lines": 2059,
+      "raw_tokens": 36735,
+      "returned_tokens": 450,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i01",
+      "fault_type": "packet_loss",
+      "raw_lines": 1280,
+      "raw_tokens": 21704,
+      "returned_tokens": 285,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i02",
+      "fault_type": "network_latency",
+      "raw_lines": 2527,
+      "raw_tokens": 43079,
+      "returned_tokens": 281,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i03",
+      "fault_type": "db_pool_exhaustion",
+      "raw_lines": 1394,
+      "raw_tokens": 23706,
+      "returned_tokens": 375,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i04",
+      "fault_type": "container_kill",
+      "raw_lines": 3154,
+      "raw_tokens": 53415,
+      "returned_tokens": 283,
+      "causal_in_top15": true,
+      "top1_service_correct": false,
+      "top5_majority_service_correct": false
+    },
+    {
+      "incident": "c08-i05",
+      "fault_type": "cpu_hog",
+      "raw_lines": 3955,
+      "raw_tokens": 67203,
+      "returned_tokens": 252,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i06",
+      "fault_type": "bad_config",
+      "raw_lines": 719,
+      "raw_tokens": 12096,
+      "returned_tokens": 240,
+      "causal_in_top15": true,
+      "top1_service_correct": false,
+      "top5_majority_service_correct": false
+    },
+    {
+      "incident": "c08-i07",
+      "fault_type": "redis_down",
+      "raw_lines": 5205,
+      "raw_tokens": 88176,
+      "returned_tokens": 227,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i08",
+      "fault_type": "memory_leak",
+      "raw_lines": 2054,
+      "raw_tokens": 34648,
+      "returned_tokens": 224,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i09",
+      "fault_type": "slow_downstream",
+      "raw_lines": 2303,
+      "raw_tokens": 39420,
+      "returned_tokens": 285,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i10",
+      "fault_type": "disk_full",
+      "raw_lines": 1949,
+      "raw_tokens": 34285,
+      "returned_tokens": 418,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i11",
+      "fault_type": "packet_loss",
+      "raw_lines": 800,
+      "raw_tokens": 13559,
+      "returned_tokens": 220,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i12",
+      "fault_type": "network_latency",
+      "raw_lines": 1282,
+      "raw_tokens": 21821,
+      "returned_tokens": 285,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i13",
+      "fault_type": "db_pool_exhaustion",
+      "raw_lines": 702,
+      "raw_tokens": 11964,
+      "returned_tokens": 373,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i14",
+      "fault_type": "container_kill",
+      "raw_lines": 2245,
+      "raw_tokens": 38148,
+      "returned_tokens": 231,
+      "causal_in_top15": false,
+      "top1_service_correct": false,
+      "top5_majority_service_correct": false
+    },
+    {
+      "incident": "c08-i15",
+      "fault_type": "cpu_hog",
+      "raw_lines": 4262,
+      "raw_tokens": 73186,
+      "returned_tokens": 269,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i16",
+      "fault_type": "bad_config",
+      "raw_lines": 1693,
+      "raw_tokens": 28702,
+      "returned_tokens": 246,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c08-i17",
+      "fault_type": "redis_down",
+      "raw_lines": 3470,
+      "raw_tokens": 58604,
+      "returned_tokens": 249,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i00",
+      "fault_type": "network_latency",
+      "raw_lines": 1837,
+      "raw_tokens": 30874,
+      "returned_tokens": 297,
+      "causal_in_top15": true,
+      "top1_service_correct": false,
+      "top5_majority_service_correct": false
+    },
+    {
+      "incident": "c09-i01",
+      "fault_type": "db_pool_exhaustion",
+      "raw_lines": 3563,
+      "raw_tokens": 60778,
+      "returned_tokens": 373,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i02",
+      "fault_type": "packet_loss",
+      "raw_lines": 4648,
+      "raw_tokens": 78923,
+      "returned_tokens": 234,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i03",
+      "fault_type": "bad_config",
+      "raw_lines": 1588,
+      "raw_tokens": 27284,
+      "returned_tokens": 216,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i04",
+      "fault_type": "slow_downstream",
+      "raw_lines": 2804,
+      "raw_tokens": 47640,
+      "returned_tokens": 285,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i05",
+      "fault_type": "memory_leak",
+      "raw_lines": 3570,
+      "raw_tokens": 60448,
+      "returned_tokens": 229,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i06",
+      "fault_type": "disk_full",
+      "raw_lines": 2406,
+      "raw_tokens": 42330,
+      "returned_tokens": 440,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i07",
+      "fault_type": "container_kill",
+      "raw_lines": 2264,
+      "raw_tokens": 38244,
+      "returned_tokens": 230,
+      "causal_in_top15": true,
+      "top1_service_correct": false,
+      "top5_majority_service_correct": false
+    },
+    {
+      "incident": "c09-i08",
+      "fault_type": "cpu_hog",
+      "raw_lines": 2084,
+      "raw_tokens": 35395,
+      "returned_tokens": 267,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i09",
+      "fault_type": "redis_down",
+      "raw_lines": 2322,
+      "raw_tokens": 39348,
+      "returned_tokens": 238,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i10",
+      "fault_type": "network_latency",
+      "raw_lines": 1767,
+      "raw_tokens": 30267,
+      "returned_tokens": 263,
+      "causal_in_top15": true,
+      "top1_service_correct": false,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i11",
+      "fault_type": "db_pool_exhaustion",
+      "raw_lines": 731,
+      "raw_tokens": 12528,
+      "returned_tokens": 372,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i12",
+      "fault_type": "packet_loss",
+      "raw_lines": 644,
+      "raw_tokens": 10885,
+      "returned_tokens": 232,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i13",
+      "fault_type": "bad_config",
+      "raw_lines": 4936,
+      "raw_tokens": 84482,
+      "returned_tokens": 219,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i14",
+      "fault_type": "slow_downstream",
+      "raw_lines": 1006,
+      "raw_tokens": 17063,
+      "returned_tokens": 284,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i15",
+      "fault_type": "memory_leak",
+      "raw_lines": 2077,
+      "raw_tokens": 35078,
+      "returned_tokens": 222,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i16",
+      "fault_type": "disk_full",
+      "raw_lines": 1572,
+      "raw_tokens": 27841,
+      "returned_tokens": 430,
+      "causal_in_top15": true,
+      "top1_service_correct": true,
+      "top5_majority_service_correct": true
+    },
+    {
+      "incident": "c09-i17",
+      "fault_type": "container_kill",
+      "raw_lines": 3441,
+      "raw_tokens": 58388,
+      "returned_tokens": 226,
+      "causal_in_top15": false,
+      "top1_service_correct": false,
+      "top5_majority_service_correct": false
+    }
+  ]
+}

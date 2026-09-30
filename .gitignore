@@ -6,10 +6,12 @@ __pycache__/
 .ruff_cache/
 data/
 artifacts/
-results/
+results/runs/
+results/llm_cache/
 lab/out/
 wandb/
 *.pt
 *.onnx
 *.npy
 .DS_Store
+release/

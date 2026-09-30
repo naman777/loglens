@@ -1,0 +1,15 @@
+{
+  "name": "int8 + cache, 4 cores, single process (4 ORT threads)",
+  "lines": 1000000,
+  "lines_per_s": 9062.177038453667,
+  "batch": 20000,
+  "threads": 4,
+  "int8": true,
+  "cache": true,
+  "mask_workers": 0,
+  "cores": 4,
+  "cache_hit_rate": 0.964434,
+  "p50_batch_ms": 2072.9911999951582,
+  "p99_batch_ms": 3624.5750759969783,
+  "peak_rss_mb": 469.491712
+}

@@ -1,0 +1,457 @@
+{
+  "BGL_false_negatives": [
+    {
+      "window": 31509,
+      "alert_lines": [
+        "No power module U58 found found on link card"
+      ],
+      "sample_lines": [
+        "Temperature Over Limit on link card",
+        "LinkCard power module U58 is not accessible",
+        "No power module U58 found found on link card"
+      ]
+    },
+    {
+      "window": 35933,
+      "alert_lines": [
+        "ciodb exited abnormally due to signal: Aborted"
+      ],
+      "sample_lines": [
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i",
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i",
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i"
+      ]
+    },
+    {
+      "window": 31510,
+      "alert_lines": [
+        "No power module U58 found found on link card",
+        "No power module U58 found found on link card"
+      ],
+      "sample_lines": [
+        "Temperature Over Limit on link card",
+        "Temperature Over Limit on link card",
+        "Temperature Over Limit on link card"
+      ]
+    },
+    {
+      "window": 32749,
+      "alert_lines": [
+        "monitor caught java.lang.IllegalStateException: while executing CONTROL Operation caught java.io.EOFException and is sto"
+      ],
+      "sample_lines": [
+        "ciod: Received signal 15, code=0, errno=0, address=<HEX>",
+        "ciod: Received signal 15, code=0, errno=0, address=<HEX>",
+        "ciod: Received signal 15, code=0, errno=0, address=<HEX>"
+      ]
+    },
+    {
+      "window": 35705,
+      "alert_lines": [
+        "ciodb exited abnormally due to signal: Aborted"
+      ],
+      "sample_lines": [
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i",
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i",
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i"
+      ]
+    },
+    {
+      "window": 35779,
+      "alert_lines": [
+        "ciodb exited abnormally due to signal: Aborted"
+      ],
+      "sample_lines": [
+        "CE sym <NUM>, at <HEX>, mask <HEX>",
+        "CE sym <NUM>, at <HEX>, mask <HEX>",
+        "CE sym <NUM>, at <HEX>, mask <HEX>"
+      ]
+    },
+    {
+      "window": 35706,
+      "alert_lines": [
+        "ciodb exited abnormally due to signal: Aborted"
+      ],
+      "sample_lines": [
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i",
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i",
+        "Kernel detected <NUM> integer alignment exceptions (<NUM>) iar <HEX>, dear <HEX> (<NUM>) iar <HEX>, dear <HEX> (<NUM>) i"
+      ]
+    },
+    {
+      "window": 32748,
+      "alert_lines": [
+        "monitor caught java.lang.IllegalStateException: while executing CONTROL Operation caught java.io.EOFException and is sto"
+      ],
+      "sample_lines": [
+        "ciod: Received signal 15, code=0, errno=0, address=<HEX>",
+        "ciod: Received signal 15, code=0, errno=0, address=<HEX>",
+        "ciod: Received signal 15, code=0, errno=0, address=<HEX>"
+      ]
+    },
+    {
+      "window": 35780,
+      "alert_lines": [
+        "ciodb exited abnormally due to signal: Aborted"
+      ],
+      "sample_lines": [
+        "CE sym <NUM>, at <HEX>, mask <HEX>",
+        "CE sym <NUM>, at <HEX>, mask <HEX>",
+        "CE sym <NUM>, at <HEX>, mask <HEX>"
+      ]
+    },
+    {
+      "window": 32460,
+      "alert_lines": [
+        "No power module U58 found found on link card",
+        "machine check interrupt"
+      ],
+      "sample_lines": [
+        "Link PGOOD error latched on link card",
+        "Temperature Over Limit on link card",
+        "Temperature Over Limit on link card"
+      ]
+    },
+    {
+      "window": 31508,
+      "alert_lines": [
+        "No power module U58 found found on link card",
+        "No power module U58 found found on link card"
+      ],
+      "sample_lines": [
+        "CE sym <NUM>, at <HEX>, mask <HEX>",
+        "CE sym <NUM>, at <HEX>, mask <HEX>",
+        "total of <NUM> ddr error(s) detected and corrected"
+      ]
+    },
+    {
+      "window": 36245,
+      "alert_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ],
+      "sample_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ]
+    },
+    {
+      "window": 36242,
+      "alert_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ],
+      "sample_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ]
+    },
+    {
+      "window": 32961,
+      "alert_lines": [
+        "idoproxy communication failure: socket closed"
+      ],
+      "sample_lines": [
+        "MACHINE CHECK DCR read timeout (mc=e08x iar <HEX> lr <HEX>)",
+        "MACHINE CHECK DCR read timeout (mc=e08x iar <HEX> lr <HEX>)",
+        "MACHINE CHECK DCR read timeout (mc=e08x iar <HEX> lr <HEX>)"
+      ]
+    },
+    {
+      "window": 32722,
+      "alert_lines": [
+        "power module status fault detected on node card. status registers are: <PATH>",
+        "power module status fault detected on node card. status registers are: <PATH>"
+      ],
+      "sample_lines": [
+        "total of <NUM> ddr error(s) detected and corrected over <DURATION:10s+>",
+        "<NUM> ddr error(s) detected and corrected on rank <NUM>, symbol <NUM> over <DURATION:10s+>",
+        "CE sym <NUM>, at <HEX>, mask <HEX>"
+      ]
+    },
+    {
+      "window": 36243,
+      "alert_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ],
+      "sample_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ]
+    },
+    {
+      "window": 36244,
+      "alert_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ],
+      "sample_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ]
+    },
+    {
+      "window": 31831,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32459,
+      "alert_lines": [
+        "No power module U58 found found on link card"
+      ],
+      "sample_lines": [
+        "Temperature Over Limit on link card",
+        "Temperature Over Limit on link card",
+        "Temperature Over Limit on link card"
+      ]
+    },
+    {
+      "window": 31832,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<NUM> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32723,
+      "alert_lines": [
+        "power module status fault detected on node card. status registers are: <PATH>",
+        "power module status fault detected on node card. status registers are: <PATH>"
+      ],
+      "sample_lines": [
+        "CE sym <NUM>, at <HEX>, mask <HEX>",
+        "total of <NUM> ddr error(s) detected and corrected over <DURATION:10s+>",
+        "<NUM> ddr error(s) detected and corrected on rank <NUM>, symbol <NUM> over <DURATION:10s+>"
+      ]
+    },
+    {
+      "window": 36241,
+      "alert_lines": [
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error",
+        "ciod: LOGIN chdir(<PATH>) failed: Input/output error"
+      ],
+      "sample_lines": [
+        "<NUM> ddr error(s) detected and corrected on rank <NUM>, symbol <NUM> over <DURATION:10s+>",
+        "total of <NUM> ddr error(s) detected and corrected over <DURATION:10s+>",
+        "<NUM> ddr error(s) detected and corrected on rank <NUM>, symbol <NUM> over <DURATION:10s+>"
+      ]
+    },
+    {
+      "window": 32630,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32628,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32635,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32637,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32633,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32603,
+      "alert_lines": [
+        "idoproxy communication failure: socket closed"
+      ],
+      "sample_lines": [
+        "Node card is not fully functional",
+        "Can not get assembly information for node card",
+        "Node card status: no ALERTs are active. Clock Mode is Low. Clock Select is Midplane. Phy JTAG Reset is asserted. ASIC JT"
+      ]
+    },
+    {
+      "window": 32648,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ]
+    },
+    {
+      "window": 32531,
+      "alert_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ],
+      "sample_lines": [
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) ",
+        "Error receiving packet on tree network, expecting type <NUM> instead of type <NUM> (softheader=<HEX> <HEX> <NUM> <NUM>) "
+      ]
+    }
+  ],
+  "BGL_false_positives": [
+    {
+      "window": 33671,
+      "alert_lines": [],
+      "sample_lines": [
+        "<NUM> microseconds spent in the rbs signal handler during <NUM> calls. <NUM> microseconds was the maximum time for a sin",
+        "<NUM> microseconds spent in the rbs signal handler during <NUM> calls. <NUM> microseconds was the maximum time for a sin",
+        "<NUM> microseconds spent in the rbs signal handler during <NUM> calls. <NUM> microseconds was the maximum time for a sin"
+      ]
+    },
+    {
+      "window": 35857,
+      "alert_lines": [],
+      "sample_lines": [
+        "Node card is not fully functional",
+        "Can not get assembly information for node card",
+        "Node card status: no ALERTs are active. Clock Mode is Low. Clock Select is Midplane. Phy JTAG Reset is asserted. ASIC JT"
+      ]
+    },
+    {
+      "window": 32453,
+      "alert_lines": [],
+      "sample_lines": [
+        "L1 DCACHE summary averages: #ofDirtyLines: <NUM> out of <NUM> #ofDirtyDblWord: <NUM> out of <NUM>",
+        "L1 DCACHE summary averages: #ofDirtyLines: <NUM> out of <NUM> #ofDirtyDblWord: <NUM> out of <NUM>",
+        "L1 DCACHE summary averages: #ofDirtyLines: <NUM> out of <NUM> #ofDirtyDblWord: <NUM> out of <NUM>"
+      ]
+    },
+    {
+      "window": 32779,
+      "alert_lines": [],
+      "sample_lines": [
+        "<NUM> ddr errors(s) detected and corrected on rank <NUM>, symbol <NUM>, bit <NUM>",
+        "<NUM> ddr errors(s) detected and corrected on rank <NUM>, symbol <NUM>, bit <NUM>",
+        "<NUM> L3 EDRAM error(s) (dcr <HEX>) detected and corrected"
+      ]
+    },
+    {
+      "window": 32501,
+      "alert_lines": [],
+      "sample_lines": [
+        "<NUM> ddr errors(s) detected and corrected on rank <NUM>, symbol <NUM>, bit <NUM>",
+        "<NUM> ddr errors(s) detected and corrected on rank <NUM>, symbol <NUM>, bit <NUM>",
+        "<NUM> L3 EDRAM error(s) (dcr <HEX>) detected and corrected"
+      ]
+    }
+  ],
+  "BGL_counts": {
+    "fn": 66,
+    "fp": 5,
+    "threshold": 2.125
+  },
+  "RCA_misses": [
+    {
+      "incident": "c08-i14",
+      "fault_type": "container_kill",
+      "target": "gateway",
+      "first_causal_rank": 551,
+      "n_causal": 2,
+      "top5": [
+        "worker: deprecated api version header v1 seen from client <NUM>",
+        "orders: slow query background_vacuum took <DURATION:<1s>",
+        "payments: bank latency high <DURATION:<1s>, retrying (attempt <NUM>/<NUM>)",
+        "worker: deprecated api version header v1 seen from client <NUM>",
+        "orders: slow query INSERT order <NUM> took <DURATION:<1s>"
+      ],
+      "causal_examples": [
+        "gateway: gateway service starting, version <VER>",
+        "gateway: gateway listening on port <NUM>, ready to serve"
+      ]
+    },
+    {
+      "incident": "c09-i17",
+      "fault_type": "container_kill",
+      "target": "worker",
+      "first_causal_rank": 874,
+      "n_causal": 2,
+      "top5": [
+        "payments: bank latency high <DURATION:<1s>, retrying (attempt <NUM>/<NUM>)",
+        "orders: slow query INSERT order <NUM> took <DURATION:<1s>",
+        "payments: bank latency high <DURATION:<1s>, retrying (attempt <NUM>/<NUM>)",
+        "orders: slow query INSERT order <NUM> took <DURATION:<1s>",
+        "orders: slow query INSERT order <NUM> took <DURATION:<1s>"
+      ],
+      "causal_examples": [
+        "worker: worker service starting, version <VER>",
+        "worker: worker listening on port <NUM>, ready to serve"
+      ]
+    }
+  ]
+}

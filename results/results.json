@@ -1,0 +1,436 @@
+{
+  "unseen": "Thunderbird",
+  "anomaly": {
+    "BGL": {
+      "_n_val": 3682,
+      "_n_test": 7364,
+      "_test_positive_rate": 0.10850081477457903,
+      "always-anomalous": {
+        "precision": 0.10850081477457903,
+        "recall": 1.0,
+        "f1": 0.19576136224427293,
+        "pr_auc": 0.10850081477457903
+      },
+      "Drain3+IsolationForest": {
+        "precision": 0.5555555555555556,
+        "recall": 0.09386733416770963,
+        "f1": 0.16059957173447537,
+        "pr_auc": 0.2819977228622982,
+        "threshold": 0.443967261391472
+      },
+      "Drain3+LogReg (supervised)": {
+        "precision": 0.9773462783171522,
+        "recall": 0.37797246558197745,
+        "f1": 0.5451263537906137,
+        "pr_auc": 0.5799122359977449,
+        "threshold": -0.5420126671829992
+      },
+      "Drain3+DeepLog": {
+        "precision": 0.2016418676244228,
+        "recall": 0.983729662077597,
+        "f1": 0.33468171173089206,
+        "pr_auc": 0.2574398937062233,
+        "threshold": 0.054145671887901745
+      },
+      "_baseline_secs": 26.93239188194275,
+      "LogLens-unsup": {
+        "precision": 0.1010752688172043,
+        "recall": 0.11764705882352941,
+        "f1": 0.10873337189126663,
+        "pr_auc": 0.15684930496230032,
+        "threshold": 9.383743286132812
+      },
+      "LogLens-sup": {
+        "precision": 0.9932249322493225,
+        "recall": 0.9173967459324155,
+        "f1": 0.9538061158100195,
+        "pr_auc": 0.9608615791313588,
+        "threshold": 2.125
+      }
+    },
+    "HDFS": {
+      "_n_val": 40000,
+      "_n_test": 40000,
+      "_test_positive_rate": 0.020575,
+      "always-anomalous": {
+        "precision": 0.020575,
+        "recall": 1.0,
+        "f1": 0.040320407613355216,
+        "pr_auc": 0.020575
+      },
+      "Drain3+IsolationForest": {
+        "precision": 0.024064302973519403,
+        "recall": 0.5929526123936817,
+        "f1": 0.04625154013837551,
+        "pr_auc": 0.035473949341539045,
+        "threshold": 0.5204116871291987
+      },
+      "Drain3+LogReg (supervised)": {
+        "precision": 0.9987096774193548,
+        "recall": 0.9404617253948967,
+        "f1": 0.9687108886107634,
+        "pr_auc": 0.9913491073430104,
+        "threshold": 2.9858476933758045
+      },
+      "Drain3+DeepLog": {
+        "precision": 0.7709320695102686,
+        "recall": 0.5929526123936817,
+        "f1": 0.6703296703296704,
+        "pr_auc": 0.41907211323143134,
+        "threshold": 0.0006797723293304444
+      },
+      "_baseline_secs": 77.73308110237122,
+      "LogLens-unsup": {
+        "precision": 0.5320987654320988,
+        "recall": 0.5236938031591738,
+        "f1": 0.5278628291488059,
+        "pr_auc": 0.5415391572746114,
+        "threshold": 0.8655810356140137
+      },
+      "LogLens-sup": {
+        "precision": 0.9340909090909091,
+        "recall": 0.9987849331713244,
+        "f1": 0.9653552554315913,
+        "pr_auc": 0.9989965336788517,
+        "threshold": -1.140625
+      }
+    },
+    "Thunderbird": {
+      "_n_val": 30001,
+      "_n_test": 40000,
+      "_test_positive_rate": 0.581775,
+      "always-anomalous": {
+        "precision": 0.581775,
+        "recall": 1.0,
+        "f1": 0.735597667177696,
+        "pr_auc": 0.581775
+      },
+      "Drain3+IsolationForest": {
+        "precision": 0.6773717238833518,
+        "recall": 0.8673885952473035,
+        "f1": 0.7606934237799132,
+        "pr_auc": 0.5850467086193053,
+        "threshold": 0.3018770590949693
+      },
+      "Drain3+LogReg (supervised)": {
+        "precision": 0.8934655124266965,
+        "recall": 0.8249323191955653,
+        "f1": 0.8578322943897045,
+        "pr_auc": 0.9231970943435709,
+        "threshold": 0.11733347179222164
+      },
+      "Drain3+DeepLog": {
+        "precision": 0.8054449723898806,
+        "recall": 0.8085600103132654,
+        "f1": 0.8069994853319609,
+        "pr_auc": 0.7816469394905639,
+        "threshold": 0.0004696441650390625
+      },
+      "_baseline_secs": 189.38806557655334,
+      "LogLens-unsup": {
+        "precision": 0.5819391302173206,
+        "recall": 0.9999570280606763,
+        "f1": 0.7357172215371968,
+        "pr_auc": 0.39638902438202,
+        "threshold": 0.1215319037437439
+      },
+      "LogLens-sup": {
+        "precision": 0.5933267604172072,
+        "recall": 0.9826823084525804,
+        "f1": 0.7399090806141102,
+        "pr_auc": 0.5277512075174495,
+        "threshold": -4.34375
+      },
+      "LogLens-unsup adapted (zero labels)": {
+        "precision": 0.5817895447386184,
+        "recall": 1.0,
+        "f1": 0.7356092935040304,
+        "pr_auc": 0.44265561800793324,
+        "threshold": 1.9073304429184645e-05
+      }
+    }
+  },
+  "few_label": {
+    "precision": 0.9824549535157582,
+    "recall": 0.9869078824860699,
+    "f1": 0.9846752276048639,
+    "pr_auc": 0.9970558313773451,
+    "f1_std": 0.004212521473712978,
+    "n_seeds": 3,
+    "train_windows": 2100
+  },
+  "rca": {
+    "random": {
+      "recall@1": 0.08333333333333333,
+      "recall@5": 0.16666666666666666,
+      "mrr": 0.1370058182929747,
+      "n_incidents": 36,
+      "by_fault_type": {
+        "disk_full": {
+          "recall@1": 0.25,
+          "recall@5": 0.75,
+          "mrr": 0.39166666666666666,
+          "n_incidents": 4
+        },
+        "packet_loss": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.027197602687798767,
+          "n_incidents": 4
+        },
+        "network_latency": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.013703215883621743,
+          "n_incidents": 4
+        },
+        "db_pool_exhaustion": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.099031279178338,
+          "n_incidents": 4
+        },
+        "container_kill": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.025722270615563297,
+          "n_incidents": 4
+        },
+        "cpu_hog": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.02072192513368984,
+          "n_incidents": 3
+        },
+        "bad_config": {
+          "recall@1": 0.0,
+          "recall@5": 0.25,
+          "mrr": 0.09429342587237324,
+          "n_incidents": 4
+        },
+        "redis_down": {
+          "recall@1": 0.6666666666666666,
+          "recall@5": 0.6666666666666666,
+          "mrr": 0.7083333333333334,
+          "n_incidents": 3
+        },
+        "memory_leak": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.02275423675895745,
+          "n_incidents": 3
+        },
+        "slow_downstream": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.023441043083900225,
+          "n_incidents": 3
+        }
+      }
+    },
+    "severity-heuristic": {
+      "recall@1": 0.027777777777777776,
+      "recall@5": 0.19444444444444445,
+      "mrr": 0.10755254012711514,
+      "n_incidents": 36,
+      "by_fault_type": {
+        "disk_full": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.007319161577136402,
+          "n_incidents": 4
+        },
+        "packet_loss": {
+          "recall@1": 0.25,
+          "recall@5": 0.25,
+          "mrr": 0.28238216406155336,
+          "n_incidents": 4
+        },
+        "network_latency": {
+          "recall@1": 0.0,
+          "recall@5": 0.5,
+          "mrr": 0.17969298245614035,
+          "n_incidents": 4
+        },
+        "db_pool_exhaustion": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.035434241834306726,
+          "n_incidents": 4
+        },
+        "container_kill": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.024418016194331985,
+          "n_incidents": 4
+        },
+        "cpu_hog": {
+          "recall@1": 0.0,
+          "recall@5": 0.3333333333333333,
+          "mrr": 0.14761904761904762,
+          "n_incidents": 3
+        },
+        "bad_config": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.026715287519808797,
+          "n_incidents": 4
+        },
+        "redis_down": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.0037023158259054767,
+          "n_incidents": 3
+        },
+        "memory_leak": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.05358220211161388,
+          "n_incidents": 3
+        },
+        "slow_downstream": {
+          "recall@1": 0.0,
+          "recall@5": 1.0,
+          "mrr": 0.3444444444444444,
+          "n_incidents": 3
+        }
+      }
+    },
+    "Drain3+DeepLog (surprise)": {
+      "recall@1": 0.5277777777777778,
+      "recall@5": 0.8055555555555556,
+      "mrr": 0.6526863953947287,
+      "n_incidents": 36,
+      "by_fault_type": {
+        "disk_full": {
+          "recall@1": 1.0,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "n_incidents": 4
+        },
+        "packet_loss": {
+          "recall@1": 0.0,
+          "recall@5": 0.75,
+          "mrr": 0.2011904761904762,
+          "n_incidents": 4
+        },
+        "network_latency": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "mrr": 0.04451486013986014,
+          "n_incidents": 4
+        },
+        "db_pool_exhaustion": {
+          "recall@1": 0.75,
+          "recall@5": 1.0,
+          "mrr": 0.875,
+          "n_incidents": 4
+        },
+        "container_kill": {
+          "recall@1": 0.25,
+          "recall@5": 0.75,
+          "mrr": 0.53125,
+          "n_incidents": 4
+        },
+        "cpu_hog": {
+          "recall@1": 0.6666666666666666,
+          "recall@5": 0.6666666666666666,
+          "mrr": 0.6851851851851851,
+          "n_incidents": 3
+        },
+        "bad_config": {
+          "recall@1": 0.5,
+          "recall@5": 1.0,
+          "mrr": 0.7083333333333334,
+          "n_incidents": 4
+        },
+        "redis_down": {
+          "recall@1": 1.0,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "n_incidents": 3
+        },
+        "memory_leak": {
+          "recall@1": 0.6666666666666666,
+          "recall@5": 1.0,
+          "mrr": 0.8333333333333334,
+          "n_incidents": 3
+        },
+        "slow_downstream": {
+          "recall@1": 0.6666666666666666,
+          "recall@5": 1.0,
+          "mrr": 0.8333333333333334,
+          "n_incidents": 3
+        }
+      }
+    },
+    "LogLens-sup": {
+      "recall@1": 0.6111111111111112,
+      "recall@5": 0.9444444444444444,
+      "mrr": 0.7602657498070503,
+      "n_incidents": 36,
+      "by_fault_type": {
+        "disk_full": {
+          "recall@1": 1.0,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "n_incidents": 4
+        },
+        "packet_loss": {
+          "recall@1": 0.75,
+          "recall@5": 1.0,
+          "mrr": 0.875,
+          "n_incidents": 4
+        },
+        "network_latency": {
+          "recall@1": 0.5,
+          "recall@5": 1.0,
+          "mrr": 0.7083333333333334,
+          "n_incidents": 4
+        },
+        "db_pool_exhaustion": {
+          "recall@1": 0.75,
+          "recall@5": 1.0,
+          "mrr": 0.875,
+          "n_incidents": 4
+        },
+        "container_kill": {
+          "recall@1": 0.0,
+          "recall@5": 0.5,
+          "mrr": 0.13405841493011966,
+          "n_incidents": 4
+        },
+        "cpu_hog": {
+          "recall@1": 0.6666666666666666,
+          "recall@5": 1.0,
+          "mrr": 0.8333333333333334,
+          "n_incidents": 3
+        },
+        "bad_config": {
+          "recall@1": 0.75,
+          "recall@5": 1.0,
+          "mrr": 0.875,
+          "n_incidents": 4
+        },
+        "redis_down": {
+          "recall@1": 0.3333333333333333,
+          "recall@5": 1.0,
+          "mrr": 0.6666666666666666,
+          "n_incidents": 3
+        },
+        "memory_leak": {
+          "recall@1": 0.6666666666666666,
+          "recall@5": 1.0,
+          "mrr": 0.8333333333333334,
+          "n_incidents": 3
+        },
+        "slow_downstream": {
+          "recall@1": 0.6666666666666666,
+          "recall@5": 1.0,
+          "mrr": 0.8333333333333334,
+          "n_incidents": 3
+        }
+      }
+    }
+  }
+}
