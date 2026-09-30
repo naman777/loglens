@@ -6,6 +6,7 @@ carry signal (e.g. ``<DURATION:10s+>``, ``status 503``).
 """
 from __future__ import annotations
 
+import os
 import re
 
 DURATION_BUCKETS = ["<10ms", "<100ms", "<1s", "<10s", "10s+"]
@@ -78,7 +79,13 @@ _HTTP_CTX = re.compile(r'(?:<URL>|")\s*$')
 _MULTISPACE = re.compile(r"\s+")
 
 
+# ablation switch: LOGLENS_MASK_DURATIONS=0 collapses durations to <NUM> instead of bucketing them
+_BUCKET_DURATIONS = os.environ.get("LOGLENS_MASK_DURATIONS", "1") != "0"
+
+
 def _dur_token(m: re.Match) -> str:
+    if not _BUCKET_DURATIONS:
+        return "<NUM>"
     v = float(m.group(1))
     unit = m.group(2).lower()
     if unit in ("us", "µs"):
