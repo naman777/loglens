@@ -48,7 +48,6 @@ def main() -> None:
     # 2. lab RCA misses
     sd = SystemData("Lab", "data/win", "data/emb")
     u = uniq("Lab")
-    miss = []
     for k, (iid, ftype, tgt, sp) in enumerate(sd.incidents):
         if sp != "test":
             continue

@@ -92,6 +92,9 @@ make export        # ONNX + int8 -> artifacts/onnx
   throughput on 4 pinned cores (17.7k vs 20k lines/s; the Python parse+mask hot path is the limit).
 * **No frontier-LLM baseline** was run, so the "within 10% of a frontier LLM at 1/100th of the cost"
   goal is untested. No cost-per-1M-lines table is claimed.
+* **Train/serve skew on unknown formats.** The model saw message text only. With a known format
+  (`loglens rank --format bgl`) the served model reproduces the offline F1 (0.960 vs 0.954); with the
+  generic parser it drops to 0.79 ([`docs/serve_consistency.md`](docs/serve_consistency.md)).
 * Thunderbird / Spark are truncated subsets; only English-ish logs were tried; no real customer data.
 
 ## Repository map

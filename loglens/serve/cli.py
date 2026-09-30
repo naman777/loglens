@@ -14,13 +14,17 @@ app = typer.Typer(add_completion=False, help="LogLens: flag incidents and rank t
 
 
 def _rt(model_dir: str, tokenizer: str, int8: bool, threads: int, cache: bool = True,
-        mask_workers: int = 0) -> LogLensRuntime:
+        mask_workers: int = 0, fmt: str = "generic", service: str = "") -> LogLensRuntime:
     return LogLensRuntime(RuntimeConfig(model_dir=model_dir, tokenizer=tokenizer, int8=int8,
-                                        threads=threads, use_cache=cache, mask_workers=mask_workers))
+                                        threads=threads, use_cache=cache, mask_workers=mask_workers,
+                                        line_format=fmt, default_service=service or None))
 
 
 THRESH = 0.85
 MODEL = typer.Option("artifacts/onnx", help="Directory with encoder/window ONNX files")
+FMT = typer.Option("generic", "--format", help="generic | bgl | hdfs | thunderbird | zookeeper | apache | "
+                   "linux | ssh | mac | openstack | android | healthapp | proxifier (strips the header "
+                   "exactly as in training; the model was trained on message text only)")
 TOK = typer.Option("artifacts/tokenizer/loglens-bpe-16k.json", help="Tokenizer json")
 
 
@@ -46,9 +50,10 @@ def _read(file: Path, frm: str | None, to: str | None) -> list[str]:
 @app.command()
 def rank(file: Path, top_k: int = 15, frm: str = typer.Option(None, "--from"),
          to: str = typer.Option(None, "--to"), json_out: bool = typer.Option(False, "--json"),
-         model_dir: str = MODEL, tokenizer: str = TOK, int8: bool = True, threads: int = 4) -> None:
+         model_dir: str = MODEL, tokenizer: str = TOK, int8: bool = True, threads: int = 4,
+         fmt: str = FMT) -> None:
     """Rank the most suspicious lines in FILE (optionally between --from and --to)."""
-    rt = _rt(model_dir, tokenizer, int8, threads)
+    rt = _rt(model_dir, tokenizer, int8, threads, fmt=fmt)
     res = rt.score(_read(file, frm, to), top_k)
     if json_out or not sys.stdout.isatty():
         typer.echo(json.dumps({"anomaly_score": res.anomaly, "n_lines": res.n_lines,
@@ -62,9 +67,10 @@ def rank(file: Path, top_k: int = 15, frm: str = typer.Option(None, "--from"),
 
 @app.command()
 def watch(paths: list[Path], interval: float = 5.0, window: int = 256, top_k: int = 5,
-          model_dir: str = MODEL, tokenizer: str = TOK, int8: bool = True, threads: int = 4) -> None:
+          model_dir: str = MODEL, tokenizer: str = TOK, int8: bool = True, threads: int = 4,
+          fmt: str = FMT) -> None:
     """Tail files; every INTERVAL seconds score the latest WINDOW lines and print suspects."""
-    rt = _rt(model_dir, tokenizer, int8, threads)
+    rt = _rt(model_dir, tokenizer, int8, threads, fmt=fmt)
     pos = {p: p.stat().st_size for p in paths}
     buf: list[str] = []
     while True:
@@ -88,8 +94,8 @@ def watch(paths: list[Path], interval: float = 5.0, window: int = 256, top_k: in
 @app.command()
 def bench(file: Path, max_lines: int = 1_000_000, batch: int = 20_000, model_dir: str = MODEL,
           tokenizer: str = TOK, int8: bool = True, threads: int = 4, cache: bool = True,
-          mask_workers: int = 0, cores: int = typer.Option(0, help="pin process tree to N cores (0 = all)")
-          ) -> None:
+          mask_workers: int = 0, cores: int = typer.Option(0, help="pin process tree to N cores (0 = all)"),
+          fmt: str = FMT) -> None:
     """Throughput, latency, cache hit rate and peak RAM on FILE."""
     if cores:
         import psutil
@@ -98,7 +104,7 @@ def bench(file: Path, max_lines: int = 1_000_000, batch: int = 20_000, model_dir
     from loglens.serve import resource_usage
 
     lines = _read(file, None, None)[:max_lines]
-    rt = _rt(model_dir, tokenizer, int8, threads, cache, mask_workers)
+    rt = _rt(model_dir, tokenizer, int8, threads, cache, mask_workers, fmt)
     lat = []
     batches = [lines[i: i + batch] for i in range(0, len(lines), batch)]
     t0 = time.perf_counter()

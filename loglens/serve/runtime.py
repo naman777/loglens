@@ -12,6 +12,7 @@ import numpy as np
 from tokenizers import Tokenizer
 
 from loglens.serve.cache import EmbeddingCache
+from loglens.serve.formats import LINE_FORMATS, Parsed
 from loglens.tokenizer.masking import LEVELS, level_token, mask, service_token
 from loglens.tokenizer.tok import DEFAULT_SERVICES
 
@@ -20,14 +21,6 @@ _ISO = re.compile(r"(\d{4})-(\d\d)-(\d\d)[T ](\d\d):(\d\d):(\d\d)(?:[.,](\d+))?"
 _SVC = re.compile(
     r"\[([A-Za-z][\w.\-]{1,30})\]|^\w{3} +\d+ \d\d:\d\d:\d\d \S+ ([^\s:\[]+)(?:\[\d+\])?:"
     r"|^\S+ \S+ (\S+?)(?:\[\d+\])?: ")
-
-
-@dataclass
-class Parsed:
-    ts: int | None
-    level: str
-    service: str
-    message: str
 
 
 def parse_line(line: str) -> Parsed:
@@ -67,12 +60,16 @@ def _iso_ms(m: re.Match) -> int:
 _KNOWN = frozenset(DEFAULT_SERVICES)
 
 
-def _prepare_chunk(lines: list[str], known: frozenset[str] = _KNOWN) -> list[tuple]:
+def _prepare_chunk(lines: list[str], known: frozenset[str] = _KNOWN, fmt: str = "generic",
+                   default_service: str | None = None) -> list[tuple]:
     """parse + mask + prefix for a chunk of raw lines -> (ts, service, level_idx, text)."""
     out = []
     memo: dict[str, str] = {}
+    fparse = LINE_FORMATS.get(fmt)
     for line in lines:
-        p = parse_line(line)
+        p = (fparse(line) if fparse else None) or parse_line(line)
+        if default_service and p.service == "other":
+            p.service = default_service
         m = memo.get(p.message)
         if m is None:
             m = memo[p.message] = mask(p.message)
@@ -99,6 +96,8 @@ class RuntimeConfig:
     # anomaly decision threshold on sigmoid(logit). Validation-tuned per system: lab 0.84, BGL 0.89,
     # HDFS 0.42 (results/results.json); 0.85 is a conservative cross-system default.
     threshold: float = 0.85
+    default_service: str | None = None  # service name to use when a line carries none
+    line_format: str = "generic"  # generic | bgl | hdfs | ... (header stripping, see LINE_FORMATS)
 
 
 @dataclass
@@ -141,9 +140,10 @@ class LogLensRuntime:
                 self._pool = ProcessPoolExecutor(w)
             n = len(raw_lines)
             k = w * 2
-            return [self._pool.submit(_prepare_chunk, raw_lines[n * i // k: n * (i + 1) // k], self.svc_known)
+            return [self._pool.submit(_prepare_chunk, raw_lines[n * i // k: n * (i + 1) // k], self.svc_known,
+                                     self.cfg.line_format, self.cfg.default_service)
                     for i in range(k)]
-        return _prepare_chunk(raw_lines, self.svc_known)
+        return _prepare_chunk(raw_lines, self.svc_known, self.cfg.line_format, self.cfg.default_service)
 
     @staticmethod
     def _gather(handle) -> list[tuple]:
