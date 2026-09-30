@@ -5,6 +5,7 @@ Upload later with `huggingface-cli upload <user>/loglens release/loglens-v0.1 .`
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import shutil
@@ -31,39 +32,41 @@ FILES = {
 }
 
 
-def main() -> None:
+def main(out: Path = OUT) -> None:
     missing = [src for src in [*FILES, "docs/model_card.md"]
                if not (ROOT / src).is_file() or (ROOT / src).stat().st_size == 0]
     if missing:
         raise SystemExit("Release incomplete; missing/empty files: " + ", ".join(missing))
     # A fresh destination prevents stale files or a previous manifest appearing valid.
-    OUT.mkdir(parents=True, exist_ok=False)
+    out.mkdir(parents=True, exist_ok=False)
     for src, dst in FILES.items():
         s = ROOT / src
-        (OUT / dst).parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(s, OUT / dst)
+        (out / dst).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(s, out / dst)
     card = (ROOT / "docs/model_card.md").read_text(encoding="utf-8")
     card = card.replace("`results/benchmark.md`", "`docs/benchmark.md`")
     header = ("---\nlicense: mit\nlibrary_name: onnx\ntags: [logs, anomaly-detection, root-cause-analysis]\n"
               "---\n\n")
-    (OUT / "README.md").write_text(header + card, encoding="utf-8")
+    (out / "README.md").write_text(header + card, encoding="utf-8")
     files = {}
-    for path in sorted(OUT.rglob("*")):
+    for path in sorted(out.rglob("*")):
         if path.is_file():
             digest = hashlib.sha256()
             with path.open("rb") as stream:
                 for chunk in iter(lambda: stream.read(1024 * 1024), b""):
                     digest.update(chunk)
-            files[path.relative_to(OUT).as_posix()] = {
+            files[path.relative_to(out).as_posix()] = {
                 "bytes": path.stat().st_size, "sha256": digest.hexdigest()}
     commit = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"],
                             capture_output=True, text=True, check=True).stdout.strip()
     dirty = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"],
                            capture_output=True, text=True, check=True).stdout.strip()
-    (OUT / "manifest.json").write_text(json.dumps({"source_commit": commit,
+    (out / "manifest.json").write_text(json.dumps({"source_commit": commit,
         "source_dirty": bool(dirty), "files": files}, indent=2), encoding="utf-8")
-    print("wrote", OUT, "-", sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file()) / 1e6, "MB")
+    print("wrote", out, "-", sum(f.stat().st_size for f in out.rglob("*") if f.is_file()) / 1e6, "MB")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out", type=Path, default=OUT)
+    main(parser.parse_args().out.resolve())

@@ -1,0 +1,17 @@
+{
+  "lines": 1000000,
+  "lines_per_s": 27491.652372823275,
+  "batch": 20000,
+  "threads": 2,
+  "int8": true,
+  "cache": true,
+  "mask_workers": 3,
+  "cores": 4,
+  "cache_hit_rate": 0.91825,
+  "p50_batch_ms": 685.5072000034852,
+  "p99_batch_ms": 1575.227462004404,
+  "peak_rss_mb": 565.604352,
+  "format": "bgl",
+  "repeat": 0,
+  "scope": "format-aware follow-up; not directly comparable with the old generic-parser benchmark"
+}

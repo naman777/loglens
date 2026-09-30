@@ -16,3 +16,24 @@
 | HDFS | int8 + cache, 1 core | 8,290 | 96.4% | 2401 / 3404 | 469 |
 | HDFS | fp32 + cache, 4 cores (2 ORT threads, 3 mask workers) | 11,987 | 96.4% | 1614 / 2701 | 514 |
 | HDFS | int8, NO cache, 4 cores (2 ORT threads, 3 mask workers) | 15,123 | 0.0% | 1289 / 2335 | 469 |
+
+## Format-aware follow-up (2026-09-30)
+
+Using the existing supported `--format bgl` / `--format hdfs` parsers, 1,000,000 lines per run,
+4-core affinity, 2 ORT threads, 3 parsing workers, int8 and cache enabled:
+
+| Dataset | First run lines/s | Second run lines/s |
+| --- | --- | --- |
+| BGL | 27,492 | 27,092 |
+| HDFS | 22,470 | 21,798 |
+
+Both formats exceed 20k lines/s in these runs. This is a **format-specific result**, not an
+improvement claim for the generic-parser benchmark above: format-specific parsing removes headers
+and changes model inputs/cache work. No runtime optimization was introduced for this measurement.
+The second HDFS repetition overlapped a unit-test run and is retained with that caveat.
+
+Raw measurements: `results/bench_format_followup/`. Example reproduction:
+
+```bash
+python -m loglens.serve.cli bench data/bench/bgl_1m.log --cores 4 --threads 2 --mask-workers 3 --format bgl
+```

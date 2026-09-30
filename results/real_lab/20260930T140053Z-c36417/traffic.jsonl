@@ -1,0 +1,171 @@
+{"ts": 1790776891199, "path": "/products", "status": 200, "body": {"sku": 3943, "source": "postgres", "stock": 1}, "seconds": 0.027835495999994464}
+{"ts": 1790776891507, "path": "/orders", "status": 200, "body": {"order_id": "4bbaf629d3c8402781f7a4e70fd34542"}, "seconds": 0.03985578099999998}
+{"ts": 1790776891890, "path": "/pay", "status": 200, "body": {"payment_id": "b73dbc58b97343e9be6999aa88029dd6"}, "seconds": 0.21090419399999405}
+{"ts": 1790776892570, "path": "/products", "status": 200, "body": {"sku": 2265, "source": "postgres", "stock": 1}, "seconds": 0.024101442999977962}
+{"ts": 1790776892955, "path": "/orders", "status": 200, "body": {"order_id": "02cc3e89974a45bba7fd9ee7655e772a"}, "seconds": 0.030704560000003767}
+{"ts": 1790776893383, "path": "/pay", "status": 200, "body": {"payment_id": "23ae33389ee2414f806aa785228f2aa7"}, "seconds": 0.20772019200001068}
+{"ts": 1790776894110, "path": "/products", "status": 200, "body": {"sku": 5722, "source": "postgres", "stock": 1}, "seconds": 0.030570554000007633}
+{"ts": 1790776894310, "path": "/orders", "status": 503, "body": {}, "seconds": 0.020489046999983884}
+{"ts": 1790776894690, "path": "/pay", "status": 200, "body": {"payment_id": "90e5821081b244f2885b739826b72958"}, "seconds": 0.20215007900000614}
+{"ts": 1790776895363, "path": "/products", "status": 200, "body": {"sku": 6007, "source": "postgres", "stock": 1}, "seconds": 0.02443286900000885}
+{"ts": 1790776895549, "path": "/orders", "status": 503, "body": {}, "seconds": 0.01808360599997627}
+{"ts": 1790776895935, "path": "/pay", "status": 200, "body": {"payment_id": "b2f26871f1324389957721298e54f453"}, "seconds": 0.2043116239999847}
+{"ts": 1790776896654, "path": "/products", "status": 200, "body": {"sku": 2315, "source": "postgres", "stock": 1}, "seconds": 0.026555420000022423}
+{"ts": 1790776896852, "path": "/orders", "status": 503, "body": {}, "seconds": 0.016985450000021274}
+{"ts": 1790776897309, "path": "/pay", "status": 200, "body": {"payment_id": "5d6f7a7344f240b3a3bb7ba4bf6b6235"}, "seconds": 0.2187116180000146}
+{"ts": 1790776898025, "path": "/products", "status": 200, "body": {"sku": 8087, "source": "postgres", "stock": 1}, "seconds": 0.02823672999997484}
+{"ts": 1790776898308, "path": "/orders", "status": 200, "body": {"order_id": "0fb23c2a6f194f73ba4ddf5c367de471"}, "seconds": 0.10967503700001657}
+{"ts": 1790776898690, "path": "/pay", "status": 200, "body": {"payment_id": "144644a0f1d34fb9a8b65b2443e6a8aa"}, "seconds": 0.2085152340000036}
+{"ts": 1790776899392, "path": "/products", "status": 200, "body": {"sku": 8851, "source": "postgres", "stock": 1}, "seconds": 0.025767999999999347}
+{"ts": 1790776899611, "path": "/orders", "status": 200, "body": {"order_id": "ab7585a7af994b75ad1b6bbd3ae0b5dd"}, "seconds": 0.036156809999994266}
+{"ts": 1790776900020, "path": "/pay", "status": 200, "body": {"payment_id": "459976b9182d4cdc88b014cb6b0b5b73"}, "seconds": 0.2049707349999892}
+{"ts": 1790776900725, "path": "/products", "status": 200, "body": {"sku": 8334, "source": "postgres", "stock": 1}, "seconds": 0.03706322700000442}
+{"ts": 1790776900990, "path": "/orders", "status": 200, "body": {"order_id": "faeea6475bfb48a7953f2911f877899e"}, "seconds": 0.027906218999987686}
+{"ts": 1790776901366, "path": "/pay", "status": 200, "body": {"payment_id": "10f84f9d0d9842ddba28bf1a9c42e974"}, "seconds": 0.21812792899999067}
+{"ts": 1790776904096, "path": "/products", "status": 504, "body": {}, "seconds": 2.0178650910000044}
+{"ts": 1790776906321, "path": "/orders", "status": 504, "body": {}, "seconds": 2.013974982999997}
+{"ts": 1790776906773, "path": "/pay", "status": 200, "body": {"payment_id": "ef28edf5eef746a0985e32e3c69f771e"}, "seconds": 0.20499865499999714}
+{"ts": 1790776909373, "path": "/products", "status": 200, "body": {"sku": 1910, "source": "postgres", "stock": 1}, "seconds": 1.9478748679999853}
+{"ts": 1790776909628, "path": "/orders", "status": 200, "body": {"order_id": "4ebff898a03f42699cfd1904696d4726"}, "seconds": 0.03175206700001354}
+{"ts": 1790776910154, "path": "/pay", "status": 200, "body": {"payment_id": "f29c501f285b4b5096bb128748ce23b8"}, "seconds": 0.2393768920000241}
+{"ts": 1790776910932, "path": "/products", "status": 200, "body": {"sku": 4011, "source": "postgres", "stock": 1}, "seconds": 0.03543296200001578}
+{"ts": 1790776911144, "path": "/orders", "status": 200, "body": {"order_id": "df60cad6f86e4a4b8ee743e9f61cc23a"}, "seconds": 0.032143370000000004}
+{"ts": 1790776911555, "path": "/pay", "status": 200, "body": {"payment_id": "81c4b7ce9a7c4fd0a023c845ffe95de8"}, "seconds": 0.23117315799999005}
+{"ts": 1790776912231, "path": "/products", "status": 200, "body": {"sku": 7505, "source": "postgres", "stock": 1}, "seconds": 0.022233662000019194}
+{"ts": 1790776912480, "path": "/orders", "status": 200, "body": {"order_id": "8237b96fa33d4c4d8aa271e59dab5b22"}, "seconds": 0.047997285000008105}
+{"ts": 1790776912898, "path": "/pay", "status": 200, "body": {"payment_id": "148d294a8f844f819f4b7d8d784433e6"}, "seconds": 0.2118270569999936}
+{"ts": 1790776913620, "path": "/products", "status": 200, "body": {"sku": 8866, "source": "postgres", "stock": 1}, "seconds": 0.03402469599998881}
+{"ts": 1790776913854, "path": "/orders", "status": 200, "body": {"order_id": "a909aaa25afa4ad79f4cd93b4754d752"}, "seconds": 0.03962893100000997}
+{"ts": 1790776914411, "path": "/pay", "status": 502, "body": {}, "seconds": 0.3159866930000135}
+{"ts": 1790776915089, "path": "/products", "status": 200, "body": {"sku": 7785, "source": "postgres", "stock": 1}, "seconds": 0.022668927000012218}
+{"ts": 1790776915264, "path": "/orders", "status": 200, "body": {"order_id": "7992891e2b47498487bd10999aedd767"}, "seconds": 0.023722012999996878}
+{"ts": 1790776915678, "path": "/pay", "status": 502, "body": {}, "seconds": 0.26350548199999935}
+{"ts": 1790776916384, "path": "/products", "status": 200, "body": {"sku": 6340, "source": "postgres", "stock": 1}, "seconds": 0.028981735000002118}
+{"ts": 1790776916567, "path": "/orders", "status": 200, "body": {"order_id": "d493643a81154e27bf01edfd5140a8b0"}, "seconds": 0.02500584000000572}
+{"ts": 1790776916982, "path": "/pay", "status": 502, "body": {}, "seconds": 0.2684965249999891}
+{"ts": 1790776917777, "path": "/products", "status": 200, "body": {"sku": 1828, "source": "postgres", "stock": 1}, "seconds": 0.0797531460000016}
+{"ts": 1790776917982, "path": "/orders", "status": 200, "body": {"order_id": "2edc4fd07ae841afa170bf93a3258b88"}, "seconds": 0.026901236000014705}
+{"ts": 1790776918379, "path": "/pay", "status": 200, "body": {"payment_id": "2472c3707f104e41879d6918b8581ca9"}, "seconds": 0.20612970199999836}
+{"ts": 1790776919092, "path": "/products", "status": 200, "body": {"sku": 3567, "source": "postgres", "stock": 1}, "seconds": 0.032960916999996925}
+{"ts": 1790776919267, "path": "/orders", "status": 200, "body": {"order_id": "64fcfab1ad364fdebfd3e5b7fc17e2bb"}, "seconds": 0.02308522100000232}
+{"ts": 1790776919671, "path": "/pay", "status": 200, "body": {"payment_id": "8a3a4604b7e24ba69dcd92176af430b8"}, "seconds": 0.20903074599999627}
+{"ts": 1790776920458, "path": "/products", "status": 200, "body": {"sku": 1150, "source": "postgres", "stock": 1}, "seconds": 0.032681171000007225}
+{"ts": 1790776920744, "path": "/orders", "status": 200, "body": {"order_id": "a0bfb315a55441f68924a10a0b4c938f"}, "seconds": 0.038877748999993855}
+{"ts": 1790776921123, "path": "/pay", "status": 200, "body": {"payment_id": "9b1167958f4342b4af92eed2ef13f773"}, "seconds": 0.20395604600000183}
+{"ts": 1790776921856, "path": "/products", "status": 200, "body": {"sku": 6640, "source": "postgres", "stock": 1}, "seconds": 0.030976472999981297}
+{"ts": 1790776922035, "path": "/orders", "status": 200, "body": {"order_id": "b71ad3afe61f470d82ee6010886ebc76"}, "seconds": 0.023270688999986078}
+{"ts": 1790776922394, "path": "/pay", "status": 200, "body": {"payment_id": "34c281050bef48cb93d51a690cf08f09"}, "seconds": 0.20232277200000226}
+{"ts": 1790776923075, "path": "/products", "status": 200, "body": {"sku": 3530, "source": "postgres", "stock": 1}, "seconds": 0.027305143999996062}
+{"ts": 1790776923293, "path": "/orders", "status": 200, "body": {"order_id": "e67577a0643e4a04a894f55f00c69015"}, "seconds": 0.035796196999996255}
+{"ts": 1790776923650, "path": "/pay", "status": 200, "body": {"payment_id": "15da0771d47b4075988402b11dfc7cf0"}, "seconds": 0.20238593100000912}
+{"ts": 1790776924376, "path": "/products", "status": 200, "body": {"sku": 7375, "source": "postgres", "stock": 1}, "seconds": 0.0384295049999821}
+{"ts": 1790776924575, "path": "/orders", "status": 200, "body": {"order_id": "ba40f839ee524b9eb39bf5abf5456fb1"}, "seconds": 0.027177671999993436}
+{"ts": 1790776925071, "path": "/pay", "status": 200, "body": {"payment_id": "b02814cc4c0b40bea8ad7691ccaa3eea"}, "seconds": 0.21244709900000203}
+{"ts": 1790776925789, "path": "/products", "status": 200, "body": {"sku": 1393, "source": "postgres", "stock": 1}, "seconds": 0.0254531300000167}
+{"ts": 1790776925973, "path": "/orders", "status": 200, "body": {"order_id": "7f0a4623885048a68a729443c092d658"}, "seconds": 0.029944360999991204}
+{"ts": 1790776926376, "path": "/pay", "status": 200, "body": {"payment_id": "9c1d30fd338f47998cc609aa0ac5ff6b"}, "seconds": 0.21273415099997806}
+{"ts": 1790776927193, "path": "/products", "status": 200, "body": {"sku": 6891, "source": "postgres", "stock": 1}, "seconds": 0.032849057000021276}
+{"ts": 1790776927468, "path": "/orders", "status": 200, "body": {"order_id": "0216e3fd259949269a5fcf4624b9c767"}, "seconds": 0.059995581999999104}
+{"ts": 1790776927889, "path": "/pay", "status": 200, "body": {"payment_id": "b4c5c7ed14164bc0ad0380869aac554e"}, "seconds": 0.20869016200001056}
+{"ts": 1790776928563, "path": "/products", "status": 200, "body": {"sku": 2823, "source": "postgres", "stock": 1}, "seconds": 0.022256863999984944}
+{"ts": 1790776928742, "path": "/orders", "status": 200, "body": {"order_id": "1b5e94e825514aa9a46a177469ff31b1"}, "seconds": 0.025258656999994855}
+{"ts": 1790776929184, "path": "/pay", "status": 200, "body": {"payment_id": "54639c6675b44e79930a1113c7f9da2d"}, "seconds": 0.20830300199997964}
+{"ts": 1790776929855, "path": "/products", "status": 200, "body": {"sku": 5855, "source": "postgres", "stock": 1}, "seconds": 0.022626464000012447}
+{"ts": 1790776930036, "path": "/orders", "status": 200, "body": {"order_id": "8f4da98f01dc435eae9a30ceaaac1fb2"}, "seconds": 0.03154247599999849}
+{"ts": 1790776930390, "path": "/pay", "status": 200, "body": {"payment_id": "abdee6e5e996481aa9d20ed163d4cc96"}, "seconds": 0.20247512399998868}
+{"ts": 1790776931068, "path": "/products", "status": 200, "body": {"sku": 4652, "source": "postgres", "stock": 1}, "seconds": 0.02433458000001565}
+{"ts": 1790776931305, "path": "/orders", "status": 200, "body": {"order_id": "c140735d65824b78af1e747501da1b0f"}, "seconds": 0.028209539000016548}
+{"ts": 1790776931678, "path": "/pay", "status": 200, "body": {"payment_id": "6bd598ced7b446dba6718e1b7f7b3a98"}, "seconds": 0.20839117299999543}
+{"ts": 1790776932365, "path": "/products", "status": 200, "body": {"sku": 2100, "source": "postgres", "stock": 1}, "seconds": 0.028397572000017135}
+{"ts": 1790776932537, "path": "/orders", "status": 200, "body": {"order_id": "1e2c77e4c7f94350859151025f7957e3"}, "seconds": 0.02299312499999928}
+{"ts": 1790776932888, "path": "/pay", "status": 200, "body": {"payment_id": "a3282f2053be43a19e3f67bb9ca45829"}, "seconds": 0.20219488399999364}
+{"ts": 1790776933581, "path": "/products", "status": 200, "body": {"sku": 1288, "source": "postgres", "stock": 1}, "seconds": 0.03255122999999571}
+{"ts": 1790776933772, "path": "/orders", "status": 200, "body": {"order_id": "b2f7cf87397d43f6bf11ea26ced1b107"}, "seconds": 0.030902004000012084}
+{"ts": 1790776934157, "path": "/pay", "status": 200, "body": {"payment_id": "188202fc20b746cd85f237f28a7b84ff"}, "seconds": 0.2021862289999774}
+{"ts": 1790776934830, "path": "/products", "status": 200, "body": {"sku": 2792, "source": "postgres", "stock": 1}, "seconds": 0.022667506000004778}
+{"ts": 1790776935005, "path": "/orders", "status": 200, "body": {"order_id": "2150e95c94474b24a35cc264afe0ed56"}, "seconds": 0.024061082999992323}
+{"ts": 1790776935358, "path": "/pay", "status": 200, "body": {"payment_id": "9cd8fcdc90b945f7a03a382f973eed79"}, "seconds": 0.20285388199999943}
+{"ts": 1790776936060, "path": "/products", "status": 200, "body": {"sku": 1602, "source": "postgres", "stock": 1}, "seconds": 0.022918817999993735}
+{"ts": 1790776936244, "path": "/orders", "status": 200, "body": {"order_id": "c8beca34e3be4b5f92d8a61b0f6506d0"}, "seconds": 0.02330164800000034}
+{"ts": 1790776936607, "path": "/pay", "status": 200, "body": {"payment_id": "4cd941a64f99440683d6be58e3070dba"}, "seconds": 0.21184805800001527}
+{"ts": 1790776937280, "path": "/products", "status": 200, "body": {"sku": 6251, "source": "postgres", "stock": 1}, "seconds": 0.023381821999976182}
+{"ts": 1790776937452, "path": "/orders", "status": 200, "body": {"order_id": "088ca90054b947339813a1dbc2ded361"}, "seconds": 0.02298241100001519}
+{"ts": 1790776937858, "path": "/pay", "status": 200, "body": {"payment_id": "64bdafd5c7b648c8874967c6f0845939"}, "seconds": 0.20188694800000917}
+{"ts": 1790776938532, "path": "/products", "status": 200, "body": {"sku": 4536, "source": "postgres", "stock": 1}, "seconds": 0.02255187200000819}
+{"ts": 1790776938703, "path": "/orders", "status": 200, "body": {"order_id": "dc796fbfefb6456196460f4cebe95c9d"}, "seconds": 0.023053317999995215}
+{"ts": 1790776939059, "path": "/pay", "status": 200, "body": {"payment_id": "fb93bd513cbd485299553cbc87be86eb"}, "seconds": 0.2022828550000213}
+{"ts": 1790776939824, "path": "/products", "status": 200, "body": {"sku": 2781, "source": "postgres", "stock": 1}, "seconds": 0.022513389000010875}
+{"ts": 1790776940010, "path": "/orders", "status": 503, "body": {}, "seconds": 0.022268370000006144}
+{"ts": 1790776940400, "path": "/pay", "status": 200, "body": {"payment_id": "a04058e06b154ab3be8004a8f51b16b0"}, "seconds": 0.2096545219999939}
+{"ts": 1790776941076, "path": "/products", "status": 200, "body": {"sku": 1893, "source": "postgres", "stock": 1}, "seconds": 0.022547131999999692}
+{"ts": 1790776941246, "path": "/orders", "status": 503, "body": {}, "seconds": 0.015975193999992143}
+{"ts": 1790776941604, "path": "/pay", "status": 200, "body": {"payment_id": "c2a975f18178427d8ef0241670f4c216"}, "seconds": 0.20217320500000824}
+{"ts": 1790776942292, "path": "/products", "status": 200, "body": {"sku": 2742, "source": "postgres", "stock": 1}, "seconds": 0.028665982000006807}
+{"ts": 1790776942484, "path": "/orders", "status": 503, "body": {}, "seconds": 0.021305803000018386}
+{"ts": 1790776942904, "path": "/pay", "status": 200, "body": {"payment_id": "f34689b13ace42ac917f7bfb7e95a50c"}, "seconds": 0.2101644619999945}
+{"ts": 1790776943579, "path": "/products", "status": 200, "body": {"sku": 8875, "source": "postgres", "stock": 1}, "seconds": 0.022332009999985303}
+{"ts": 1790776943881, "path": "/orders", "status": 200, "body": {"order_id": "57cedc4c35344b85ad9a0b3cbda231ca"}, "seconds": 0.11994633900002327}
+{"ts": 1790776944358, "path": "/pay", "status": 200, "body": {"payment_id": "9d0b039be50c48db9bc1bb8f1d06af0f"}, "seconds": 0.2561955150000017}
+{"ts": 1790776945039, "path": "/products", "status": 200, "body": {"sku": 6351, "source": "postgres", "stock": 1}, "seconds": 0.02277299400000743}
+{"ts": 1790776945248, "path": "/orders", "status": 200, "body": {"order_id": "46cb37c4439d46e49727d5db5d12222a"}, "seconds": 0.03638857400000006}
+{"ts": 1790776945629, "path": "/pay", "status": 200, "body": {"payment_id": "7f03dd6634d44649b59105e98d058059"}, "seconds": 0.20613892200000805}
+{"ts": 1790776946382, "path": "/products", "status": 200, "body": {"sku": 1171, "source": "postgres", "stock": 1}, "seconds": 0.057930670000018836}
+{"ts": 1790776946602, "path": "/orders", "status": 200, "body": {"order_id": "0af76a47ea8c40db9122114b9183a86e"}, "seconds": 0.030136002999995526}
+{"ts": 1790776946987, "path": "/pay", "status": 200, "body": {"payment_id": "5e8369f8f8494c18ac0863ea36acd4f3"}, "seconds": 0.206200865999989}
+{"ts": 1790776947662, "path": "/products", "status": 200, "body": {"sku": 1441, "source": "postgres", "stock": 1}, "seconds": 0.02566745400000059}
+{"ts": 1790776947888, "path": "/orders", "status": 200, "body": {"order_id": "fd1e842f76934d13afa5498a38dee399"}, "seconds": 0.031223867999983668}
+{"ts": 1790776948302, "path": "/pay", "status": 200, "body": {"payment_id": "7d14e20f7d5248bdb72f1ca6c27eb9e4"}, "seconds": 0.22233903000000055}
+{"ts": 1790776948972, "path": "/products", "status": 200, "body": {"sku": 8370, "source": "postgres", "stock": 1}, "seconds": 0.022534341000010727}
+{"ts": 1790776949141, "path": "/orders", "status": 200, "body": {"order_id": "b184d7b91de741d093761b7d9af88597"}, "seconds": 0.02348705299999665}
+{"ts": 1790776949491, "path": "/pay", "status": 200, "body": {"payment_id": "aa36a7d75a5f4b78b192d21cc4d24661"}, "seconds": 0.2017734140000016}
+{"ts": 1790776950175, "path": "/products", "status": 200, "body": {"sku": 5046, "source": "postgres", "stock": 1}, "seconds": 0.02903467900000578}
+{"ts": 1790776950402, "path": "/orders", "status": 200, "body": {"order_id": "d1e68d10a81d4dabac95bca576019664"}, "seconds": 0.03782728100000554}
+{"ts": 1790776950771, "path": "/pay", "status": 200, "body": {"payment_id": "fe4368e2c541496cac22f720451c15b3"}, "seconds": 0.20247369499998058}
+{"ts": 1790776951442, "path": "/products", "status": 200, "body": {"sku": 5318, "source": "postgres", "stock": 1}, "seconds": 0.023808895999991364}
+{"ts": 1790776951616, "path": "/orders", "status": 200, "body": {"order_id": "d109b3146f854bb797f76acb96f8b049"}, "seconds": 0.023491264000000456}
+{"ts": 1790776951967, "path": "/pay", "status": 200, "body": {"payment_id": "6219d364d56544b395b55b21fb3b4028"}, "seconds": 0.20247998399997869}
+{"ts": 1790776952667, "path": "/products", "status": 200, "body": {"sku": 8749, "source": "postgres", "stock": 1}, "seconds": 0.026876227999991897}
+{"ts": 1790776952859, "path": "/orders", "status": 200, "body": {"order_id": "be5b1489a82e4bc0b877662d61bc10d6"}, "seconds": 0.023073864999986426}
+{"ts": 1790776953210, "path": "/pay", "status": 200, "body": {"payment_id": "c8b6be80b1a04a09a683a341886f523e"}, "seconds": 0.20250559999999496}
+{"ts": 1790776953894, "path": "/products", "status": 200, "body": {"sku": 1391, "source": "postgres", "stock": 1}, "seconds": 0.03291041700001074}
+{"ts": 1790776954066, "path": "/orders", "status": 200, "body": {"order_id": "23b75a67a5b24a32a5a8f58da2b4b575"}, "seconds": 0.023031970999994655}
+{"ts": 1790776954416, "path": "/pay", "status": 200, "body": {"payment_id": "6929a8f7c1a94325801d1f48e0eebde7"}, "seconds": 0.2021554179999896}
+{"ts": 1790776955089, "path": "/products", "status": 200, "body": {"sku": 7464, "source": "postgres", "stock": 1}, "seconds": 0.022771581999990076}
+{"ts": 1790776955261, "path": "/orders", "status": 200, "body": {"order_id": "2fa5ba8420294c59ae14973db5867655"}, "seconds": 0.023207920999993803}
+{"ts": 1790776955609, "path": "/pay", "status": 200, "body": {"payment_id": "2c282faaa5f549c0aa297718223798f8"}, "seconds": 0.20240007600000354}
+{"ts": 1790776956280, "path": "/products", "status": 200, "body": {"sku": 6860, "source": "postgres", "stock": 1}, "seconds": 0.022665282000019715}
+{"ts": 1790776956461, "path": "/orders", "status": 200, "body": {"order_id": "b78bd76e42984dcfba7090268bfe0803"}, "seconds": 0.030212319999975534}
+{"ts": 1790776956834, "path": "/pay", "status": 200, "body": {"payment_id": "b4724b9ff2c54f219ee019708569a6bb"}, "seconds": 0.20857880899998804}
+{"ts": 1790776957504, "path": "/products", "status": 200, "body": {"sku": 9987, "source": "postgres", "stock": 1}, "seconds": 0.022480588999997053}
+{"ts": 1790776957676, "path": "/orders", "status": 200, "body": {"order_id": "6391252726dd411b93ca1795712f1505"}, "seconds": 0.02323526699998979}
+{"ts": 1790776958027, "path": "/pay", "status": 200, "body": {"payment_id": "0fe6630a26c4416999de0ba7de9e9ba1"}, "seconds": 0.20248136899999736}
+{"ts": 1790776958840, "path": "/products", "status": 200, "body": {"sku": 6092, "source": "postgres", "stock": 1}, "seconds": 0.04538445899999033}
+{"ts": 1790776959128, "path": "/orders", "status": 200, "body": {"order_id": "ecabf3c19cbd486ebd1dc5a03dc43fc2"}, "seconds": 0.027231341000003795}
+{"ts": 1790776961304, "path": "/pay", "status": 504, "body": {}, "seconds": 2.0131520230000035}
+{"ts": 1790776961975, "path": "/products", "status": 200, "body": {"sku": 7364, "source": "postgres", "stock": 1}, "seconds": 0.022101859000002833}
+{"ts": 1790776962154, "path": "/orders", "status": 200, "body": {"order_id": "cc1c699e127d4cca83ec2125ff925165"}, "seconds": 0.02307523100000708}
+{"ts": 1790776964321, "path": "/pay", "status": 504, "body": {}, "seconds": 2.020461071999989}
+{"ts": 1790776965020, "path": "/products", "status": 200, "body": {"sku": 6558, "source": "postgres", "stock": 1}, "seconds": 0.030214604000008194}
+{"ts": 1790776965256, "path": "/orders", "status": 200, "body": {"order_id": "fedb72096fc14bc9bf42293298499bdb"}, "seconds": 0.026090151000005335}
+{"ts": 1790776967417, "path": "/pay", "status": 504, "body": {}, "seconds": 2.012915444000015}
+{"ts": 1790776968090, "path": "/products", "status": 200, "body": {"sku": 7764, "source": "postgres", "stock": 1}, "seconds": 0.022592895999991924}
+{"ts": 1790776968271, "path": "/orders", "status": 200, "body": {"order_id": "76e1138563684fe499740d62bf8522ac"}, "seconds": 0.02371719000001349}
+{"ts": 1790776970434, "path": "/pay", "status": 504, "body": {}, "seconds": 2.0137391179999895}
+{"ts": 1790776971117, "path": "/products", "status": 200, "body": {"sku": 7044, "source": "postgres", "stock": 1}, "seconds": 0.029050521999977263}
+{"ts": 1790776971312, "path": "/orders", "status": 200, "body": {"order_id": "3ba692c32b8144fcbe66d6edb1082234"}, "seconds": 0.027918712000001733}
+{"ts": 1790776973480, "path": "/pay", "status": 504, "body": {}, "seconds": 2.0148045359999855}
+{"ts": 1790776974156, "path": "/products", "status": 200, "body": {"sku": 8946, "source": "postgres", "stock": 1}, "seconds": 0.023560683999988896}
+{"ts": 1790776974346, "path": "/orders", "status": 200, "body": {"order_id": "d94bded5960041fd9e5dc36aeabae0bc"}, "seconds": 0.023071133000001964}
+{"ts": 1790776976512, "path": "/pay", "status": 504, "body": {}, "seconds": 2.0125571659999935}
+{"ts": 1790776977183, "path": "/products", "status": 200, "body": {"sku": 3701, "source": "postgres", "stock": 1}, "seconds": 0.022573152999996182}
+{"ts": 1790776977356, "path": "/orders", "status": 200, "body": {"order_id": "573202fd8fe64ecebbf3b2470c72d956"}, "seconds": 0.023556735999989087}
+{"ts": 1790776979544, "path": "/pay", "status": 504, "body": {}, "seconds": 2.0142741859999944}
+{"ts": 1790776980216, "path": "/products", "status": 200, "body": {"sku": 1752, "source": "postgres", "stock": 1}, "seconds": 0.022344345000021804}
+{"ts": 1790776980398, "path": "/orders", "status": 200, "body": {"order_id": "db9f0d0d77ec436999e9529d63f48cb9"}, "seconds": 0.027985731000001124}
+{"ts": 1790776982584, "path": "/pay", "status": 504, "body": {}, "seconds": 2.019717380000003}
+{"ts": 1790776983347, "path": "/products", "status": 200, "body": {"sku": 2935, "source": "postgres", "stock": 1}, "seconds": 0.025087186000007478}
+{"ts": 1790776983537, "path": "/orders", "status": 200, "body": {"order_id": "6bac67195ad346238c372f1932f49f35"}, "seconds": 0.030191795999996884}
+{"ts": 1790776983991, "path": "/pay", "status": 200, "body": {"payment_id": "113fb42ab3a146e2b1977448e468ea1f"}, "seconds": 0.2993029790000037}
+{"ts": 1790776984703, "path": "/products", "status": 200, "body": {"sku": 7207, "source": "postgres", "stock": 1}, "seconds": 0.02505433300001414}
+{"ts": 1790776984899, "path": "/orders", "status": 200, "body": {"order_id": "1e1823e7c26b45f5af84c8f2b8abdaae"}, "seconds": 0.03169317800001181}
+{"ts": 1790776985276, "path": "/pay", "status": 200, "body": {"payment_id": "ce8a60a0dd9f400a999cbce52c17a37a"}, "seconds": 0.20839188399997965}

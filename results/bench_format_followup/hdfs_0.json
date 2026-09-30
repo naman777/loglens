@@ -1,0 +1,17 @@
+{
+  "lines": 1000000,
+  "lines_per_s": 22470.231914251926,
+  "batch": 20000,
+  "threads": 2,
+  "int8": true,
+  "cache": true,
+  "mask_workers": 3,
+  "cores": 4,
+  "cache_hit_rate": 0.964434,
+  "p50_batch_ms": 858.0586000025505,
+  "p99_batch_ms": 1449.6876890014375,
+  "peak_rss_mb": 457.752576,
+  "format": "hdfs",
+  "repeat": 0,
+  "scope": "format-aware follow-up; not directly comparable with the old generic-parser benchmark"
+}

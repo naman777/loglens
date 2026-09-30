@@ -1,0 +1,18 @@
+{
+  "ci_run": "https://github.com/naman777/loglens/actions/runs/36725870364",
+  "source_commit": "d96595b",
+  "files": {
+    "incidents.jsonl": {
+      "sha256": "a827b67628946f60ed80dba82f0b281be29879370b4f5103af9f5a68052fe5ef",
+      "bytes": 8211
+    },
+    "logs.jsonl": {
+      "sha256": "e0b8b5bf68c147eeac7b45d334850e3cc3a32aedc49cb6298ddacc6dd427f13f",
+      "bytes": 83719
+    },
+    "traffic.jsonl": {
+      "sha256": "3574227c62ca8e1dfa0950f6f764e87f130b0572115df9a14790a20619c95978",
+      "bytes": 24110
+    }
+  }
+}

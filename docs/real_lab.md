@@ -1,9 +1,9 @@
 # Real Docker lab validation
 
-The saved model benchmarks use the simulator. The first real Docker CI campaign passed all six
-fault/recovery checks in run 36725075577. Evidence review found that container recreation discarded
-earlier logs; the runner now captures and merges snapshots before each recreation/recovery.
-The corrected campaign is being validated separately. Docker remains absent on the local machine.
+The saved model benchmarks use the simulator. The corrected real Docker campaign passed all six
+fault/recovery checks in CI run 36725870364, with logs preserved across container recreation.
+See `real_lab_validation.md` for evidence, the six-case diagnosis pilot, and limitations.
+Docker remains absent on the local machine; CI supplies the real-container validation.
 
 ## Run
 

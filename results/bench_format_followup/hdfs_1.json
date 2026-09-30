@@ -1,0 +1,19 @@
+{
+  "lines": 1000000,
+  "lines_per_s": 21798.248421805816,
+  "batch": 20000,
+  "threads": 2,
+  "int8": true,
+  "cache": true,
+  "mask_workers": 3,
+  "cores": 4,
+  "cache_hit_rate": 0.964434,
+  "p50_batch_ms": 852.3151999979746,
+  "p99_batch_ms": 1800.689172995189,
+  "peak_rss_mb": 457.723904,
+  "format": "hdfs",
+  "repeat": 1,
+  "scope": "format-aware follow-up; not directly comparable with the old generic-parser benchmark",
+  "concurrent_unit_tests": true,
+  "timing_note": "A local unit-test run overlapped part of this repetition; retain it transparently, do not treat it as controlled timing."
+}

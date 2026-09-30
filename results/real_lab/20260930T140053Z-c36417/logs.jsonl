@@ -1,0 +1,604 @@
+{"level": "INFO", "message": "request received method=GET path=/products rid=ab2f572d", "rid": "ab2f572d", "service": "gateway", "ts": 1790776889969}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1945", "service": "inventory", "ts": 1790776890065}
+{"level": "INFO", "message": "request completed status=200 rid=ab2f572d", "rid": "ab2f572d", "service": "gateway", "ts": 1790776890068}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=55bf2289", "rid": "55bf2289", "service": "gateway", "ts": 1790776890223}
+{"level": "INFO", "message": "payment a31a6d490ef746a78ed7971529a202c8 approved in 180ms", "service": "payments", "ts": 1790776890490}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=9b37cb93", "rid": "9b37cb93", "service": "gateway", "ts": 1790776890695}
+{"level": "INFO", "message": "order 06ff083294c84c399fb0b43d89c730b7 persisted, enqueued email task", "service": "orders", "ts": 1790776890784}
+{"level": "INFO", "message": "sent email to user for order_id=06ff083294c84c399fb0b43d89c730b7", "service": "worker", "ts": 1790776890821}
+{"level": "INFO", "message": "request received method=GET path=/products rid=7c2b251a", "rid": "7c2b251a", "service": "gateway", "ts": 1790776891156}
+{"level": "INFO", "message": "postgres stock fallback key=sku:3943", "service": "inventory", "ts": 1790776891178}
+{"level": "INFO", "message": "request completed status=200 rid=7c2b251a", "rid": "7c2b251a", "service": "gateway", "ts": 1790776891180}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=13a56d29", "rid": "13a56d29", "service": "gateway", "ts": 1790776891456}
+{"level": "INFO", "message": "order 4bbaf629d3c8402781f7a4e70fd34542 persisted, enqueued email task", "service": "orders", "ts": 1790776891487}
+{"level": "INFO", "message": "sent email to user for order_id=4bbaf629d3c8402781f7a4e70fd34542", "service": "worker", "ts": 1790776891625}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=966765d2", "rid": "966765d2", "service": "gateway", "ts": 1790776891667}
+{"level": "INFO", "message": "payment b73dbc58b97343e9be6999aa88029dd6 approved in 180ms", "service": "payments", "ts": 1790776891872}
+{"level": "INFO", "message": "request received method=GET path=/products rid=9237b168", "rid": "9237b168", "service": "gateway", "ts": 1790776892164}
+{"level": "INFO", "message": "postgres stock fallback key=sku:3755", "service": "inventory", "ts": 1790776892187}
+{"level": "INFO", "message": "request completed status=200 rid=9237b168", "rid": "9237b168", "service": "gateway", "ts": 1790776892189}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=ef327065", "rid": "ef327065", "service": "gateway", "ts": 1790776892345}
+{"level": "INFO", "message": "request received method=GET path=/products rid=deaa0981", "rid": "deaa0981", "service": "gateway", "ts": 1790776892533}
+{"level": "INFO", "message": "payment 15639703ddc64c9ab36ea16540962b01 approved in 180ms", "service": "payments", "ts": 1790776892543}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2265", "service": "inventory", "ts": 1790776892551}
+{"level": "INFO", "message": "request completed status=200 rid=deaa0981", "rid": "deaa0981", "service": "gateway", "ts": 1790776892553}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=be50e7bd", "rid": "be50e7bd", "service": "gateway", "ts": 1790776892854}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=c154a7c0", "rid": "c154a7c0", "service": "gateway", "ts": 1790776892861}
+{"level": "INFO", "message": "order 02cc3e89974a45bba7fd9ee7655e772a persisted, enqueued email task", "service": "orders", "ts": 1790776892886}
+{"level": "INFO", "message": "order c231f9bb1f544ce9b7d25ece19925358 persisted, enqueued email task", "service": "orders", "ts": 1790776892886}
+{"level": "INFO", "message": "sent email to user for order_id=02cc3e89974a45bba7fd9ee7655e772a", "service": "worker", "ts": 1790776893031}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=595a3444", "rid": "595a3444", "service": "gateway", "ts": 1790776893163}
+{"level": "INFO", "message": "sent email to user for order_id=c231f9bb1f544ce9b7d25ece19925358", "service": "worker", "ts": 1790776893232}
+{"level": "INFO", "message": "payment 23ae33389ee2414f806aa785228f2aa7 approved in 180ms", "service": "payments", "ts": 1790776893364}
+{"level": "INFO", "message": "request received method=GET path=/products rid=f23aedcc", "rid": "f23aedcc", "service": "gateway", "ts": 1790776894056}
+{"level": "INFO", "message": "postgres stock fallback key=sku:5722", "service": "inventory", "ts": 1790776894080}
+{"level": "INFO", "message": "request completed status=200 rid=f23aedcc", "rid": "f23aedcc", "service": "gateway", "ts": 1790776894083}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=0b82c7a8", "rid": "0b82c7a8", "service": "gateway", "ts": 1790776894279}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "0b82c7a8", "service": "gateway", "ts": 1790776894294}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=3e06339e", "rid": "3e06339e", "service": "gateway", "ts": 1790776894383}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "3e06339e", "service": "gateway", "ts": 1790776894397}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=0696595b", "rid": "0696595b", "service": "gateway", "ts": 1790776894478}
+{"level": "INFO", "message": "payment 90e5821081b244f2885b739826b72958 approved in 180ms", "service": "payments", "ts": 1790776894674}
+{"level": "INFO", "message": "request received method=GET path=/products rid=4dd2970a", "rid": "4dd2970a", "service": "gateway", "ts": 1790776895329}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6007", "service": "inventory", "ts": 1790776895347}
+{"level": "INFO", "message": "request completed status=200 rid=4dd2970a", "rid": "4dd2970a", "service": "gateway", "ts": 1790776895350}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=1eb8f7b2", "rid": "1eb8f7b2", "service": "gateway", "ts": 1790776895519}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "1eb8f7b2", "service": "gateway", "ts": 1790776895532}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=b8cf8b93", "rid": "b8cf8b93", "service": "gateway", "ts": 1790776895722}
+{"level": "INFO", "message": "payment b2f26871f1324389957721298e54f453 approved in 180ms", "service": "payments", "ts": 1790776895920}
+{"level": "INFO", "message": "request received method=GET path=/products rid=f775a44d", "rid": "f775a44d", "service": "gateway", "ts": 1790776896607}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2315", "service": "inventory", "ts": 1790776896628}
+{"level": "INFO", "message": "request completed status=200 rid=f775a44d", "rid": "f775a44d", "service": "gateway", "ts": 1790776896630}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=85e1a0d3", "rid": "85e1a0d3", "service": "gateway", "ts": 1790776896699}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "85e1a0d3", "service": "gateway", "ts": 1790776896722}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=65737f13", "rid": "65737f13", "service": "gateway", "ts": 1790776896825}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "65737f13", "service": "gateway", "ts": 1790776896836}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=3e7a313e", "rid": "3e7a313e", "service": "gateway", "ts": 1790776897081}
+{"level": "INFO", "message": "payment 5d6f7a7344f240b3a3bb7ba4bf6b6235 approved in 180ms", "service": "payments", "ts": 1790776897292}
+{"level": "INFO", "message": "request received method=GET path=/products rid=ecb01131", "rid": "ecb01131", "service": "gateway", "ts": 1790776897985}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8087", "service": "inventory", "ts": 1790776898007}
+{"level": "INFO", "message": "request completed status=200 rid=ecb01131", "rid": "ecb01131", "service": "gateway", "ts": 1790776898009}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=6b784b64", "rid": "6b784b64", "service": "gateway", "ts": 1790776898185}
+{"level": "INFO", "message": "order 0fb23c2a6f194f73ba4ddf5c367de471 persisted, enqueued email task", "service": "orders", "ts": 1790776898289}
+{"level": "INFO", "message": "sent email to user for order_id=0fb23c2a6f194f73ba4ddf5c367de471", "service": "worker", "ts": 1790776898454}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=b23bccd5", "rid": "b23bccd5", "service": "gateway", "ts": 1790776898469}
+{"level": "INFO", "message": "payment 144644a0f1d34fb9a8b65b2443e6a8aa approved in 180ms", "service": "payments", "ts": 1790776898672}
+{"level": "INFO", "message": "request received method=GET path=/products rid=2cbcf274", "rid": "2cbcf274", "service": "gateway", "ts": 1790776898862}
+{"level": "INFO", "message": "postgres stock fallback key=sku:4821", "service": "inventory", "ts": 1790776898880}
+{"level": "INFO", "message": "request completed status=200 rid=2cbcf274", "rid": "2cbcf274", "service": "gateway", "ts": 1790776898882}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=c62bbacd", "rid": "c62bbacd", "service": "gateway", "ts": 1790776899035}
+{"level": "INFO", "message": "payment 85d4d158ed2345b7b109e67559f3f04e approved in 180ms", "service": "payments", "ts": 1790776899233}
+{"level": "INFO", "message": "request received method=GET path=/products rid=8c5db56c", "rid": "8c5db56c", "service": "gateway", "ts": 1790776899354}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8851", "service": "inventory", "ts": 1790776899373}
+{"level": "INFO", "message": "request completed status=200 rid=8c5db56c", "rid": "8c5db56c", "service": "gateway", "ts": 1790776899375}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=103cadb7", "rid": "103cadb7", "service": "gateway", "ts": 1790776899443}
+{"level": "INFO", "message": "order 7b0867a38b1b4f8ea003059b32bc665f persisted, enqueued email task", "service": "orders", "ts": 1790776899475}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=d3e457cd", "rid": "d3e457cd", "service": "gateway", "ts": 1790776899560}
+{"level": "INFO", "message": "order ab7585a7af994b75ad1b6bbd3ae0b5dd persisted, enqueued email task", "service": "orders", "ts": 1790776899589}
+{"level": "INFO", "message": "sent email to user for order_id=7b0867a38b1b4f8ea003059b32bc665f", "service": "worker", "ts": 1790776899660}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=322c8f9c", "rid": "322c8f9c", "service": "gateway", "ts": 1790776899800}
+{"level": "INFO", "message": "sent email to user for order_id=ab7585a7af994b75ad1b6bbd3ae0b5dd", "service": "worker", "ts": 1790776899862}
+{"level": "INFO", "message": "payment 459976b9182d4cdc88b014cb6b0b5b73 approved in 180ms", "service": "payments", "ts": 1790776899999}
+{"level": "INFO", "message": "request received method=GET path=/products rid=fe57b6f7", "rid": "fe57b6f7", "service": "gateway", "ts": 1790776900677}
+{"level": "INFO", "message": "request received method=GET path=/products rid=f4dd8c6c", "rid": "f4dd8c6c", "service": "gateway", "ts": 1790776900684}
+{"level": "INFO", "message": "postgres stock fallback key=sku:3703", "service": "inventory", "ts": 1790776900706}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8334", "service": "inventory", "ts": 1790776900706}
+{"level": "INFO", "message": "request completed status=200 rid=f4dd8c6c", "rid": "f4dd8c6c", "service": "gateway", "ts": 1790776900711}
+{"level": "INFO", "message": "request completed status=200 rid=fe57b6f7", "rid": "fe57b6f7", "service": "gateway", "ts": 1790776900711}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=bc014ca4", "rid": "bc014ca4", "service": "gateway", "ts": 1790776900950}
+{"level": "INFO", "message": "order faeea6475bfb48a7953f2911f877899e persisted, enqueued email task", "service": "orders", "ts": 1790776900972}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=9e5d7f81", "rid": "9e5d7f81", "service": "gateway", "ts": 1790776900975}
+{"level": "INFO", "message": "sent email to user for order_id=faeea6475bfb48a7953f2911f877899e", "service": "worker", "ts": 1790776901066}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=fcf3e3eb", "rid": "fcf3e3eb", "service": "gateway", "ts": 1790776901129}
+{"level": "INFO", "message": "payment b47177acf7ec4fa0a3bca972d2458505 approved in 180ms", "service": "payments", "ts": 1790776901173}
+{"level": "INFO", "message": "payment 10f84f9d0d9842ddba28bf1a9c42e974 approved in 180ms", "service": "payments", "ts": 1790776901331}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=fd9c86af", "rid": "fd9c86af", "service": "gateway", "ts": 1790776901371}
+{"level": "INFO", "message": "order e8bd218ca7de40ff85328e7714c0889a persisted, enqueued email task", "service": "orders", "ts": 1790776901393}
+{"level": "INFO", "message": "sent email to user for order_id=e8bd218ca7de40ff85328e7714c0889a", "service": "worker", "ts": 1790776901468}
+{"level": "INFO", "message": "request received method=GET path=/products rid=e4c6db5d", "rid": "e4c6db5d", "service": "gateway", "ts": 1790776902068}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=beeb8096", "rid": "beeb8096", "service": "gateway", "ts": 1790776902236}
+{"level": "ERROR", "message": "timeout after 2000ms calling inventory for GET /stock", "rid": "e4c6db5d", "service": "gateway", "ts": 1790776904081}
+{"level": "ERROR", "message": "timeout after 2000ms calling orders for POST /create", "rid": "beeb8096", "service": "gateway", "ts": 1790776904246}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=29ea376e", "rid": "29ea376e", "service": "gateway", "ts": 1790776904290}
+{"level": "ERROR", "message": "worker task pending: ConnectionError", "service": "worker", "ts": 1790776905561}
+{"level": "ERROR", "message": "order persistence/enqueue failed: ConnectionError order_id=317e0cdc528e44028e3b17a0a10c0e51", "service": "orders", "ts": 1790776906118}
+{"level": "ERROR", "message": "timeout after 2000ms calling orders for POST /create", "rid": "29ea376e", "service": "gateway", "ts": 1790776906299}
+{"level": "ERROR", "message": "redis unavailable: redis:6379 (key=sku:1585)", "service": "inventory", "ts": 1790776906352}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1585", "service": "inventory", "ts": 1790776906366}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=5689aba4", "rid": "5689aba4", "service": "gateway", "ts": 1790776906559}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=524edf79", "rid": "524edf79", "service": "gateway", "ts": 1790776906590}
+{"level": "INFO", "message": "payment ef28edf5eef746a0985e32e3c69f771e approved in 180ms", "service": "payments", "ts": 1790776906758}
+{"level": "INFO", "message": "request received method=GET path=/products rid=992f0b1b", "rid": "992f0b1b", "service": "gateway", "ts": 1790776907413}
+{"level": "ERROR", "message": "order persistence/enqueue failed: ConnectionError order_id=6ac89550ecfd4825b0eb1757ce1c8e6f", "service": "orders", "ts": 1790776908261}
+{"level": "ERROR", "message": "timeout after 2000ms calling orders for POST /create", "rid": "524edf79", "service": "gateway", "ts": 1790776908600}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1910", "service": "inventory", "ts": 1790776909354}
+{"level": "INFO", "message": "request completed status=200 rid=992f0b1b", "rid": "992f0b1b", "service": "gateway", "ts": 1790776909357}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=dd90d9bd", "rid": "dd90d9bd", "service": "gateway", "ts": 1790776909584}
+{"level": "INFO", "message": "order 4ebff898a03f42699cfd1904696d4726 persisted, enqueued email task", "service": "orders", "ts": 1790776909609}
+{"level": "INFO", "message": "order caabf6b341994b999b20c25ebe57439b persisted, enqueued email task", "service": "orders", "ts": 1790776909681}
+{"level": "INFO", "message": "sent email to user for order_id=4ebff898a03f42699cfd1904696d4726", "service": "worker", "ts": 1790776909760}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=855ca98b", "rid": "855ca98b", "service": "gateway", "ts": 1790776909903}
+{"level": "INFO", "message": "sent email to user for order_id=caabf6b341994b999b20c25ebe57439b", "service": "worker", "ts": 1790776909962}
+{"level": "INFO", "message": "request received method=GET path=/products rid=80f6c67d", "rid": "80f6c67d", "service": "gateway", "ts": 1790776910018}
+{"level": "INFO", "message": "postgres stock fallback key=sku:9012", "service": "inventory", "ts": 1790776910036}
+{"level": "INFO", "message": "request completed status=200 rid=80f6c67d", "rid": "80f6c67d", "service": "gateway", "ts": 1790776910037}
+{"level": "INFO", "message": "payment f29c501f285b4b5096bb128748ce23b8 approved in 180ms", "service": "payments", "ts": 1790776910136}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=363db009", "rid": "363db009", "service": "gateway", "ts": 1790776910195}
+{"level": "INFO", "message": "payment 4468a358fa244d98b969ec2c3f9143d1 approved in 180ms", "service": "payments", "ts": 1790776910398}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=6279469d", "rid": "6279469d", "service": "gateway", "ts": 1790776910595}
+{"level": "INFO", "message": "order 8e93d15574a74b3bb85e6e57af9fa175 persisted, enqueued email task", "service": "orders", "ts": 1790776910619}
+{"level": "INFO", "message": "sent email to user for order_id=8e93d15574a74b3bb85e6e57af9fa175", "service": "worker", "ts": 1790776910764}
+{"level": "INFO", "message": "request received method=GET path=/products rid=8678cf6c", "rid": "8678cf6c", "service": "gateway", "ts": 1790776910879}
+{"level": "INFO", "message": "postgres stock fallback key=sku:4011", "service": "inventory", "ts": 1790776910908}
+{"level": "INFO", "message": "request completed status=200 rid=8678cf6c", "rid": "8678cf6c", "service": "gateway", "ts": 1790776910910}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=bc33ce7e", "rid": "bc33ce7e", "service": "gateway", "ts": 1790776911098}
+{"level": "INFO", "message": "order df60cad6f86e4a4b8ee743e9f61cc23a persisted, enqueued email task", "service": "orders", "ts": 1790776911124}
+{"level": "INFO", "message": "sent email to user for order_id=df60cad6f86e4a4b8ee743e9f61cc23a", "service": "worker", "ts": 1790776911166}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=4d094637", "rid": "4d094637", "service": "gateway", "ts": 1790776911313}
+{"level": "INFO", "message": "payment 81c4b7ce9a7c4fd0a023c845ffe95de8 approved in 180ms", "service": "payments", "ts": 1790776911538}
+{"level": "INFO", "message": "request received method=GET path=/products rid=f329ca1a", "rid": "f329ca1a", "service": "gateway", "ts": 1790776911869}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8500", "service": "inventory", "ts": 1790776911898}
+{"level": "INFO", "message": "request completed status=200 rid=f329ca1a", "rid": "f329ca1a", "service": "gateway", "ts": 1790776911900}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=bdaeab0e", "rid": "bdaeab0e", "service": "gateway", "ts": 1790776912068}
+{"level": "INFO", "message": "request received method=GET path=/products rid=7292355c", "rid": "7292355c", "service": "gateway", "ts": 1790776912199}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7505", "service": "inventory", "ts": 1790776912216}
+{"level": "INFO", "message": "request completed status=200 rid=7292355c", "rid": "7292355c", "service": "gateway", "ts": 1790776912218}
+{"level": "INFO", "message": "payment 4ba62c6eecae4b3dae24807765cd8275 approved in 180ms", "service": "payments", "ts": 1790776912270}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=f0c9c7df", "rid": "f0c9c7df", "service": "gateway", "ts": 1790776912420}
+{"level": "INFO", "message": "order 8237b96fa33d4c4d8aa271e59dab5b22 persisted, enqueued email task", "service": "orders", "ts": 1790776912463}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=dba0830c", "rid": "dba0830c", "service": "gateway", "ts": 1790776912490}
+{"level": "INFO", "message": "order 968974d4398c420088f45cabf742bf7a persisted, enqueued email task", "service": "orders", "ts": 1790776912514}
+{"level": "INFO", "message": "sent email to user for order_id=8237b96fa33d4c4d8aa271e59dab5b22", "service": "worker", "ts": 1790776912572}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=eaed7296", "rid": "eaed7296", "service": "gateway", "ts": 1790776912677}
+{"level": "INFO", "message": "sent email to user for order_id=968974d4398c420088f45cabf742bf7a", "service": "worker", "ts": 1790776912773}
+{"level": "INFO", "message": "payment 148d294a8f844f819f4b7d8d784433e6 approved in 180ms", "service": "payments", "ts": 1790776912882}
+{"level": "INFO", "message": "request received method=GET path=/products rid=bb693748", "rid": "bb693748", "service": "gateway", "ts": 1790776913573}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8866", "service": "inventory", "ts": 1790776913600}
+{"level": "INFO", "message": "request completed status=200 rid=bb693748", "rid": "bb693748", "service": "gateway", "ts": 1790776913602}
+{"level": "WARN", "message": "holding database connections in_use=10/10", "service": "payments", "ts": 1790776913790}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=3ed3d228", "rid": "3ed3d228", "service": "gateway", "ts": 1790776913800}
+{"level": "INFO", "message": "order a909aaa25afa4ad79f4cd93b4754d752 persisted, enqueued email task", "service": "orders", "ts": 1790776913834}
+{"level": "INFO", "message": "sent email to user for order_id=a909aaa25afa4ad79f4cd93b4754d752", "service": "worker", "ts": 1790776913977}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=8c4348c3", "rid": "8c4348c3", "service": "gateway", "ts": 1790776914083}
+{"level": "ERROR", "message": "connection pool exhausted, waiting for free connection", "service": "payments", "ts": 1790776914242}
+{"level": "ERROR", "message": "connection pool exhausted, waiting for free connection", "service": "payments", "ts": 1790776914393}
+{"level": "ERROR", "message": "upstream payments returned status=503", "rid": "8c4348c3", "service": "gateway", "ts": 1790776914395}
+{"level": "INFO", "message": "request received method=GET path=/products rid=b7500fa2", "rid": "b7500fa2", "service": "gateway", "ts": 1790776915056}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7785", "service": "inventory", "ts": 1790776915074}
+{"level": "INFO", "message": "request completed status=200 rid=b7500fa2", "rid": "b7500fa2", "service": "gateway", "ts": 1790776915075}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=a7c04fb1", "rid": "a7c04fb1", "service": "gateway", "ts": 1790776915230}
+{"level": "INFO", "message": "order 7992891e2b47498487bd10999aedd767 persisted, enqueued email task", "service": "orders", "ts": 1790776915249}
+{"level": "INFO", "message": "sent email to user for order_id=7992891e2b47498487bd10999aedd767", "service": "worker", "ts": 1790776915382}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=d65d8055", "rid": "d65d8055", "service": "gateway", "ts": 1790776915404}
+{"level": "ERROR", "message": "connection pool exhausted, waiting for free connection", "service": "payments", "ts": 1790776915662}
+{"level": "ERROR", "message": "upstream payments returned status=503", "rid": "d65d8055", "service": "gateway", "ts": 1790776915664}
+{"level": "INFO", "message": "request received method=GET path=/products rid=5afccaec", "rid": "5afccaec", "service": "gateway", "ts": 1790776916346}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6340", "service": "inventory", "ts": 1790776916368}
+{"level": "INFO", "message": "request completed status=200 rid=5afccaec", "rid": "5afccaec", "service": "gateway", "ts": 1790776916371}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=6ea053b7", "rid": "6ea053b7", "service": "gateway", "ts": 1790776916532}
+{"level": "INFO", "message": "order d493643a81154e27bf01edfd5140a8b0 persisted, enqueued email task", "service": "orders", "ts": 1790776916552}
+{"level": "INFO", "message": "sent email to user for order_id=d493643a81154e27bf01edfd5140a8b0", "service": "worker", "ts": 1790776916587}
+{"level": "ERROR", "message": "connection pool exhausted, waiting for free connection", "service": "payments", "ts": 1790776916701}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=126ff47c", "rid": "126ff47c", "service": "gateway", "ts": 1790776916703}
+{"level": "ERROR", "message": "connection pool exhausted, waiting for free connection", "service": "payments", "ts": 1790776916966}
+{"level": "ERROR", "message": "upstream payments returned status=503", "rid": "126ff47c", "service": "gateway", "ts": 1790776916968}
+{"level": "INFO", "message": "held database connections released", "service": "payments", "ts": 1790776916991}
+{"level": "INFO", "message": "request received method=GET path=/products rid=1ad23c48", "rid": "1ad23c48", "service": "gateway", "ts": 1790776917687}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1828", "service": "inventory", "ts": 1790776917760}
+{"level": "INFO", "message": "request completed status=200 rid=1ad23c48", "rid": "1ad23c48", "service": "gateway", "ts": 1790776917763}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=d515de4d", "rid": "d515de4d", "service": "gateway", "ts": 1790776917944}
+{"level": "INFO", "message": "order 2edc4fd07ae841afa170bf93a3258b88 persisted, enqueued email task", "service": "orders", "ts": 1790776917965}
+{"level": "INFO", "message": "sent email to user for order_id=2edc4fd07ae841afa170bf93a3258b88", "service": "worker", "ts": 1790776917993}
+{"level": "INFO", "message": "request received method=GET path=/products rid=5edc609d", "rid": "5edc609d", "service": "gateway", "ts": 1790776918048}
+{"level": "INFO", "message": "postgres stock fallback key=sku:4259", "service": "inventory", "ts": 1790776918073}
+{"level": "INFO", "message": "request completed status=200 rid=5edc609d", "rid": "5edc609d", "service": "gateway", "ts": 1790776918075}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=eb122bda", "rid": "eb122bda", "service": "gateway", "ts": 1790776918163}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=993e287f", "rid": "993e287f", "service": "gateway", "ts": 1790776918245}
+{"level": "INFO", "message": "payment 2472c3707f104e41879d6918b8581ca9 approved in 180ms", "service": "payments", "ts": 1790776918363}
+{"level": "INFO", "message": "payment a192ec3ccdfe4f5c993c309c3eb8fee3 approved in 180ms", "service": "payments", "ts": 1790776918442}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=9d1bc187", "rid": "9d1bc187", "service": "gateway", "ts": 1790776918601}
+{"level": "INFO", "message": "order b6119a3466c14e76b3824e30c810b77a persisted, enqueued email task", "service": "orders", "ts": 1790776918626}
+{"level": "INFO", "message": "sent email to user for order_id=b6119a3466c14e76b3824e30c810b77a", "service": "worker", "ts": 1790776918797}
+{"level": "INFO", "message": "request received method=GET path=/products rid=fb94f31f", "rid": "fb94f31f", "service": "gateway", "ts": 1790776919050}
+{"level": "INFO", "message": "postgres stock fallback key=sku:3567", "service": "inventory", "ts": 1790776919076}
+{"level": "INFO", "message": "request completed status=200 rid=fb94f31f", "rid": "fb94f31f", "service": "gateway", "ts": 1790776919078}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=af0dd691", "rid": "af0dd691", "service": "gateway", "ts": 1790776919234}
+{"level": "INFO", "message": "order 64fcfab1ad364fdebfd3e5b7fc17e2bb persisted, enqueued email task", "service": "orders", "ts": 1790776919252}
+{"level": "INFO", "message": "sent email to user for order_id=64fcfab1ad364fdebfd3e5b7fc17e2bb", "service": "worker", "ts": 1790776919401}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=04a04fef", "rid": "04a04fef", "service": "gateway", "ts": 1790776919449}
+{"level": "INFO", "message": "payment 8a3a4604b7e24ba69dcd92176af430b8 approved in 180ms", "service": "payments", "ts": 1790776919652}
+{"level": "INFO", "message": "request received method=GET path=/products rid=cd2978b9", "rid": "cd2978b9", "service": "gateway", "ts": 1790776920365}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1150", "service": "inventory", "ts": 1790776920389}
+{"level": "INFO", "message": "request completed status=200 rid=cd2978b9", "rid": "cd2978b9", "service": "gateway", "ts": 1790776920391}
+{"level": "INFO", "message": "request received method=GET path=/products rid=3b868207", "rid": "3b868207", "service": "gateway", "ts": 1790776920550}
+{"level": "INFO", "message": "postgres stock fallback key=sku:5523", "service": "inventory", "ts": 1790776920577}
+{"level": "INFO", "message": "request completed status=200 rid=3b868207", "rid": "3b868207", "service": "gateway", "ts": 1790776920579}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=e2f7275b", "rid": "e2f7275b", "service": "gateway", "ts": 1790776920689}
+{"level": "INFO", "message": "order a0bfb315a55441f68924a10a0b4c938f persisted, enqueued email task", "service": "orders", "ts": 1790776920721}
+{"level": "INFO", "message": "sent email to user for order_id=a0bfb315a55441f68924a10a0b4c938f", "service": "worker", "ts": 1790776920805}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=56434f35", "rid": "56434f35", "service": "gateway", "ts": 1790776920846}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=ad9f1e72", "rid": "ad9f1e72", "service": "gateway", "ts": 1790776920899}
+{"level": "INFO", "message": "payment c9993fceb2ce484fba3bee4a9323a99e approved in 180ms", "service": "payments", "ts": 1790776921055}
+{"level": "INFO", "message": "payment 9b1167958f4342b4af92eed2ef13f773 approved in 180ms", "service": "payments", "ts": 1790776921095}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=458bc30d", "rid": "458bc30d", "service": "gateway", "ts": 1790776921280}
+{"level": "INFO", "message": "order a3e11c396ec34928bf749021235b2814 persisted, enqueued email task", "service": "orders", "ts": 1790776921300}
+{"level": "INFO", "message": "sent email to user for order_id=a3e11c396ec34928bf749021235b2814", "service": "worker", "ts": 1790776921408}
+{"level": "INFO", "message": "request received method=GET path=/products rid=2e2c4a59", "rid": "2e2c4a59", "service": "gateway", "ts": 1790776921793}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6640", "service": "inventory", "ts": 1790776921815}
+{"level": "INFO", "message": "request completed status=200 rid=2e2c4a59", "rid": "2e2c4a59", "service": "gateway", "ts": 1790776921819}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776921886}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=f3e5788e", "rid": "f3e5788e", "service": "gateway", "ts": 1790776922001}
+{"level": "INFO", "message": "order b71ad3afe61f470d82ee6010886ebc76 persisted, enqueued email task", "service": "orders", "ts": 1790776922020}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=e74e1538", "rid": "e74e1538", "service": "gateway", "ts": 1790776922182}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776922210}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776922211}
+{"level": "INFO", "message": "payment 34c281050bef48cb93d51a690cf08f09 approved in 180ms", "service": "payments", "ts": 1790776922379}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776922411}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776922411}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776922612}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776922612}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776922813}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776922813}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776923013}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776923013}
+{"level": "INFO", "message": "request received method=GET path=/products rid=67748c5d", "rid": "67748c5d", "service": "gateway", "ts": 1790776923037}
+{"level": "INFO", "message": "postgres stock fallback key=sku:3530", "service": "inventory", "ts": 1790776923056}
+{"level": "INFO", "message": "request completed status=200 rid=67748c5d", "rid": "67748c5d", "service": "gateway", "ts": 1790776923059}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776923215}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776923215}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=7593fc62", "rid": "7593fc62", "service": "gateway", "ts": 1790776923242}
+{"level": "INFO", "message": "order e67577a0643e4a04a894f55f00c69015 persisted, enqueued email task", "service": "orders", "ts": 1790776923271}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776923416}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776923416}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=defbd317", "rid": "defbd317", "service": "gateway", "ts": 1790776923437}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776923617}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776923617}
+{"level": "INFO", "message": "payment 15da0771d47b4075988402b11dfc7cf0 approved in 180ms", "service": "payments", "ts": 1790776923634}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776923818}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776923818}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776924019}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776924019}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776924042}
+{"level": "ERROR", "message": "spool failed errno=28: No space left on device", "service": "worker", "ts": 1790776924221}
+{"level": "ERROR", "message": "worker task pending: HTTPException", "service": "worker", "ts": 1790776924221}
+{"level": "INFO", "message": "request received method=GET path=/products rid=09e57a84", "rid": "09e57a84", "service": "gateway", "ts": 1790776924326}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7375", "service": "inventory", "ts": 1790776924357}
+{"level": "INFO", "message": "request completed status=200 rid=09e57a84", "rid": "09e57a84", "service": "gateway", "ts": 1790776924360}
+{"level": "INFO", "message": "sent email to user for order_id=b71ad3afe61f470d82ee6010886ebc76", "service": "worker", "ts": 1790776924422}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=f15ea66d", "rid": "f15ea66d", "service": "gateway", "ts": 1790776924536}
+{"level": "INFO", "message": "order ba40f839ee524b9eb39bf5abf5456fb1 persisted, enqueued email task", "service": "orders", "ts": 1790776924558}
+{"level": "INFO", "message": "sent email to user for order_id=e67577a0643e4a04a894f55f00c69015", "service": "worker", "ts": 1790776924623}
+{"level": "INFO", "message": "sent email to user for order_id=ba40f839ee524b9eb39bf5abf5456fb1", "service": "worker", "ts": 1790776924825}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=175fb181", "rid": "175fb181", "service": "gateway", "ts": 1790776924847}
+{"level": "INFO", "message": "payment b02814cc4c0b40bea8ad7691ccaa3eea approved in 180ms", "service": "payments", "ts": 1790776925052}
+{"level": "INFO", "message": "request received method=GET path=/products rid=6c2b18e6", "rid": "6c2b18e6", "service": "gateway", "ts": 1790776925478}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2564", "service": "inventory", "ts": 1790776925495}
+{"level": "INFO", "message": "request completed status=200 rid=6c2b18e6", "rid": "6c2b18e6", "service": "gateway", "ts": 1790776925496}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=4774ac54", "rid": "4774ac54", "service": "gateway", "ts": 1790776925670}
+{"level": "INFO", "message": "request received method=GET path=/products rid=49a0e127", "rid": "49a0e127", "service": "gateway", "ts": 1790776925754}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1393", "service": "inventory", "ts": 1790776925774}
+{"level": "INFO", "message": "request completed status=200 rid=49a0e127", "rid": "49a0e127", "service": "gateway", "ts": 1790776925776}
+{"level": "INFO", "message": "payment 7e170677a190460e91a5236316e2c573 approved in 180ms", "service": "payments", "ts": 1790776925872}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=845d5e2e", "rid": "845d5e2e", "service": "gateway", "ts": 1790776925931}
+{"level": "INFO", "message": "order 7f0a4623885048a68a729443c092d658 persisted, enqueued email task", "service": "orders", "ts": 1790776925955}
+{"level": "INFO", "message": "sent email to user for order_id=7f0a4623885048a68a729443c092d658", "service": "worker", "ts": 1790776926031}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=8fa59984", "rid": "8fa59984", "service": "gateway", "ts": 1790776926046}
+{"level": "INFO", "message": "order c18dca42481b4cce874f2e34af4479ab persisted, enqueued email task", "service": "orders", "ts": 1790776926068}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=cd0ddcfa", "rid": "cd0ddcfa", "service": "gateway", "ts": 1790776926154}
+{"level": "INFO", "message": "sent email to user for order_id=c18dca42481b4cce874f2e34af4479ab", "service": "worker", "ts": 1790776926232}
+{"level": "INFO", "message": "payment 9c1d30fd338f47998cc609aa0ac5ff6b approved in 180ms", "service": "payments", "ts": 1790776926357}
+{"level": "INFO", "message": "request received method=GET path=/products rid=f3fe8ecb", "rid": "f3fe8ecb", "service": "gateway", "ts": 1790776927149}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6891", "service": "inventory", "ts": 1790776927177}
+{"level": "INFO", "message": "request completed status=200 rid=f3fe8ecb", "rid": "f3fe8ecb", "service": "gateway", "ts": 1790776927178}
+{"level": "INFO", "message": "request received method=GET path=/products rid=2adc27d9", "rid": "2adc27d9", "service": "gateway", "ts": 1790776927381}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=406dc4f5", "rid": "406dc4f5", "service": "gateway", "ts": 1790776927390}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7123", "service": "inventory", "ts": 1790776927415}
+{"level": "INFO", "message": "order 0216e3fd259949269a5fcf4624b9c767 persisted, enqueued email task", "service": "orders", "ts": 1790776927420}
+{"level": "INFO", "message": "request completed status=200 rid=2adc27d9", "rid": "2adc27d9", "service": "gateway", "ts": 1790776927422}
+{"level": "INFO", "message": "sent email to user for order_id=0216e3fd259949269a5fcf4624b9c767", "service": "worker", "ts": 1790776927436}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=e475bc2d", "rid": "e475bc2d", "service": "gateway", "ts": 1790776927664}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=aaa06b8f", "rid": "aaa06b8f", "service": "gateway", "ts": 1790776927673}
+{"level": "INFO", "message": "payment 62340a12363145ad88ebb47af7801a10 approved in 180ms", "service": "payments", "ts": 1790776927871}
+{"level": "INFO", "message": "payment b4c5c7ed14164bc0ad0380869aac554e approved in 180ms", "service": "payments", "ts": 1790776927871}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=cd6b6f23", "rid": "cd6b6f23", "service": "gateway", "ts": 1790776928030}
+{"level": "INFO", "message": "order adbe24ef12fc4997a634796c887bf025 persisted, enqueued email task", "service": "orders", "ts": 1790776928049}
+{"level": "INFO", "message": "sent email to user for order_id=adbe24ef12fc4997a634796c887bf025", "service": "worker", "ts": 1790776928239}
+{"level": "INFO", "message": "request received method=GET path=/products rid=a0c30add", "rid": "a0c30add", "service": "gateway", "ts": 1790776928531}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2823", "service": "inventory", "ts": 1790776928548}
+{"level": "INFO", "message": "request completed status=200 rid=a0c30add", "rid": "a0c30add", "service": "gateway", "ts": 1790776928549}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=6a1a81b9", "rid": "6a1a81b9", "service": "gateway", "ts": 1790776928705}
+{"level": "INFO", "message": "order 1b5e94e825514aa9a46a177469ff31b1 persisted, enqueued email task", "service": "orders", "ts": 1790776928724}
+{"level": "INFO", "message": "sent email to user for order_id=1b5e94e825514aa9a46a177469ff31b1", "service": "worker", "ts": 1790776928842}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=9294e86a", "rid": "9294e86a", "service": "gateway", "ts": 1790776928957}
+{"level": "INFO", "message": "payment 54639c6675b44e79930a1113c7f9da2d approved in 180ms", "service": "payments", "ts": 1790776929159}
+{"level": "INFO", "message": "request received method=GET path=/products rid=dafc79e5", "rid": "dafc79e5", "service": "gateway", "ts": 1790776929823}
+{"level": "INFO", "message": "postgres stock fallback key=sku:5855", "service": "inventory", "ts": 1790776929841}
+{"level": "INFO", "message": "request completed status=200 rid=dafc79e5", "rid": "dafc79e5", "service": "gateway", "ts": 1790776929842}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=81422064", "rid": "81422064", "service": "gateway", "ts": 1790776929995}
+{"level": "INFO", "message": "sent email to user for order_id=8f4da98f01dc435eae9a30ceaaac1fb2", "service": "worker", "ts": 1790776930046}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=74f8c2d8", "rid": "74f8c2d8", "service": "gateway", "ts": 1790776930177}
+{"level": "INFO", "message": "payment abdee6e5e996481aa9d20ed163d4cc96 approved in 180ms", "service": "payments", "ts": 1790776930374}
+{"level": "INFO", "message": "request received method=GET path=/products rid=d67521c2", "rid": "d67521c2", "service": "gateway", "ts": 1790776931033}
+{"level": "INFO", "message": "postgres stock fallback key=sku:4652", "service": "inventory", "ts": 1790776931051}
+{"level": "INFO", "message": "request completed status=200 rid=d67521c2", "rid": "d67521c2", "service": "gateway", "ts": 1790776931054}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=450f6245", "rid": "450f6245", "service": "gateway", "ts": 1790776931268}
+{"level": "INFO", "message": "sent email to user for order_id=c140735d65824b78af1e747501da1b0f", "service": "worker", "ts": 1790776931451}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=a9ea0dc8", "rid": "a9ea0dc8", "service": "gateway", "ts": 1790776931454}
+{"level": "INFO", "message": "payment 6bd598ced7b446dba6718e1b7f7b3a98 approved in 180ms", "service": "payments", "ts": 1790776931656}
+{"level": "INFO", "message": "request received method=GET path=/products rid=52021698", "rid": "52021698", "service": "gateway", "ts": 1790776932325}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2100", "service": "inventory", "ts": 1790776932346}
+{"level": "INFO", "message": "request completed status=200 rid=52021698", "rid": "52021698", "service": "gateway", "ts": 1790776932348}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=fcd77bcc", "rid": "fcd77bcc", "service": "gateway", "ts": 1790776932504}
+{"level": "INFO", "message": "sent email to user for order_id=1e2c77e4c7f94350859151025f7957e3", "service": "worker", "ts": 1790776932655}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=1cb48640", "rid": "1cb48640", "service": "gateway", "ts": 1790776932676}
+{"level": "INFO", "message": "payment a3282f2053be43a19e3f67bb9ca45829 approved in 180ms", "service": "payments", "ts": 1790776932872}
+{"level": "INFO", "message": "request received method=GET path=/products rid=de845318", "rid": "de845318", "service": "gateway", "ts": 1790776933537}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1288", "service": "inventory", "ts": 1790776933563}
+{"level": "INFO", "message": "request completed status=200 rid=de845318", "rid": "de845318", "service": "gateway", "ts": 1790776933565}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=7bb2fd15", "rid": "7bb2fd15", "service": "gateway", "ts": 1790776933728}
+{"level": "INFO", "message": "sent email to user for order_id=b2f7cf87397d43f6bf11ea26ced1b107", "service": "worker", "ts": 1790776933859}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=c8aed816", "rid": "c8aed816", "service": "gateway", "ts": 1790776933945}
+{"level": "INFO", "message": "payment 188202fc20b746cd85f237f28a7b84ff approved in 180ms", "service": "payments", "ts": 1790776934142}
+{"level": "INFO", "message": "request received method=GET path=/products rid=62762c5b", "rid": "62762c5b", "service": "gateway", "ts": 1790776934798}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2792", "service": "inventory", "ts": 1790776934815}
+{"level": "INFO", "message": "request completed status=200 rid=62762c5b", "rid": "62762c5b", "service": "gateway", "ts": 1790776934817}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=49c87a0e", "rid": "49c87a0e", "service": "gateway", "ts": 1790776934970}
+{"level": "INFO", "message": "sent email to user for order_id=2150e95c94474b24a35cc264afe0ed56", "service": "worker", "ts": 1790776935063}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=f9775ea3", "rid": "f9775ea3", "service": "gateway", "ts": 1790776935145}
+{"level": "INFO", "message": "payment 9cd8fcdc90b945f7a03a382f973eed79 approved in 180ms", "service": "payments", "ts": 1790776935343}
+{"level": "INFO", "message": "request received method=GET path=/products rid=1f5f9f7f", "rid": "1f5f9f7f", "service": "gateway", "ts": 1790776936028}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1602", "service": "inventory", "ts": 1790776936045}
+{"level": "INFO", "message": "request completed status=200 rid=1f5f9f7f", "rid": "1f5f9f7f", "service": "gateway", "ts": 1790776936047}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=870d8aec", "rid": "870d8aec", "service": "gateway", "ts": 1790776936211}
+{"level": "INFO", "message": "sent email to user for order_id=c8beca34e3be4b5f92d8a61b0f6506d0", "service": "worker", "ts": 1790776936268}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=6c97b85a", "rid": "6c97b85a", "service": "gateway", "ts": 1790776936385}
+{"level": "INFO", "message": "payment 4cd941a64f99440683d6be58e3070dba approved in 180ms", "service": "payments", "ts": 1790776936592}
+{"level": "INFO", "message": "request received method=GET path=/products rid=e0cece34", "rid": "e0cece34", "service": "gateway", "ts": 1790776937247}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6251", "service": "inventory", "ts": 1790776937265}
+{"level": "INFO", "message": "request completed status=200 rid=e0cece34", "rid": "e0cece34", "service": "gateway", "ts": 1790776937266}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=9bc6134c", "rid": "9bc6134c", "service": "gateway", "ts": 1790776937419}
+{"level": "INFO", "message": "sent email to user for order_id=088ca90054b947339813a1dbc2ded361", "service": "worker", "ts": 1790776937472}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=17a6cc31", "rid": "17a6cc31", "service": "gateway", "ts": 1790776937647}
+{"level": "INFO", "message": "payment 64bdafd5c7b648c8874967c6f0845939 approved in 180ms", "service": "payments", "ts": 1790776937843}
+{"level": "INFO", "message": "request received method=GET path=/products rid=e4061149", "rid": "e4061149", "service": "gateway", "ts": 1790776938500}
+{"level": "INFO", "message": "postgres stock fallback key=sku:4536", "service": "inventory", "ts": 1790776938518}
+{"level": "INFO", "message": "request completed status=200 rid=e4061149", "rid": "e4061149", "service": "gateway", "ts": 1790776938519}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=473c594e", "rid": "473c594e", "service": "gateway", "ts": 1790776938670}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=ff0699d7", "rid": "ff0699d7", "service": "gateway", "ts": 1790776938846}
+{"level": "INFO", "message": "sent email to user for order_id=dc796fbfefb6456196460f4cebe95c9d", "service": "worker", "ts": 1790776938877}
+{"level": "INFO", "message": "payment fb93bd513cbd485299553cbc87be86eb approved in 180ms", "service": "payments", "ts": 1790776939043}
+{"level": "INFO", "message": "request received method=GET path=/products rid=d01aab24", "rid": "d01aab24", "service": "gateway", "ts": 1790776939791}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2781", "service": "inventory", "ts": 1790776939808}
+{"level": "INFO", "message": "request completed status=200 rid=d01aab24", "rid": "d01aab24", "service": "gateway", "ts": 1790776939810}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=553c8194", "rid": "553c8194", "service": "gateway", "ts": 1790776939978}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "553c8194", "service": "gateway", "ts": 1790776939996}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=fadc350d", "rid": "fadc350d", "service": "gateway", "ts": 1790776940182}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=f6662ee9", "rid": "f6662ee9", "service": "gateway", "ts": 1790776940331}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "f6662ee9", "service": "gateway", "ts": 1790776940342}
+{"level": "INFO", "message": "payment a04058e06b154ab3be8004a8f51b16b0 approved in 180ms", "service": "payments", "ts": 1790776940385}
+{"level": "INFO", "message": "request received method=GET path=/products rid=3c36f4c7", "rid": "3c36f4c7", "service": "gateway", "ts": 1790776941043}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1893", "service": "inventory", "ts": 1790776941060}
+{"level": "INFO", "message": "request completed status=200 rid=3c36f4c7", "rid": "3c36f4c7", "service": "gateway", "ts": 1790776941062}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=6ba720e0", "rid": "6ba720e0", "service": "gateway", "ts": 1790776941220}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "6ba720e0", "service": "gateway", "ts": 1790776941232}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=ee7fa3e3", "rid": "ee7fa3e3", "service": "gateway", "ts": 1790776941392}
+{"level": "INFO", "message": "payment c2a975f18178427d8ef0241670f4c216 approved in 180ms", "service": "payments", "ts": 1790776941588}
+{"level": "INFO", "message": "request received method=GET path=/products rid=2fcb0c0e", "rid": "2fcb0c0e", "service": "gateway", "ts": 1790776942251}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2742", "service": "inventory", "ts": 1790776942274}
+{"level": "INFO", "message": "request completed status=200 rid=2fcb0c0e", "rid": "2fcb0c0e", "service": "gateway", "ts": 1790776942275}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=e6eed7c9", "rid": "e6eed7c9", "service": "gateway", "ts": 1790776942450}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "e6eed7c9", "service": "gateway", "ts": 1790776942467}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=d8e1c1d7", "rid": "d8e1c1d7", "service": "gateway", "ts": 1790776942667}
+{"level": "ERROR", "message": "connection refused calling orders:8000 for POST /create", "rid": "d8e1c1d7", "service": "gateway", "ts": 1790776942678}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=dd939865", "rid": "dd939865", "service": "gateway", "ts": 1790776942680}
+{"level": "INFO", "message": "payment f34689b13ace42ac917f7bfb7e95a50c approved in 180ms", "service": "payments", "ts": 1790776942884}
+{"level": "INFO", "message": "request received method=GET path=/products rid=1e681fbc", "rid": "1e681fbc", "service": "gateway", "ts": 1790776943547}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8875", "service": "inventory", "ts": 1790776943564}
+{"level": "INFO", "message": "request completed status=200 rid=1e681fbc", "rid": "1e681fbc", "service": "gateway", "ts": 1790776943565}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=79f4aee7", "rid": "79f4aee7", "service": "gateway", "ts": 1790776943738}
+{"level": "INFO", "message": "order 57cedc4c35344b85ad9a0b3cbda231ca persisted, enqueued email task", "service": "orders", "ts": 1790776943851}
+{"level": "INFO", "message": "sent email to user for order_id=57cedc4c35344b85ad9a0b3cbda231ca", "service": "worker", "ts": 1790776943898}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=17ca93e0", "rid": "17ca93e0", "service": "gateway", "ts": 1790776944087}
+{"level": "INFO", "message": "payment 9d0b039be50c48db9bc1bb8f1d06af0f approved in 180ms", "service": "payments", "ts": 1790776944335}
+{"level": "INFO", "message": "request received method=GET path=/products rid=b286b085", "rid": "b286b085", "service": "gateway", "ts": 1790776944726}
+{"level": "INFO", "message": "postgres stock fallback key=sku:4125", "service": "inventory", "ts": 1790776944744}
+{"level": "INFO", "message": "request completed status=200 rid=b286b085", "rid": "b286b085", "service": "gateway", "ts": 1790776944745}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=21d4f571", "rid": "21d4f571", "service": "gateway", "ts": 1790776944905}
+{"level": "INFO", "message": "request received method=GET path=/products rid=7167cc12", "rid": "7167cc12", "service": "gateway", "ts": 1790776945007}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6351", "service": "inventory", "ts": 1790776945024}
+{"level": "INFO", "message": "request completed status=200 rid=7167cc12", "rid": "7167cc12", "service": "gateway", "ts": 1790776945026}
+{"level": "INFO", "message": "payment 112d29f6282d433880264b3552e1b6c8 approved in 180ms", "service": "payments", "ts": 1790776945105}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=ae5d04ac", "rid": "ae5d04ac", "service": "gateway", "ts": 1790776945195}
+{"level": "INFO", "message": "order 46cb37c4439d46e49727d5db5d12222a persisted, enqueued email task", "service": "orders", "ts": 1790776945225}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=7d3bbc38", "rid": "7d3bbc38", "service": "gateway", "ts": 1790776945299}
+{"level": "INFO", "message": "sent email to user for order_id=46cb37c4439d46e49727d5db5d12222a", "service": "worker", "ts": 1790776945303}
+{"level": "INFO", "message": "order 42c8b75ca3d34a74858c0bdd64ecb41b persisted, enqueued email task", "service": "orders", "ts": 1790776945323}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=6c56a707", "rid": "6c56a707", "service": "gateway", "ts": 1790776945413}
+{"level": "INFO", "message": "sent email to user for order_id=42c8b75ca3d34a74858c0bdd64ecb41b", "service": "worker", "ts": 1790776945504}
+{"level": "INFO", "message": "payment 7f03dd6634d44649b59105e98d058059 approved in 180ms", "service": "payments", "ts": 1790776945614}
+{"level": "INFO", "message": "request received method=GET path=/products rid=00adbf48", "rid": "00adbf48", "service": "gateway", "ts": 1790776946312}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1171", "service": "inventory", "ts": 1790776946363}
+{"level": "INFO", "message": "request completed status=200 rid=00adbf48", "rid": "00adbf48", "service": "gateway", "ts": 1790776946365}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=2bc431fe", "rid": "2bc431fe", "service": "gateway", "ts": 1790776946562}
+{"level": "INFO", "message": "order 0af76a47ea8c40db9122114b9183a86e persisted, enqueued email task", "service": "orders", "ts": 1790776946586}
+{"level": "INFO", "message": "sent email to user for order_id=0af76a47ea8c40db9122114b9183a86e", "service": "worker", "ts": 1790776946710}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=1c74078d", "rid": "1c74078d", "service": "gateway", "ts": 1790776946771}
+{"level": "INFO", "message": "payment 5e8369f8f8494c18ac0863ea36acd4f3 approved in 180ms", "service": "payments", "ts": 1790776946971}
+{"level": "INFO", "message": "request received method=GET path=/products rid=334717d3", "rid": "334717d3", "service": "gateway", "ts": 1790776947310}
+{"level": "INFO", "message": "postgres stock fallback key=sku:5245", "service": "inventory", "ts": 1790776947327}
+{"level": "INFO", "message": "request completed status=200 rid=334717d3", "rid": "334717d3", "service": "gateway", "ts": 1790776947329}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=b1d18751", "rid": "b1d18751", "service": "gateway", "ts": 1790776947483}
+{"level": "INFO", "message": "request received method=GET path=/products rid=e86cec88", "rid": "e86cec88", "service": "gateway", "ts": 1790776947627}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1441", "service": "inventory", "ts": 1790776947648}
+{"level": "INFO", "message": "request completed status=200 rid=e86cec88", "rid": "e86cec88", "service": "gateway", "ts": 1790776947649}
+{"level": "INFO", "message": "payment 2038b0735ba94a6f88c364da8c9a79ae approved in 180ms", "service": "payments", "ts": 1790776947683}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=044767e0", "rid": "044767e0", "service": "gateway", "ts": 1790776947847}
+{"level": "INFO", "message": "order fd1e842f76934d13afa5498a38dee399 persisted, enqueued email task", "service": "orders", "ts": 1790776947873}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=2531fda1", "rid": "2531fda1", "service": "gateway", "ts": 1790776947898}
+{"level": "INFO", "message": "sent email to user for order_id=fd1e842f76934d13afa5498a38dee399", "service": "worker", "ts": 1790776947914}
+{"level": "INFO", "message": "order db5d49f19f69430aa6d9605404285f0d persisted, enqueued email task", "service": "orders", "ts": 1790776947921}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=a2fc3e7f", "rid": "a2fc3e7f", "service": "gateway", "ts": 1790776948066}
+{"level": "INFO", "message": "sent email to user for order_id=db5d49f19f69430aa6d9605404285f0d", "service": "worker", "ts": 1790776948116}
+{"level": "INFO", "message": "payment 7d14e20f7d5248bdb72f1ca6c27eb9e4 approved in 180ms", "service": "payments", "ts": 1790776948278}
+{"level": "INFO", "message": "request received method=GET path=/products rid=87f0fe5e", "rid": "87f0fe5e", "service": "gateway", "ts": 1790776948940}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8370", "service": "inventory", "ts": 1790776948958}
+{"level": "INFO", "message": "request completed status=200 rid=87f0fe5e", "rid": "87f0fe5e", "service": "gateway", "ts": 1790776948959}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=e5c58364", "rid": "e5c58364", "service": "gateway", "ts": 1790776949108}
+{"level": "INFO", "message": "order b184d7b91de741d093761b7d9af88597 persisted, enqueued email task", "service": "orders", "ts": 1790776949127}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=447209c8", "rid": "447209c8", "service": "gateway", "ts": 1790776949280}
+{"level": "INFO", "message": "sent email to user for order_id=b184d7b91de741d093761b7d9af88597", "service": "worker", "ts": 1790776949320}
+{"level": "INFO", "message": "request received method=GET path=/products rid=50049fcb", "rid": "50049fcb", "service": "gateway", "ts": 1790776950137}
+{"level": "INFO", "message": "postgres stock fallback key=sku:5046", "service": "inventory", "ts": 1790776950160}
+{"level": "INFO", "message": "request completed status=200 rid=50049fcb", "rid": "50049fcb", "service": "gateway", "ts": 1790776950162}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=ed1a3225", "rid": "ed1a3225", "service": "gateway", "ts": 1790776950353}
+{"level": "INFO", "message": "order d1e68d10a81d4dabac95bca576019664 persisted, enqueued email task", "service": "orders", "ts": 1790776950385}
+{"level": "INFO", "message": "sent email to user for order_id=d1e68d10a81d4dabac95bca576019664", "service": "worker", "ts": 1790776950524}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=d2ca85fe", "rid": "d2ca85fe", "service": "gateway", "ts": 1790776950556}
+{"level": "INFO", "message": "request received method=GET path=/products rid=a8c60e76", "rid": "a8c60e76", "service": "gateway", "ts": 1790776951409}
+{"level": "INFO", "message": "postgres stock fallback key=sku:5318", "service": "inventory", "ts": 1790776951426}
+{"level": "INFO", "message": "request completed status=200 rid=a8c60e76", "rid": "a8c60e76", "service": "gateway", "ts": 1790776951429}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=37e1bdf5", "rid": "37e1bdf5", "service": "gateway", "ts": 1790776951583}
+{"level": "INFO", "message": "order d109b3146f854bb797f76acb96f8b049 persisted, enqueued email task", "service": "orders", "ts": 1790776951602}
+{"level": "INFO", "message": "sent email to user for order_id=d109b3146f854bb797f76acb96f8b049", "service": "worker", "ts": 1790776951728}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=a6a3125c", "rid": "a6a3125c", "service": "gateway", "ts": 1790776951755}
+{"level": "INFO", "message": "request received method=GET path=/products rid=3244b91f", "rid": "3244b91f", "service": "gateway", "ts": 1790776952631}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8749", "service": "inventory", "ts": 1790776952653}
+{"level": "INFO", "message": "request completed status=200 rid=3244b91f", "rid": "3244b91f", "service": "gateway", "ts": 1790776952654}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=027eb20b", "rid": "027eb20b", "service": "gateway", "ts": 1790776952828}
+{"level": "INFO", "message": "order be5b1489a82e4bc0b877662d61bc10d6 persisted, enqueued email task", "service": "orders", "ts": 1790776952846}
+{"level": "INFO", "message": "sent email to user for order_id=be5b1489a82e4bc0b877662d61bc10d6", "service": "worker", "ts": 1790776952933}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=9cdbf9e4", "rid": "9cdbf9e4", "service": "gateway", "ts": 1790776952998}
+{"level": "INFO", "message": "request received method=GET path=/products rid=ca205e3f", "rid": "ca205e3f", "service": "gateway", "ts": 1790776953847}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1391", "service": "inventory", "ts": 1790776953874}
+{"level": "INFO", "message": "request completed status=200 rid=ca205e3f", "rid": "ca205e3f", "service": "gateway", "ts": 1790776953877}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=fe59acd3", "rid": "fe59acd3", "service": "gateway", "ts": 1790776954033}
+{"level": "INFO", "message": "order 23b75a67a5b24a32a5a8f58da2b4b575 persisted, enqueued email task", "service": "orders", "ts": 1790776954052}
+{"level": "INFO", "message": "sent email to user for order_id=23b75a67a5b24a32a5a8f58da2b4b575", "service": "worker", "ts": 1790776954138}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=c1accba8", "rid": "c1accba8", "service": "gateway", "ts": 1790776954204}
+{"level": "INFO", "message": "request received method=GET path=/products rid=d38566ad", "rid": "d38566ad", "service": "gateway", "ts": 1790776955057}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7464", "service": "inventory", "ts": 1790776955074}
+{"level": "INFO", "message": "request completed status=200 rid=d38566ad", "rid": "d38566ad", "service": "gateway", "ts": 1790776955076}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=6adc9523", "rid": "6adc9523", "service": "gateway", "ts": 1790776955228}
+{"level": "INFO", "message": "order 2fa5ba8420294c59ae14973db5867655 persisted, enqueued email task", "service": "orders", "ts": 1790776955246}
+{"level": "INFO", "message": "sent email to user for order_id=2fa5ba8420294c59ae14973db5867655", "service": "worker", "ts": 1790776955342}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=abcf93b3", "rid": "abcf93b3", "service": "gateway", "ts": 1790776955397}
+{"level": "INFO", "message": "request received method=GET path=/products rid=10ee5fb3", "rid": "10ee5fb3", "service": "gateway", "ts": 1790776956249}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6860", "service": "inventory", "ts": 1790776956266}
+{"level": "INFO", "message": "request completed status=200 rid=10ee5fb3", "rid": "10ee5fb3", "service": "gateway", "ts": 1790776956267}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=9fb2e5b8", "rid": "9fb2e5b8", "service": "gateway", "ts": 1790776956421}
+{"level": "INFO", "message": "order b78bd76e42984dcfba7090268bfe0803 persisted, enqueued email task", "service": "orders", "ts": 1790776956446}
+{"level": "INFO", "message": "sent email to user for order_id=b78bd76e42984dcfba7090268bfe0803", "service": "worker", "ts": 1790776956546}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=2b072442", "rid": "2b072442", "service": "gateway", "ts": 1790776956616}
+{"level": "INFO", "message": "request received method=GET path=/products rid=7c7f3d67", "rid": "7c7f3d67", "service": "gateway", "ts": 1790776957473}
+{"level": "INFO", "message": "postgres stock fallback key=sku:9987", "service": "inventory", "ts": 1790776957490}
+{"level": "INFO", "message": "request completed status=200 rid=7c7f3d67", "rid": "7c7f3d67", "service": "gateway", "ts": 1790776957491}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=29010043", "rid": "29010043", "service": "gateway", "ts": 1790776957644}
+{"level": "INFO", "message": "order 6391252726dd411b93ca1795712f1505 persisted, enqueued email task", "service": "orders", "ts": 1790776957663}
+{"level": "INFO", "message": "sent email to user for order_id=6391252726dd411b93ca1795712f1505", "service": "worker", "ts": 1790776957750}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=a645df73", "rid": "a645df73", "service": "gateway", "ts": 1790776957816}
+{"level": "INFO", "message": "request received method=GET path=/products rid=6fdfeffd", "rid": "6fdfeffd", "service": "gateway", "ts": 1790776958738}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6092", "service": "inventory", "ts": 1790776958775}
+{"level": "INFO", "message": "request completed status=200 rid=6fdfeffd", "rid": "6fdfeffd", "service": "gateway", "ts": 1790776958777}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=0d221f15", "rid": "0d221f15", "service": "gateway", "ts": 1790776959090}
+{"level": "INFO", "message": "order ecabf3c19cbd486ebd1dc5a03dc43fc2 persisted, enqueued email task", "service": "orders", "ts": 1790776959112}
+{"level": "INFO", "message": "sent email to user for order_id=ecabf3c19cbd486ebd1dc5a03dc43fc2", "service": "worker", "ts": 1790776959156}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=dad665c5", "rid": "dad665c5", "service": "gateway", "ts": 1790776959281}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "dad665c5", "service": "gateway", "ts": 1790776961291}
+{"level": "INFO", "message": "request received method=GET path=/products rid=a31ead66", "rid": "a31ead66", "service": "gateway", "ts": 1790776961944}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7364", "service": "inventory", "ts": 1790776961961}
+{"level": "INFO", "message": "request completed status=200 rid=a31ead66", "rid": "a31ead66", "service": "gateway", "ts": 1790776961963}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=271bcc38", "rid": "271bcc38", "service": "gateway", "ts": 1790776962121}
+{"level": "INFO", "message": "order cc1c699e127d4cca83ec2125ff925165 persisted, enqueued email task", "service": "orders", "ts": 1790776962139}
+{"level": "INFO", "message": "sent email to user for order_id=cc1c699e127d4cca83ec2125ff925165", "service": "worker", "ts": 1790776962166}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=cbd9f9c2", "rid": "cbd9f9c2", "service": "gateway", "ts": 1790776962291}
+{"level": "WARN", "message": "bank call slow: latency=3000ms (downstream bank-sim degraded)", "service": "payments", "ts": 1790776962382}
+{"level": "INFO", "message": "payment bf0d30490c234486aa57cf1746a440cf approved in 3000ms", "service": "payments", "ts": 1790776962383}
+{"level": "WARN", "message": "bank call slow: latency=3000ms (downstream bank-sim degraded)", "service": "payments", "ts": 1790776962797}
+{"level": "INFO", "message": "payment 0aadd2a585d94ae99d69144ffbef3a66 approved in 3000ms", "service": "payments", "ts": 1790776962799}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=bf2c73b8", "rid": "bf2c73b8", "service": "gateway", "ts": 1790776962959}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "cbd9f9c2", "service": "gateway", "ts": 1790776964307}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "bf2c73b8", "service": "gateway", "ts": 1790776964968}
+{"level": "INFO", "message": "request received method=GET path=/products rid=61e226bf", "rid": "61e226bf", "service": "gateway", "ts": 1790776964980}
+{"level": "INFO", "message": "postgres stock fallback key=sku:6558", "service": "inventory", "ts": 1790776965003}
+{"level": "INFO", "message": "request completed status=200 rid=61e226bf", "rid": "61e226bf", "service": "gateway", "ts": 1790776965005}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=64701ecd", "rid": "64701ecd", "service": "gateway", "ts": 1790776965180}
+{"level": "INFO", "message": "order fedb72096fc14bc9bf42293298499bdb persisted, enqueued email task", "service": "orders", "ts": 1790776965201}
+{"level": "WARN", "message": "bank call slow: latency=3000ms (downstream bank-sim degraded)", "service": "payments", "ts": 1790776965314}
+{"level": "INFO", "message": "payment a82e3ae878114917afcbc61e56b43ac8 approved in 3000ms", "service": "payments", "ts": 1790776965316}
+{"level": "INFO", "message": "sent email to user for order_id=fedb72096fc14bc9bf42293298499bdb", "service": "worker", "ts": 1790776965377}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=d9fa8e01", "rid": "d9fa8e01", "service": "gateway", "ts": 1790776965395}
+{"level": "WARN", "message": "bank call slow: latency=3000ms (downstream bank-sim degraded)", "service": "payments", "ts": 1790776965975}
+{"level": "INFO", "message": "payment f9d6e39333b94b37ab17c11aaf120886 approved in 3000ms", "service": "payments", "ts": 1790776965976}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "d9fa8e01", "service": "gateway", "ts": 1790776967404}
+{"level": "INFO", "message": "request received method=GET path=/products rid=a0afb993", "rid": "a0afb993", "service": "gateway", "ts": 1790776968058}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7764", "service": "inventory", "ts": 1790776968075}
+{"level": "INFO", "message": "request completed status=200 rid=a0afb993", "rid": "a0afb993", "service": "gateway", "ts": 1790776968077}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=34d6ff92", "rid": "34d6ff92", "service": "gateway", "ts": 1790776968238}
+{"level": "INFO", "message": "order 76e1138563684fe499740d62bf8522ac persisted, enqueued email task", "service": "orders", "ts": 1790776968257}
+{"level": "INFO", "message": "sent email to user for order_id=76e1138563684fe499740d62bf8522ac", "service": "worker", "ts": 1790776968388}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=54ab61fa", "rid": "54ab61fa", "service": "gateway", "ts": 1790776968409}
+{"level": "WARN", "message": "bank call slow: latency=3000ms (downstream bank-sim degraded)", "service": "payments", "ts": 1790776968410}
+{"level": "INFO", "message": "payment c5fae30e1d5749f5adb3f8c937d493e4 approved in 3000ms", "service": "payments", "ts": 1790776968412}
+{"level": "WARN", "message": "bank call slow: latency=3000ms (downstream bank-sim degraded)", "service": "payments", "ts": 1790776970360}
+{"level": "INFO", "message": "payment 10a6b46b09154ab7b46d43956e7c94a4 approved in 3000ms", "service": "payments", "ts": 1790776970362}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "54ab61fa", "service": "gateway", "ts": 1790776970419}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=b049f200", "rid": "b049f200", "service": "gateway", "ts": 1790776970516}
+{"level": "INFO", "message": "request received method=GET path=/products rid=62e59695", "rid": "62e59695", "service": "gateway", "ts": 1790776971073}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7044", "service": "inventory", "ts": 1790776971096}
+{"level": "INFO", "message": "request completed status=200 rid=62e59695", "rid": "62e59695", "service": "gateway", "ts": 1790776971099}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=c91baacc", "rid": "c91baacc", "service": "gateway", "ts": 1790776971274}
+{"level": "INFO", "message": "order 3ba692c32b8144fcbe66d6edb1082234 persisted, enqueued email task", "service": "orders", "ts": 1790776971297}
+{"level": "INFO", "message": "sent email to user for order_id=3ba692c32b8144fcbe66d6edb1082234", "service": "worker", "ts": 1790776971397}
+{"level": "WARN", "message": "bank call slow: latency=3000ms (downstream bank-sim degraded)", "service": "payments", "ts": 1790776971425}
+{"level": "INFO", "message": "payment f6de9745025446f78e7ce01ff06f3035 approved in 3000ms", "service": "payments", "ts": 1790776971426}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=c0b3d428", "rid": "c0b3d428", "service": "gateway", "ts": 1790776971455}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "b049f200", "service": "gateway", "ts": 1790776972526}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "c0b3d428", "service": "gateway", "ts": 1790776973466}
+{"level": "INFO", "message": "request received method=GET path=/products rid=1b5f0038", "rid": "1b5f0038", "service": "gateway", "ts": 1790776974119}
+{"level": "INFO", "message": "postgres stock fallback key=sku:8946", "service": "inventory", "ts": 1790776974137}
+{"level": "INFO", "message": "request completed status=200 rid=1b5f0038", "rid": "1b5f0038", "service": "gateway", "ts": 1790776974139}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=5910c71a", "rid": "5910c71a", "service": "gateway", "ts": 1790776974313}
+{"level": "INFO", "message": "order d94bded5960041fd9e5dc36aeabae0bc persisted, enqueued email task", "service": "orders", "ts": 1790776974331}
+{"level": "INFO", "message": "sent email to user for order_id=d94bded5960041fd9e5dc36aeabae0bc", "service": "worker", "ts": 1790776974408}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=8ab781a8", "rid": "8ab781a8", "service": "gateway", "ts": 1790776974490}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "8ab781a8", "service": "gateway", "ts": 1790776976498}
+{"level": "INFO", "message": "request received method=GET path=/products rid=f92351eb", "rid": "f92351eb", "service": "gateway", "ts": 1790776977152}
+{"level": "INFO", "message": "postgres stock fallback key=sku:3701", "service": "inventory", "ts": 1790776977168}
+{"level": "INFO", "message": "request completed status=200 rid=f92351eb", "rid": "f92351eb", "service": "gateway", "ts": 1790776977170}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=c5f094a2", "rid": "c5f094a2", "service": "gateway", "ts": 1790776977321}
+{"level": "INFO", "message": "order 573202fd8fe64ecebbf3b2470c72d956 persisted, enqueued email task", "service": "orders", "ts": 1790776977340}
+{"level": "INFO", "message": "sent email to user for order_id=573202fd8fe64ecebbf3b2470c72d956", "service": "worker", "ts": 1790776977418}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=675c8b54", "rid": "675c8b54", "service": "gateway", "ts": 1790776977519}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "675c8b54", "service": "gateway", "ts": 1790776979530}
+{"level": "INFO", "message": "request received method=GET path=/products rid=d34ccfa0", "rid": "d34ccfa0", "service": "gateway", "ts": 1790776980184}
+{"level": "INFO", "message": "postgres stock fallback key=sku:1752", "service": "inventory", "ts": 1790776980201}
+{"level": "INFO", "message": "request completed status=200 rid=d34ccfa0", "rid": "d34ccfa0", "service": "gateway", "ts": 1790776980203}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=3019483f", "rid": "3019483f", "service": "gateway", "ts": 1790776980355}
+{"level": "INFO", "message": "order db9f0d0d77ec436999e9529d63f48cb9 persisted, enqueued email task", "service": "orders", "ts": 1790776980378}
+{"level": "INFO", "message": "sent email to user for order_id=db9f0d0d77ec436999e9529d63f48cb9", "service": "worker", "ts": 1790776980429}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=310fd157", "rid": "310fd157", "service": "gateway", "ts": 1790776980554}
+{"level": "ERROR", "message": "timeout after 2000ms calling payments for POST /charge", "rid": "310fd157", "service": "gateway", "ts": 1790776982570}
+{"level": "INFO", "message": "request received method=GET path=/products rid=2044cb1e", "rid": "2044cb1e", "service": "gateway", "ts": 1790776983268}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2935", "service": "inventory", "ts": 1790776983287}
+{"level": "INFO", "message": "request completed status=200 rid=2044cb1e", "rid": "2044cb1e", "service": "gateway", "ts": 1790776983289}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=4db32efe", "rid": "4db32efe", "service": "gateway", "ts": 1790776983497}
+{"level": "INFO", "message": "order 6bac67195ad346238c372f1932f49f35 persisted, enqueued email task", "service": "orders", "ts": 1790776983522}
+{"level": "INFO", "message": "sent email to user for order_id=6bac67195ad346238c372f1932f49f35", "service": "worker", "ts": 1790776983640}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=1624acf5", "rid": "1624acf5", "service": "gateway", "ts": 1790776983679}
+{"level": "INFO", "message": "payment 113fb42ab3a146e2b1977448e468ea1f approved in 180ms", "service": "payments", "ts": 1790776983972}
+{"level": "INFO", "message": "request received method=GET path=/products rid=8a2e787b", "rid": "8a2e787b", "service": "gateway", "ts": 1790776984667}
+{"level": "INFO", "message": "postgres stock fallback key=sku:7207", "service": "inventory", "ts": 1790776984685}
+{"level": "INFO", "message": "request completed status=200 rid=8a2e787b", "rid": "8a2e787b", "service": "gateway", "ts": 1790776984687}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=47d217f8", "rid": "47d217f8", "service": "gateway", "ts": 1790776984858}
+{"level": "INFO", "message": "order 1e1823e7c26b45f5af84c8f2b8abdaae persisted, enqueued email task", "service": "orders", "ts": 1790776984883}
+{"level": "INFO", "message": "request received method=GET path=/products rid=17fd1d1d", "rid": "17fd1d1d", "service": "gateway", "ts": 1790776984949}
+{"level": "INFO", "message": "postgres stock fallback key=sku:2353", "service": "inventory", "ts": 1790776984971}
+{"level": "INFO", "message": "request completed status=200 rid=17fd1d1d", "rid": "17fd1d1d", "service": "gateway", "ts": 1790776984973}
+{"level": "INFO", "message": "sent email to user for order_id=1e1823e7c26b45f5af84c8f2b8abdaae", "service": "worker", "ts": 1790776985044}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=ebc32848", "rid": "ebc32848", "service": "gateway", "ts": 1790776985058}
+{"level": "INFO", "message": "request received method=POST path=/pay rid=197f3b74", "rid": "197f3b74", "service": "gateway", "ts": 1790776985149}
+{"level": "INFO", "message": "payment ce8a60a0dd9f400a999cbce52c17a37a approved in 180ms", "service": "payments", "ts": 1790776985261}
+{"level": "INFO", "message": "payment 71d39b3f5d064899aab4bf3de6b730cc approved in 180ms", "service": "payments", "ts": 1790776985347}
+{"level": "INFO", "message": "request received method=POST path=/orders rid=6e8a17bf", "rid": "6e8a17bf", "service": "gateway", "ts": 1790776985502}
+{"level": "INFO", "message": "order b06ba1351821466295db16e8b7145b0f persisted, enqueued email task", "service": "orders", "ts": 1790776985522}
+{"level": "INFO", "message": "sent email to user for order_id=b06ba1351821466295db16e8b7145b0f", "service": "worker", "ts": 1790776985647}

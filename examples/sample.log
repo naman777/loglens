@@ -1,0 +1,6 @@
+{"ts":1800000000000,"service":"orders","level":"INFO","message":"order persisted, enqueued email task"}
+{"ts":1800000001000,"service":"payments","level":"INFO","message":"payment approved in 180ms"}
+{"ts":1800000002000,"service":"payments","level":"WARN","message":"holding database connections in_use=10/10"}
+{"ts":1800000003000,"service":"payments","level":"ERROR","message":"connection pool exhausted, waiting for free connection"}
+{"ts":1800000004000,"service":"gateway","level":"ERROR","message":"upstream payments returned status=503"}
+{"ts":1800000005000,"service":"payments","level":"INFO","message":"held database connections released"}

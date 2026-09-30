@@ -13,19 +13,19 @@ local JSONL in `results/runs/`; W&B is used automatically with `wandb: true`).
 | --- | --- | --- |
 | 0 Setup | done | met (CI = ruff + pytest; W&B not configured, local tracker instead) |
 | 1 Data pipeline | done: 15 Loghub systems + lab in Parquet, time splits, manifest, `docs/data_report.md` | met (no train/test key-time overlap); Thunderbird/Spark are capped subsets |
-| 2 Fault-injection lab | done via **simulator**: 180 incidents, 10 fault types, causal lines labelled | count met; Docker version written but never run; "hand-check" replaced by agreement with simulator ground truth (F1 0.94) |
+| 2 Fault-injection lab | done via **simulator**: 180 incidents, 10 fault types, causal lines labelled | count met; six Docker faults now verified in Linux CI; "hand-check" replaced by agreement with simulator ground truth (F1 0.94) |
 | 3 Tokenizer | done, 16k vocab | **not met**: 1.5x fewer tokens than GPT-2 (1.3x on unseen), gate was 2x; <2% of lines >128 tokens: met |
 | 4 Line encoder | done (33.6M params, MLM val loss 0.83) | loss plateaued: met; NN template agreement 68% (gate 90%): **not met**; linear probe beats TF-IDF: **not met** |
 | 5 Window model | done | beats Drain3+DeepLog on BGL F1 (0.954 vs 0.335, supervised vs unsupervised): met; lab RCA Recall@5 >= 0.6: met (0.94) |
 | 6 Baselines + eval | done: `make eval` -> `results/benchmark.md` | filled except frontier-LLM row (no API key). Baselines: Drain3+DeepLog, Drain3+IsolationForest, Drain3+LogReg (supervised), heuristics, Qwen2.5-1.5B |
-| 7 CPU serving | done | int8 within 0.5 F1 of FP32: met; 20k lines/s on 4 cores: **missed** (17.7k; 24k on 8 cores); `docker run` untested |
+| 7 CPU serving | done | int8 within 0.5 F1 of FP32: met; 20k lines/s: met for format-specific BGL/HDFS (27k/22k), still missed by the earlier generic benchmark; serving-image Docker run untested |
 | 8 Integration + release | drafts done: agent tool + agent-side eval, demo script, README, model card, blog draft, release script | HF upload, video, Show HN, cold-email items **not done** (need the user's accounts); stranger-repro test not done |
 
 ## What is in the repo
 
 Everything in the Implementation Plan's layout, plus `scripts/` (ablations, LLM eval, serving bench,
 agent eval, error analysis, demo, consistency check, release packaging) and `docs/` reports.
-Tests: 125 (masking, parsers, lab lifecycle/services, diagnosis evaluation, encoder, metrics, ONNX parity, runtime end-to-end).
+Tests: 129 (masking, parsers, lab lifecycle/services, diagnosis evaluation, encoder, metrics, ONNX parity, runtime end-to-end).
 
 ## Key results (see README / results/*.md for tables)
 
@@ -121,3 +121,15 @@ Tests: 125 (masking, parsers, lab lifecycle/services, diagnosis evaluation, enco
   6/36 correct services (16.7%), LogLens selection 31/36 (86.1%). Both use a 1,500 text-token budget
   plus chat formatting. Mean input tokens 1,503.6 vs 919.7; mean end-to-end time 4.70 vs 4.75 seconds.
   No latency improvement established. Full answers and limitations: `docs/diagnosis_eval.md`.
+
+## Verified follow-up outcomes
+
+- Corrected real Docker campaign passed all six fault/recovery checks in CI run 36725870364;
+  604 application logs retained across container recreation, with evidence committed separately.
+- Real six-case Qwen diagnosis pilot: LogLens 3/6 correct services versus raw prefixes 1/6.
+  Mean times 2.14 vs 3.09 s; too few cases for broad claims. See `docs/real_lab_validation.md`.
+- Supported format-specific serving on four cores: BGL 27.1-27.5k, HDFS 21.8-22.5k lines/s.
+  This is a different parser/input configuration, not a generic-parser speedup claim.
+- Full local suite now 129 passing tests; Ruff passes. Actual Docker tests also pass on Linux CI.
+- Liberty selected as a second-system candidate; acquisition/preparation command was rejected by
+  automatic approval review. No new transfer score produced; protocol is in `docs/transfer_protocol.md`.

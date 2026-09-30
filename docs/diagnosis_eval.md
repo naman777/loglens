@@ -51,3 +51,6 @@ Set `HF_HUB_OFFLINE=1` when reusing already downloaded Hugging Face weights. Eac
 output directory. A `--limit` run is a seeded pilot subset and must not be reported as all 36 cases.
 API-provider token budgeting is approximate; inspect exact returned token usage before comparing
 costs. The harness does not assign current API prices or claim a frontier-model result.
+
+A separate six-case real-container pilot is reported in `real_lab_validation.md`: 3/6 versus 1/6
+correct services. Do not merge its numbers with the synthetic benchmark.

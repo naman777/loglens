@@ -4,7 +4,7 @@ A small log-intelligence model, trained from scratch, that flags incidents and r
 that explain them — on a laptop CPU, with zero LLM API calls.
 
 > **Status: v0.1 (research prototype).** Everything below was produced by the scripts in this repo on
-> one Windows laptop (RTX 3050 6 GB, no Docker). Read [Limitations](#limitations-read-this) before
+> a Windows laptop (RTX 3050 6 GB), with real-container checks added on Linux CI. Read [Limitations](#limitations-read-this) before
 > quoting any number — the root-cause results are on **synthetic** incidents, and zero-shot transfer
 > to an unseen log system **did not work**.
 
@@ -20,6 +20,7 @@ that explain them — on a laptop CPU, with zero LLM API calls.
 | Model size | 33.6M + 3.6M params; int8 ONNX **37.5 MB** total (FP32 148 MB) |
 | int8 vs FP32 accuracy | F1 drop <= 0.5 point on BGL / HDFS / lab |
 | CPU throughput, int8, template cache (1M raw BGL lines) | **17.7k lines/s pinned to 4 cores** (target 20k: **missed**), 24.1k on 8 cores, 9.9k on 1 core; HDFS 16.8k / 22.7k / 8.3k — [`docs/serving_benchmark.md`](docs/serving_benchmark.md) |
+| Format-specific CPU follow-up, 4 cores | **27.1-27.5k BGL**, **21.8-22.5k HDFS** lines/s using `--format bgl/hdfs`; different inputs from the generic benchmark above |
 | Frontier-LLM comparison | **not run** (no API key in the build environment); a 1.5B open LLM is included |
 
 Full tables: [`results/benchmark.md`](results/benchmark.md) (regenerate with `make eval`),
@@ -27,34 +28,47 @@ Full tables: [`results/benchmark.md`](results/benchmark.md) (regenerate with `ma
 
 ## Quickstart
 
+Use the source and weights from the same [v0.1.0-rc.1 research prerelease](https://github.com/naman777/loglens/releases/tag/v0.1.0-rc.1).
+Download `loglens-v0.1.0-rc.1.zip` from that release into the repository root.
+
 ```bash
-python -m pip install -e ".[dev,train,serve,export,baselines,lab]"
-python -m pytest -q                         # unit and integration tests
-python scripts/smoke_check.py               # requires the saved artifacts (see below)
-python -m loglens.serve.cli rank sample.log # needs artifacts/onnx (see "Reproduce")
-docker build -t loglens . && docker run --rm -v "$PWD:/data" loglens rank /data/sample.log   # untested here: no Docker on the dev machine
+git clone --branch v0.1.0-rc.1 https://github.com/naman777/loglens.git
+cd loglens
+python -m venv .venv
+# Activate: Windows PowerShell: .\.venv\Scripts\Activate.ps1
+# Activate: Linux/macOS: source .venv/bin/activate
+python -m pip install -e ".[serve]"
+python -m pip check
+python -m zipfile -e loglens-v0.1.0-rc.1.zip artifacts
+python scripts/smoke_check.py
+python -m loglens.serve.cli rank examples/sample.log
 ```
 
-Use a fresh virtual environment (`python -m venv .venv`, then activate it) and run
-`python -m pip check` after installation. Serving alone needs `python -m pip install -e ".[serve]"`;
-export additionally needs the `export` extra. Optional LLM comparisons need the `llm` extra.
+The release contains matching FP32/int8 ONNX files, PyTorch checkpoints, tokenizers, model card and
+reports. `SHA256SUMS.txt` on the release checks the ZIP; `artifacts/manifest.json` records per-file
+hashes and the source commit. The six-line example is synthetic input, not an accuracy benchmark.
+The smoke check verifies inference and cache reuse; add `--fp32` to check FP32 too.
 
-**Weights are not published yet.** A fresh clone cannot run inference until you reproduce training
-and export below, or obtain the matching artifacts from the author. The smoke check reports missing
-files explicitly; it does not download or train anything. It checks inference and cache reuse, not
-accuracy. For a packaged release, pass `--model-dir release/loglens-v0.1/onnx`
-and `--tokenizer release/loglens-v0.1/tokenizer/loglens-bpe-16k.json`.
+For development and all tests:
+
+```bash
+python -m pip install -e ".[dev,train,serve,export,baselines,lab]"
+python -m pytest -q
+```
+
+Training from scratch still uses the commands under Reproduce. Export needs the `export` extra;
+optional LLM comparisons need the `llm` extra. The full training pipeline has not been rerun from
+a fresh clone as part of release verification.
 
 Real-container validation: `python lab/run_real_campaign.py --duration 10` (requires Docker).
-See [real lab instructions](docs/real_lab.md) for the six supported faults and evidence outputs.
+See [real lab instructions](docs/real_lab.md) and [validated campaign](docs/real_lab_validation.md).
+The model-serving Docker image is separate and has not been validated by this lab campaign.
 
 Paired LLM diagnosis: `python scripts/diagnosis_eval.py --max-prompt-tokens 1500 --max-new-tokens 128`
 (requires saved artifacts, held-out lab data and the `llm` extra). This compares budget-constrained
-single-call answers, not a full autonomous agent. Results are saved under `results/diagnosis/`.
+single-call answers, not a full autonomous agent. See [diagnosis results](docs/diagnosis_eval.md).
 
-Demo (simulated fault, no Docker): `python scripts/demo.py --fault db_pool_exhaustion` — LogLens flags the
-window and ranks the `QueuePool limit reached` lines at the top.
-
+Demo (simulated fault, no Docker): `python scripts/demo.py --fault db_pool_exhaustion`.
 CLI: `loglens rank <file> [--from ISO --to ISO]`, `loglens watch <paths>`, `loglens bench <file>`.
 HTTP: `uvicorn loglens.serve.api:app` -> `POST /score {"lines": [...], "top_k": 15}`, `GET /health`,
 `GET /metrics`. Agent tool: `loglens.agent.tool.TOOL_SPEC` / `LogLensTool.rank_suspect_lines`.
@@ -77,7 +91,7 @@ raw lines -> parse (ts, level, service) -> mask (<NUM> <IP> <PATH> <DURATION:buc
 * **Line encoder**: pre-LN transformer, MLM-pretrained on ~59k distinct masked lines from 14 systems.
 * **Window model**: line embedding + log-bucketed time gap + service + level embeddings.
 * **Fault lab** (`lab/`): 5-service microservice app with 10 fault types and causal-line labels. Docker
-  Compose version included (**not run**); results use the deterministic simulator in `lab/sim`.
+  Compose version validated for six faults on Linux CI; headline RCA results use the deterministic simulator in `lab/sim`.
 * **Serving**: ONNX Runtime dynamic int8 (parity vs PyTorch < 1e-3), embedding cache, parse+mask in a
   process pool pipelined with model inference.
 
