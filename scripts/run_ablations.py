@@ -34,6 +34,11 @@ VARIANTS = {
     "nogap": {"use_gap": False},
     "random_enc": {"emb_dir": "data/emb_random", "pretrained_encoder": False},
     "simcse_enc": {"emb_dir": "data/emb_v2"},
+    # masking ablation: durations collapsed to <NUM> (LOGLENS_MASK_DURATIONS=0), random-init encoder,
+    # compared against random_enc (bucketed durations, same encoder type)
+    "random_enc_nodur": {"emb_dir": "data/emb_nodur_random", "win_dir": "data/win_nodur",
+                         "pretrained_encoder": False},
+    "template_enc": {"emb_dir": "data/emb_v3"},
 }
 
 

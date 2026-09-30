@@ -55,6 +55,12 @@ class PretrainConfig:
     mask_prob: float = 0.15
     simcse_weight: float = 0.0
     simcse_rows: int = 64  # contrastive loss on the first N rows only (memory)
+    # template-aware supervised contrastive loss: lines of the same Drain3 template are positives
+    template_weight: float = 0.0
+    template_groups: int = 24  # templates per contrastive mini-batch
+    template_per_group: int = 4  # lines per template
+    template_temp: float = 0.1
+    cluster_dir: str = "data/clusters"  # <system>.npy: Drain3 cluster id per unique line (row == uid)
     bf16: bool = True
     # bookkeeping
     log_every: int = 50
@@ -71,7 +77,7 @@ class Corpus:
     """Ragged token store over distinct lines from several systems."""
 
     def __init__(self, cfg: PretrainConfig):
-        ids, offs, sysid, self.names = [], [], [], []
+        ids, offs, sysid, self.names, clusters = [], [], [], [], []
         base = 0
         for f in sorted(Path(cfg.tok_dir).glob("*.npz")):
             name = f.stem
@@ -86,6 +92,12 @@ class Corpus:
             lens = ends - starts
             flat = np.concatenate([z["ids"][s:e] for s, e in zip(starts, ends, strict=True)]) \
                 if len(keep) < 5000 else self._gather(z["ids"], starts, lens)
+            cf = Path(cfg.cluster_dir) / f"{name}.npy"
+            if cfg.template_weight > 0 and cf.exists():
+                cl = np.load(cf)[z["uid"][keep]].astype(np.int64) + len(self.names) * 10_000_000
+            else:
+                cl = np.full(len(keep), -1, dtype=np.int64)
+            clusters.append(cl)
             ids.append(flat)
             offs.append(np.concatenate([[0], np.cumsum(lens)]) + base)
             base += int(lens.sum())
@@ -95,6 +107,8 @@ class Corpus:
         self.starts = np.concatenate([o[:-1] for o in offs])
         self.lens = np.concatenate([np.diff(o) for o in offs])
         self.system = np.concatenate(sysid)
+        self.cluster = np.concatenate(clusters)
+        self._groups = None
         rng = np.random.default_rng(cfg.seed)
         self.is_val = rng.random(len(self.lens)) < cfg.val_frac
         train_idx = np.nonzero(~self.is_val)[0]
@@ -126,6 +140,24 @@ class Corpus:
             share[free] += excess * share[free] / share[free].sum()
         w = share[self.system[idx]] / counts[self.system[idx]]
         return w / w.sum()
+
+    def template_batch(self, rng: np.random.Generator, n_groups: int, per_group: int) -> np.ndarray:
+        """Padded ids for ``n_groups`` templates x ``per_group`` lines; labels = template ids."""
+        if self._groups is None:
+            tr = self.train_idx[self.cluster[self.train_idx] >= 0]
+            order = np.argsort(self.cluster[tr], kind="stable")
+            tr, cl = tr[order], self.cluster[tr][order]
+            cuts = np.nonzero(np.diff(cl))[0] + 1
+            groups = np.split(tr, cuts)
+            self._groups = [g for g in groups if len(g) >= 2]
+        pick = rng.choice(len(self._groups), size=n_groups, replace=False)
+        rows, labels = [], []
+        for gi, g in enumerate(pick):
+            members = self._groups[g]
+            take = rng.choice(members, size=min(per_group, len(members)), replace=False)
+            rows.extend(take.tolist())
+            labels.extend([gi] * len(take))
+        return self.batch(rng, np.array(rows)), np.array(labels)
 
     def batch(self, rng: np.random.Generator, indices: np.ndarray) -> np.ndarray:
         lens = np.minimum(self.lens[indices], self.max_len)
@@ -259,6 +291,18 @@ def main(cfg: PretrainConfig) -> None:
                 sim = F.normalize(z1.float(), dim=-1) @ F.normalize(z2.float(), dim=-1).T / 0.05
                 total = loss + cfg.simcse_weight * F.cross_entropy(
                     sim, torch.arange(len(sub), device=dev))
+            if cfg.template_weight > 0:
+                tb, tl = corpus.template_batch(rng, cfg.template_groups, cfg.template_per_group)
+                tids = torch.from_numpy(tb).to(dev)
+                z = F.normalize(model.embed(tids).float(), dim=-1)
+                lab = torch.from_numpy(tl).to(dev)
+                sim = z @ z.T / cfg.template_temp
+                eye = torch.eye(len(z), device=dev, dtype=torch.bool)
+                sim = sim.masked_fill(eye, -1e9)
+                pos = (lab[:, None] == lab[None, :]) & ~eye
+                logp = sim - torch.logsumexp(sim, dim=1, keepdim=True)
+                supcon = -(logp * pos).sum(1) / pos.sum(1).clamp(min=1)
+                total = total + cfg.template_weight * supcon.mean()
         opt.zero_grad(set_to_none=True)
         total.backward()
         gn = torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.grad_clip)
