@@ -1,101 +1,111 @@
-"""Fault injector for the Docker lab: one function per fault type; each returns a label record.
+"""Reversible real-lab fault contexts. The campaign runner verifies effects and labels.
 
-Requires docker (and pumba for netem faults). The simulator in lab/sim mirrors these fault types.
+Six faults are supported. Network netem, packet loss, CPU hog and memory leak remain
+simulator-only until their injection and recovery can be verified reliably.
 """
 from __future__ import annotations
 
+import json
 import subprocess
-import time
-import uuid
+import tempfile
+from contextlib import contextmanager
+from pathlib import Path
 
-COMPOSE = ["docker", "compose", "-f", "lab/docker-compose.yml"]
-PY_GET = "import urllib.request;urllib.request.urlopen('http://localhost:8000{}')"
-
-
-def sh(*args: str) -> None:
-    subprocess.run(args, check=False)
-
-
-def _rec(fault: str, target: str, t0: float, notes: str = "") -> dict:
-    return {"incident_id": uuid.uuid4().hex[:8], "fault_type": fault, "target_service": target,
-            "t_start": int(t0 * 1000), "t_end": int(time.time() * 1000), "notes": notes}
+ROOT = Path(__file__).resolve().parents[2]
+COMPOSE = ["docker", "compose", "-p", "loglens-lab", "-f", str(ROOT / "lab/docker-compose.yml")]
+TARGETS = {"container_kill": "orders", "redis_down": "inventory", "db_pool_exhaustion": "payments",
+           "disk_full": "worker", "bad_config": "orders", "slow_downstream": "payments"}
 
 
-def container_kill(svc: str, duration: float = 30) -> dict:
-    t0 = time.time()
-    sh("docker", "kill", f"lab-{svc}-1")
-    time.sleep(duration)
-    sh(*COMPOSE, "up", "-d", svc)
-    return _rec("container_kill", svc, t0)
+def sh(*args: str, timeout: float = 120) -> str:
+    return subprocess.run(args, check=True, capture_output=True, text=True, timeout=timeout).stdout
 
 
-def network_latency(svc: str, ms: int = 2000, duration: float = 180) -> dict:
-    t0 = time.time()
-    sh("pumba", "netem", "--duration", f"{int(duration)}s", "delay", "--time", str(ms), f"lab-{svc}-1")
-    return _rec("network_latency", svc, t0, f"delay={ms}ms")
+def request(service: str, path: str, method: str = "GET") -> dict:
+    # Run from gateway so stopped/unhealthy target containers can still be probed.
+    code = """import json, time, urllib.request, urllib.error
+start = time.monotonic()
+try:
+    req = urllib.request.Request(URL, method=METHOD)
+    with urllib.request.urlopen(req, timeout=5) as response:
+        result = {'status': response.status, 'body': json.loads(response.read())}
+except urllib.error.HTTPError as exc:
+    result = {'status': exc.code, 'body': {}}
+except (urllib.error.URLError, TimeoutError) as exc:
+    result = {'status': 0, 'body': {}, 'error': type(exc).__name__}
+result['seconds'] = time.monotonic() - start
+print(json.dumps(result))
+"""
+    code = f"URL = {('http://' + service + ':8000' + path)!r}\nMETHOD = {method!r}\n" + code
+    return json.loads(sh(*COMPOSE, "exec", "-T", "gateway", "python", "-c", code, timeout=15))
 
 
-def packet_loss(svc: str, pct: int = 30, duration: float = 180) -> dict:
-    t0 = time.time()
-    sh("pumba", "netem", "--duration", f"{int(duration)}s", "loss", "--percent", str(pct), f"lab-{svc}-1")
-    return _rec("packet_loss", svc, t0, f"loss={pct}%")
+def require_ok(service: str, path: str, method: str = "GET") -> dict:
+    result = request(service, path, method)
+    if result["status"] != 200:
+        raise RuntimeError(f"{service}{path} returned {result}")
+    return result["body"]
 
 
-def db_pool_exhaustion(svc: str = "payments", duration: float = 180) -> dict:
-    t0 = time.time()
-    sh("docker", "exec", f"lab-{svc}-1", "python", "-c", PY_GET.format("/debug/hold?n=10"))
-    time.sleep(duration)
-    return _rec("db_pool_exhaustion", svc, t0)
+@contextmanager
+def environment_fault(service: str, environment: dict):
+    # JSON is valid YAML; an override recreates the actual serving container.
+    with tempfile.TemporaryDirectory(prefix="loglens-compose-") as folder:
+        override = Path(folder) / "override.json"
+        override.write_text(json.dumps({"services": {service: {"environment": environment}}}))
+        try:
+            sh(*COMPOSE, "-f", str(override), "up", "-d", "--no-deps", "--force-recreate", service)
+            yield
+        finally:
+            sh(*COMPOSE, "up", "-d", "--no-deps", "--force-recreate", service)
 
 
-def redis_down(duration: float = 150) -> dict:
-    t0 = time.time()
-    sh(*COMPOSE, "stop", "redis")
-    time.sleep(duration)
-    sh(*COMPOSE, "start", "redis")
-    return _rec("redis_down", "inventory", t0)
-
-
-def disk_full(duration: float = 150) -> dict:
-    t0 = time.time()
-    sh("docker", "exec", "lab-worker-1", "sh", "-c", "dd if=/dev/zero of=/var/spool/outbox/fill bs=1M || true")
-    time.sleep(duration)
-    sh("docker", "exec", "lab-worker-1", "rm", "-f", "/var/spool/outbox/fill")
-    return _rec("disk_full", "worker", t0)
-
-
-def bad_config(svc: str, duration: float = 120) -> dict:
-    t0 = time.time()
-    sh(*COMPOSE, "run", "-d", "-e", "PORT=abc", svc)
-    time.sleep(duration)
-    sh(*COMPOSE, "up", "-d", "--force-recreate", svc)
-    return _rec("bad_config", svc, t0)
-
-
-def memory_leak(svc: str = "orders", duration: float = 180) -> dict:
-    t0 = time.time()
-    for _ in range(int(duration // 5)):
-        sh("docker", "exec", f"lab-{svc}-1", "python", "-c", PY_GET.format("/debug/leak?mb=50"))
-        time.sleep(5)
-    return _rec("memory_leak", svc, t0)
-
-
-def cpu_hog(svc: str, duration: float = 150) -> dict:
-    t0 = time.time()
-    sh("docker", "exec", "-d", f"lab-{svc}-1", "sh", "-c",
-       f"timeout {int(duration)} sh -c 'while :; do :; done'")
-    time.sleep(duration)
-    return _rec("cpu_hog", svc, t0)
-
-
-def slow_downstream(duration: float = 180) -> dict:
-    t0 = time.time()
-    sh(*COMPOSE, "up", "-d", "-e", "BANK_LATENCY_MS=1800", "payments")
-    time.sleep(duration)
-    sh(*COMPOSE, "up", "-d", "--force-recreate", "payments")
-    return _rec("slow_downstream", "payments", t0)
-
-
-FAULTS = {f.__name__: f for f in (container_kill, network_latency, packet_loss, db_pool_exhaustion,
-                                  redis_down, disk_full, bad_config, memory_leak, cpu_hog,
-                                  slow_downstream)}
+@contextmanager
+def inject(fault: str):
+    if fault not in TARGETS:
+        raise ValueError(f"Unsupported real-lab fault: {fault}")
+    if fault == "bad_config":
+        with environment_fault("orders", {"PORT": "abc"}):
+            yield
+    elif fault == "slow_downstream":
+        with environment_fault("payments", {"BANK_LATENCY_MS": "3000"}):
+            yield
+    elif fault in ("container_kill", "redis_down"):
+        service = "orders" if fault == "container_kill" else "redis"
+        try:
+            sh(*COMPOSE, "kill" if fault == "container_kill" else "stop", service)
+            yield
+        finally:
+            sh(*COMPOSE, "up", "-d", "--no-deps", service)
+    elif fault == "db_pool_exhaustion":
+        try:
+            body = require_ok("payments", "/debug/hold?n=10", "POST")
+            if body.get("held") != 10:
+                raise RuntimeError("Database hold did not acquire all connections")
+            yield
+        finally:
+            require_ok("payments", "/debug/release", "POST")
+    elif fault == "disk_full":
+        # Refuse to fill anything except this lab's bounded tmpfs, and cap the write.
+        code = """import errno, os
+root = '/var/spool/outbox'
+assert any(parts[1] == root and parts[2] == 'tmpfs' for parts in
+           (line.split() for line in open('/proc/mounts'))), 'spool must be tmpfs'
+stats = os.statvfs(root)
+assert stats.f_blocks * stats.f_frsize <= 16 * 1024 * 1024, 'spool exceeds 16 MiB'
+try:
+    with open(root + '/fill', 'wb', buffering=0) as stream:
+        for _ in range(17):
+            stream.write(b'x' * (1024 * 1024))
+except OSError as exc:
+    if exc.errno != errno.ENOSPC:
+        raise
+else:
+    raise RuntimeError('spool did not fill')
+"""
+        try:
+            sh(*COMPOSE, "exec", "-T", "worker", "python", "-c", code)
+            yield
+        finally:
+            sh(*COMPOSE, "exec", "-T", "worker", "python", "-c",
+               "from pathlib import Path; Path('/var/spool/outbox/fill').unlink(missing_ok=True)")

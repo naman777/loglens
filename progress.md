@@ -25,7 +25,7 @@ local JSONL in `results/runs/`; W&B is used automatically with `wandb: true`).
 
 Everything in the Implementation Plan's layout, plus `scripts/` (ablations, LLM eval, serving bench,
 agent eval, error analysis, demo, consistency check, release packaging) and `docs/` reports.
-Tests: 100+ (masking, parsers, lab, encoder, metrics, ONNX parity, runtime end-to-end).
+Tests: 125 (masking, parsers, lab lifecycle/services, diagnosis evaluation, encoder, metrics, ONNX parity, runtime end-to-end).
 
 ## Key results (see README / results/*.md for tables)
 
@@ -75,7 +75,49 @@ Tests: 100+ (masking, parsers, lab, encoder, metrics, ONNX parity, runtime end-t
 
 ## Next (if continuing)
 
-1. Template-aware encoder objective evaluated on the *unseen* system (fix the embedding gates honestly).
-2. Masking ablation (durations bucketed vs `<NUM>`), running now with a random-init encoder.
-3. Real Docker lab; service-level attribution metric; header-stripping learned instead of hand-written.
-4. Rust/Go parse+mask hot path (the throughput bottleneck).
+1. Verify the full training quickstart from a fresh clone and publish downloadable weights after review.
+   Clean local installation of the dev/serve/export/baselines extras and saved-model smoke checks pass.
+2. Run and validate the real Docker lab on a Docker-enabled host or CI. Six faults now have real
+   dependency interactions and an evidence-producing runner, but Docker is unavailable locally.
+   See `docs/real_lab.md` and `docs/next_steps.md` for the remaining validation work.
+3. Evaluate few-label adaptation on another unseen system and actual LLM-agent diagnoses with/without
+   LogLens. Existing agent-side token counts and service-vote metrics are proxies, not agent answers.
+4. Improve unfamiliar-format parsing and threshold stability; then optimize the parse/mask hot path.
+
+## Completed follow-up experiments (latest commit c260274)
+
+- Duration masking ablation is complete: removing buckets reduced BGL F1 0.939 -> 0.872 and
+  HDFS 0.995 -> 0.950 with a random-init encoder. Keep duration buckets.
+- Template-contrastive encoder v3 is complete: nearest-neighbour agreement 72.3% (90% gate still
+  missed); linear probe still loses to TF-IDF. Thunderbird PR-AUC rose to 0.700 and lab Recall@5
+  to 1.000, but BGL F1 fell to 0.473 despite PR-AUC 0.962. Single seed; not adopted as main model.
+- See `docs/error_analysis.md` and `docs/embedding_report_v3_template.md` for interpretation.
+
+## Reproducibility follow-up (2026-09-30)
+
+- Applied the previously blocked dependency, CI, quickstart, smoke-check, and release-packaging changes.
+- Existing environment: all 100 tests and Ruff pass; saved FP32/int8 inference and cache reuse pass.
+- Built `release/loglens-v0.1` locally and independently verified all 15 SHA-256 manifest entries.
+  Packaging rejects missing artifacts and refuses to overwrite an existing release directory.
+- Saved the real-lab fixes and experiment prerequisites in `docs/next_steps.md`. Docker remains
+  unavailable; no real-container results or new accuracy measurements were produced. Nothing published.
+- Fresh isolated `.venv`: installed `.[dev,serve,export,baselines]`; `pip check` reports no broken
+  requirements, Ruff passes, all 100 tests pass, and both saved FP32/int8 smoke checks pass.
+  NumPy/SciPy compatibility warning is absent there; existing ONNX export warnings remain.
+  This validates a clean local install with existing artifacts, not a fresh-clone training run.
+
+## Real-lab and diagnosis follow-up (2026-09-30)
+
+- Implemented Postgres persistence, Redis task enqueue/consumption, payment connection holds and
+  release, worker retry without premature acknowledgement, and gateway error propagation.
+- Replaced unverified Docker fault helpers with six reversible contexts. Network latency, packet
+  loss, CPU hog and memory leak remain simulator-only, explicitly unsupported by the real runner.
+- Added health checks, 16 MiB tmpfs spool, resource limits, and a normal/fault/recovery runner that
+  stores evidence separately under `lab/real-out/`. Invalid/unrecovered incidents are not accepted.
+- Added Docker CI coverage with evidence upload (configured but not executed here).
+- Local validation: all 125 tests pass, Ruff passes, `pip check` passes. Docker preflight fails
+  because the executable is absent. No real-container results or manually reviewed labels claimed.
+- Ran paired Qwen2.5-1.5B single-call diagnosis on all 36 held-out synthetic incidents: raw prefix
+  6/36 correct services (16.7%), LogLens selection 31/36 (86.1%). Both use a 1,500 text-token budget
+  plus chat formatting. Mean input tokens 1,503.6 vs 919.7; mean end-to-end time 4.70 vs 4.75 seconds.
+  No latency improvement established. Full answers and limitations: `docs/diagnosis_eval.md`.

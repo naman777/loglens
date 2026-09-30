@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "Naman Kundra" }]
 dependencies = [
-  "numpy",
+  "numpy>=1.23.5,<2.3",
   "pyyaml",
   "tokenizers",
   "polars",
@@ -20,9 +20,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-train = ["torch", "wandb"]
-serve = ["onnxruntime", "fastapi", "uvicorn"]
+train = ["torch", "wandb", "matplotlib"]
+serve = ["onnxruntime", "fastapi", "uvicorn", "psutil"]
+export = ["torch", "onnx", "onnxruntime"]
+llm = ["torch", "transformers", "anthropic"]
 baselines = ["drain3"]
+lab = ["fastapi", "uvicorn", "httpx", "psycopg[binary]", "redis"]
 dev = ["pytest", "ruff"]
 
 [project.scripts]

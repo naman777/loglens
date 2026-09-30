@@ -15,3 +15,5 @@ wandb/
 *.npy
 .DS_Store
 release/
+/lab/real-out/
+results/diagnosis/*/cache/

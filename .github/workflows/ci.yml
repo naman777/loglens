@@ -9,6 +9,22 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-      - run: pip install -e ".[dev,serve,baselines]"
+      - run: pip install -e ".[dev,serve,export,baselines,lab]"
+      - run: pip check
       - run: ruff check .
       - run: pytest -q
+
+  docker-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python lab/run_real_campaign.py --duration 2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: docker-lab-evidence
+          path: lab/real-out/

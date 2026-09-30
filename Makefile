@@ -3,7 +3,7 @@ PY ?= python
 .PHONY: setup data lab-up lab-down lab-campaign masked tokenizer pretrain embed finetune eval export bench serve test lint
 
 setup:
-	$(PY) -m pip install -e ".[dev,train,serve,baselines]"
+	$(PY) -m pip install -e ".[dev,train,serve,export,baselines,lab]"
 
 # download Loghub (Zenodo) -> parse -> time-split Parquet; Thunderbird is streamed (first 6M lines)
 data:

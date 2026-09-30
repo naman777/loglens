@@ -1,32 +1,65 @@
-# Real (Docker) version of the lab. NOTE: the committed results were produced with the
-# deterministic simulator in lab/sim (Docker was not available on the dev machine); this file
-# is the reusable Compose setup and has NOT been run by the author.
+# Isolated, bounded real lab. Recorded model benchmarks still use the simulator.
+name: loglens-lab
+x-app: &app
+  mem_limit: 256m
+  cpus: 1.0
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
+    interval: 2s
+    timeout: 3s
+    retries: 30
+    start_period: 5s
 services:
   postgres:
     image: postgres:16-alpine
     environment: { POSTGRES_PASSWORD: lab, POSTGRES_DB: lab }
+    mem_limit: 256m
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lab"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
   redis:
     image: redis:7-alpine
+    mem_limit: 128m
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
   orders:
+    <<: *app
     build: { context: ./services, args: { SERVICE: orders } }
-    environment: { DATABASE_URL: "postgresql://postgres:lab@postgres/lab", POOL_SIZE: "10" }
-    depends_on: [postgres, redis]
+    environment: { DATABASE_URL: "postgresql://postgres:lab@postgres/lab", POOL_SIZE: "10", REDIS_HOST: redis }
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
   payments:
+    <<: *app
     build: { context: ./services, args: { SERVICE: payments } }
     environment: { DATABASE_URL: "postgresql://postgres:lab@postgres/lab", BANK_LATENCY_MS: "180", POOL_SIZE: "10" }
-    depends_on: [postgres]
+    depends_on:
+      postgres: { condition: service_healthy }
   inventory:
+    <<: *app
     build: { context: ./services, args: { SERVICE: inventory } }
     environment: { REDIS_HOST: redis, DATABASE_URL: "postgresql://postgres:lab@postgres/lab" }
-    depends_on: [redis, postgres]
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
   worker:
+    <<: *app
     build: { context: ./services, args: { SERVICE: worker } }
     environment: { REDIS_HOST: redis, SPOOL_DIR: /var/spool/outbox }
-    volumes: ["spool:/var/spool/outbox"]
-    depends_on: [redis]
+    tmpfs: ["/var/spool/outbox:size=16777216,mode=1777"]
+    depends_on:
+      redis: { condition: service_healthy }
   gateway:
+    <<: *app
     build: { context: ./services, args: { SERVICE: gateway } }
-    ports: ["8000:8000"]
-    depends_on: [orders, payments, inventory]
-volumes:
-  spool: {}
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      orders: { condition: service_healthy }
+      payments: { condition: service_healthy }
+      inventory: { condition: service_healthy }
+      worker: { condition: service_healthy }

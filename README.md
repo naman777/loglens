@@ -28,11 +28,29 @@ Full tables: [`results/benchmark.md`](results/benchmark.md) (regenerate with `ma
 ## Quickstart
 
 ```bash
-pip install -e ".[dev,train,serve,baselines]"
-make test                                   # 100+ tests
+python -m pip install -e ".[dev,train,serve,export,baselines,lab]"
+python -m pytest -q                         # unit and integration tests
+python scripts/smoke_check.py               # requires the saved artifacts (see below)
 python -m loglens.serve.cli rank sample.log # needs artifacts/onnx (see "Reproduce")
 docker build -t loglens . && docker run --rm -v "$PWD:/data" loglens rank /data/sample.log   # untested here: no Docker on the dev machine
 ```
+
+Use a fresh virtual environment (`python -m venv .venv`, then activate it) and run
+`python -m pip check` after installation. Serving alone needs `python -m pip install -e ".[serve]"`;
+export additionally needs the `export` extra. Optional LLM comparisons need the `llm` extra.
+
+**Weights are not published yet.** A fresh clone cannot run inference until you reproduce training
+and export below, or obtain the matching artifacts from the author. The smoke check reports missing
+files explicitly; it does not download or train anything. It checks inference and cache reuse, not
+accuracy. For a packaged release, pass `--model-dir release/loglens-v0.1/onnx`
+and `--tokenizer release/loglens-v0.1/tokenizer/loglens-bpe-16k.json`.
+
+Real-container validation: `python lab/run_real_campaign.py --duration 10` (requires Docker).
+See [real lab instructions](docs/real_lab.md) for the six supported faults and evidence outputs.
+
+Paired LLM diagnosis: `python scripts/diagnosis_eval.py --max-prompt-tokens 1500 --max-new-tokens 128`
+(requires saved artifacts, held-out lab data and the `llm` extra). This compares budget-constrained
+single-call answers, not a full autonomous agent. Results are saved under `results/diagnosis/`.
 
 Demo (simulated fault, no Docker): `python scripts/demo.py --fault db_pool_exhaustion` — LogLens flags the
 window and ranks the `QueuePool limit reached` lines at the top.
